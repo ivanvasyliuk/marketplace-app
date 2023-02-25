@@ -1,11 +1,11 @@
-import { types } from 'mobx-state-tree';
-import Api from 'src/api';
-import { LatestProductCollection } from '../schemas';
-import { asyncModel } from '../utils';
-import { ProductModel } from './ProductModel';
+import { types } from "mobx-state-tree";
+import Api from "../../api";
+import { LatestProductCollection } from "../schemas";
+import { asyncModel } from "../utils";
+import { ProductModel } from "./ProductModel";
 
 export const LatestProductsStore = types
-  .model('LatestProductsStore', {
+  .model("LatestProductsStore", {
     items: types.array(types.reference(ProductModel)),
     fetchLatest: asyncModel(fetchLatest),
   })

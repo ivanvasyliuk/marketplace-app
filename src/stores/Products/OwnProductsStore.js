@@ -1,14 +1,12 @@
-import { getParent, types } from 'mobx-state-tree';
-import Api from 'src/api';
-import { Product, ProductCollection } from '../schemas';
-import { asyncModel } from '../utils';
-import { ProductModel } from './ProductModel';
+import { getParent, types } from "mobx-state-tree";
+import Api from "../../api";
+import { Product, ProductCollection } from "../schemas";
+import { asyncModel } from "../utils";
+import { ProductModel } from "./ProductModel";
 
 export const OwnProductStore = types
-  .model('OwnPrducts', {
-    items: types.array(
-      types.reference(types.late(() => ProductModel)),
-    ),
+  .model("OwnPrducts", {
+    items: types.array(types.reference(types.late(() => ProductModel))),
     fetch: asyncModel(fetchOwnProducts),
     createProduct: asyncModel(createProduct),
   })

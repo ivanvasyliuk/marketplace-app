@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { View, TextInput, Text } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
 import s from "./styles";
 
 const Inputw = (props) => {
@@ -48,10 +49,13 @@ const Input = ({ label, name, handleChange, errors, touched, ...props }) => {
           onBlur={() => setIsFocused(false)}
           onFocus={() => setIsFocused(true)}
         />
+        {hasError && (
+          <AntDesign style={s.warningIcon} name="exclamationcircle" size={16} />
+        )}
       </View>
-      {errors[name] && (
-        <Text style={{ fontSize: 10, color: "red" }}>{errors[name]}</Text>
-      )}
+      <Text style={[hasError ? s.redErrorText : s.grayErrorText]}>
+        {errors[name] && errors[name]}
+      </Text>
     </View>
   );
 };

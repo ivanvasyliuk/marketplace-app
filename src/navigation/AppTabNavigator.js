@@ -3,6 +3,7 @@ import { AntDesign } from "@expo/vector-icons";
 import ProfileNavigator from "./ProfileNavigator";
 import BrowseNavigator from "./BrowseNavigator";
 import screens from "./screens";
+import colors from "../styles/colors";
 
 const Tab = createBottomTabNavigator();
 
@@ -11,11 +12,11 @@ export default function AppTabNavigator() {
     <>
       <Tab.Navigator
         screenOptions={({ route }) => ({
-          tabBarStyle: { backgroundColor: "black" },
+          tabBarStyle: { backgroundColor: colors.white },
           headerShown: false,
           tabBarIcon: ({ focused, color, size }) => {
             if (focused) {
-              color = "green";
+              color = colors.primary;
             }
             if (route.name == "ProfileTab") {
               return <AntDesign name="user" size={size} color={color} />;
@@ -24,7 +25,7 @@ export default function AppTabNavigator() {
               return <AntDesign name="search1" size={size} color={color} />;
             }
           },
-          tabBarActiveTintColor: "green",
+          tabBarActiveTintColor: colors.primary,
           tabBarInactiveTintColor: "grey",
           //   headerShown: false,
         })}

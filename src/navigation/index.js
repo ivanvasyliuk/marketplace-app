@@ -5,11 +5,13 @@ import AuthNavigator from "./AuthNavigator";
 import AppTabNavigator from "./AppTabNavigator";
 import screens from "./screens";
 import { createStackNavigator } from "@react-navigation/stack";
+import { useStore } from "../stores/createStore";
+import { observer } from "mobx-react";
 
 const RootStack = createStackNavigator();
 
 function RootNavigator() {
-  const [isLogin, setIsLogin] = useState(false);
+  const store = useStore();
   return (
     <NavigationContainer>
       <RootStack.Navigator
@@ -17,7 +19,7 @@ function RootNavigator() {
           headerShown: false,
         })}
       >
-        {isLogin ? (
+        {store.viewer.userModel ? (
           <RootStack.Group>
             <RootStack.Screen
               name={screens.MainApp}
@@ -34,4 +36,4 @@ function RootNavigator() {
   );
 }
 
-export default RootNavigator;
+export default observer(RootNavigator);

@@ -20,6 +20,12 @@ const styles = StyleSheet.create({
   errorLabel: {
     color: "red",
   },
+  redErrorText: {
+    color: "red",
+  },
+  grayErrorText: {
+    color: colors.gray,
+  },
   focusedInput: {
     borderColor: colors.primary,
   },
@@ -27,11 +33,16 @@ const styles = StyleSheet.create({
     position: "absolute",
     left: 16,
     top: -12,
-    backgroundColor: colors.white,
+    backgroundColor: colors.backgroundColor,
     paddingHorizontal: 8,
     color: colors.primary,
     fontWeight: "500",
     textTransform: "capitalize",
+  },
+  warningIcon: {
+    color: "red",
+    position: "absolute",
+    right: 14,
   },
 });
 export default styles;

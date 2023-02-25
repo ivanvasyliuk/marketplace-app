@@ -1,11 +1,11 @@
-import { getRoot, getSnapshot, types } from 'mobx-state-tree';
-import Api from 'src/api';
-import { ChatSchema } from '../schemas';
-import { UserModel } from '../users/UserModel';
-import { asyncModel } from '../utils';
+import { getRoot, getSnapshot, types } from "mobx-state-tree";
+import Api from "../../api";
+import { ChatSchema } from "../schemas";
+import { UserModel } from "../users/UserModel";
+import { asyncModel } from "../utils";
 
 export const ProductModel = types
-  .model('ProductModel', {
+  .model("ProductModel", {
     id: types.identifierNumber,
     ownerId: types.string,
     title: types.string,

@@ -1,8 +1,7 @@
-import { types } from 'mobx-state-tree';
-import Api from 'src/api';
-import { OwnProductStore } from '../Products/OwnProductsStore';
+import { types } from "mobx-state-tree";
+import { OwnProductStore } from "../Products/OwnProductsStore";
 
-export const UserModel = types.model('UserModel', {
+export const UserModel = types.model("UserModel", {
   id: types.identifier,
   fullName: types.string,
   location: types.maybeNull(types.string),

@@ -1,4 +1,5 @@
 import { Field, Formik } from "formik";
+import { observer } from "mobx-react";
 import React from "react";
 import { View, Text, TextInput } from "react-native";
 import * as yup from "yup";
@@ -22,7 +23,7 @@ const validationSchema = yup.object({
 
 const RegisterScreen = ({ navigation }) => {
   function onSubmit(values) {
-    console.log(values);
+    console.log("register submit", values);
   }
 
   return (
@@ -50,7 +51,6 @@ const RegisterScreen = ({ navigation }) => {
                 errors={errors}
                 touched={touched}
               />
-
               <Input
                 value={values.password}
                 handleChange={handleChange}
@@ -60,7 +60,6 @@ const RegisterScreen = ({ navigation }) => {
                 errors={errors}
                 touched={touched}
               />
-
               <Input
                 value={values.repeatPassword}
                 handleChange={handleChange}
@@ -83,4 +82,4 @@ const RegisterScreen = ({ navigation }) => {
   );
 };
 
-export default RegisterScreen;
+export default observer(RegisterScreen);

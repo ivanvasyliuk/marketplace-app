@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { View, Text, Button, TextInput } from "react-native";
 import screens from "../../navigation/screens";
+import { useStore } from "../../stores/createStore";
 import colors from "../../styles/colors";
 import styles from "./styles";
 
 const BrowseScreen = ({ navigation }) => {
+  const store = useStore();
   const [count, setCount] = useState(0);
   const [title, setTitle] = useState("");
   return (
@@ -29,6 +31,11 @@ const BrowseScreen = ({ navigation }) => {
             color={colors.primary}
             onPress={() => setCount(count + 1)}
             title="increment"
+          />
+          <Button
+            color={colors.primary}
+            onPress={() => store.auth.logout.run()}
+            title="logout"
           />
         </View>
         <TextInput

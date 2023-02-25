@@ -1,12 +1,12 @@
-import { types } from 'mobx-state-tree';
-import Api from 'src/api';
-import { AuthStore } from './Auth/AuthStore';
-import { EntitiesStore } from './EntitiesStore';
-import { OwnProductStore } from './Products/OwnProductsStore';
-import { ViewerStore } from './ViewerStore';
+import { types } from "mobx-state-tree";
+import Api from "../api";
+import { AuthStore } from "./Auth/AuthStore";
+import { EntitiesStore } from "./EntitiesStore";
+import { OwnProductStore } from "./Products/OwnProductsStore";
+import { ViewerStore } from "./ViewerStore";
 
 export const RootStore = types
-  .model('RootStore', {
+  .model("RootStore", {
     auth: types.optional(AuthStore, {}),
     viewer: types.optional(ViewerStore, {}),
     entities: types.optional(EntitiesStore, {}),
@@ -15,7 +15,7 @@ export const RootStore = types
   .actions((store) => ({
     async bootstrap() {
       try {
-        const token = localStorage.getItem('__token');
+        const token = localStorage.getItem("__token");
         // TODO: check for undifined token
 
         Api.Auth.setToken(token);

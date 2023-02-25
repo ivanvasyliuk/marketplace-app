@@ -1,12 +1,8 @@
-import Api from 'src/api';
-import { useStore } from '../createStore';
-import { Product } from '../schemas';
-import {
-  asyncModel,
-  suspenseModel,
-  createCollection,
-} from '../utils';
-import { ProductModel } from './ProductModel';
+import Api from "../../api";
+import { useStore } from "../createStore";
+import { Product } from "../schemas";
+import { asyncModel, suspenseModel, createCollection } from "../utils";
+import { ProductModel } from "./ProductModel";
 
 export function useProductsCollection() {
   const store = useStore();
@@ -22,7 +18,7 @@ function getProduct(id) {
   return async function getProductFlow(flow, store, Root) {
     try {
       const res = await Api.Products.getById(id);
-      console.log('res', res);
+      console.log("res", res);
       flow.merge(res.data, Product);
 
       Root.entities.merge(entities);

@@ -1,4 +1,4 @@
-import { types } from 'mobx-state-tree';
+import { types } from "mobx-state-tree";
 
 // export function safeReference(T) {
 //   return types.reference(T, {
@@ -15,7 +15,7 @@ import { types } from 'mobx-state-tree';
 //   });
 // }
 
-const ViewerModel = types.model('ViewerModel', {
+const ViewerModel = types.model("ViewerModel", {
   id: types.string,
   fullName: types.string,
   location: types.maybeNull(types.string),
@@ -29,18 +29,17 @@ const ViewerModel = types.model('ViewerModel', {
 // const ViewerModel = UserModel.named('ViewerModel');
 
 export const ViewerStore = types
-  .model('ViewerStore', {
+  .model("ViewerStore", {
     userModel: types.maybe(ViewerModel),
   })
   .views((store) => ({
     get initials() {
-      const array = store.userModel.fullName.split(' ');
+      const array = store.userModel.fullName.split(" ");
       return array.map((letter) => letter[0]).concat();
     },
   }))
   .actions((store) => ({
     setViewer(user) {
-      console.log('user', user);
       store.userModel = user;
     },
   }));

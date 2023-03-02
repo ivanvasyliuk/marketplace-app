@@ -15,12 +15,16 @@ const styles = StyleSheet.create({
   labelContainer: {
     flexDirection: "row",
   },
+  touchableContainer: {
+    overflow: "hidden",
+    borderRadius: 20,
+  },
   touchable: {
     justifyContent: "center",
     alignItems: "center",
     paddingHorizontal: 25,
-    height: 40,
     borderRadius: 20,
+    height: 40,
     backgroundColor: colors.primary,
   },
   navigateLabel: {

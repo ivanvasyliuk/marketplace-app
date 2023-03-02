@@ -1,12 +1,12 @@
 import React from "react";
 import { Text, View } from "react-native";
 import s from "./styles";
-const SavedScreen = () => {
+
+const CreatePostScreen = () => {
   return (
     <View style={s.container}>
-      <Text>SavedScreen</Text>
+      <Text>Modal</Text>
     </View>
   );
 };
-
-export default SavedScreen;
+export default CreatePostScreen;

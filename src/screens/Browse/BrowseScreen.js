@@ -37,6 +37,11 @@ const BrowseScreen = ({ navigation }) => {
             onPress={() => store.auth.logout.run()}
             title="logout"
           />
+          <Button
+            color={colors.primary}
+            onPress={() => alert("Clicked")}
+            title="Click"
+          />
         </View>
         <TextInput
           style={{ width: 200, height: 50, borderWidth: 1, marginTop: 5 }}

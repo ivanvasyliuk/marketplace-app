@@ -6,6 +6,7 @@ import AppTabNavigator from "./AppTabNavigator";
 import screens from "./screens";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useStore } from "../stores/createStore";
+import CreatePostScreen from "../screens/CreatePost/CreatePostScreen";
 import { observer } from "mobx-react";
 
 const RootStack = createStackNavigator();
@@ -24,6 +25,11 @@ function RootNavigator() {
             <RootStack.Screen
               name={screens.MainApp}
               component={AppTabNavigator}
+            />
+            <RootStack.Screen
+              name={screens.CreatePostModal}
+              component={CreatePostScreen}
+              screenOptions={{ presentation: "modal" }}
             />
           </RootStack.Group>
         ) : (

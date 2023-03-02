@@ -9,7 +9,7 @@ import s from "./styles";
 
 const validationSchema = yup.object({
   //Add required for email
-  email: yup.string().email(),
+  email: yup.string().email().required("Email is required"),
   password: yup
     .string()
     .min(6, "Password must contain 6-20 characters.")

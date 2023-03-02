@@ -1,24 +1,8 @@
 import React from "react";
-import {
-  Platform,
-  Text,
-  View,
-  TouchableNativeFeedback,
-  TouchableOpacity,
-} from "react-native";
+import { Text, View } from "react-native";
 import screens from "../../../navigation/screens";
+import Touchable from "../../Touchable/Touchable";
 import s from "./styles";
-
-const isAndroid = Platform.OS === "android";
-
-const Touchable = (props) =>
-  isAndroid ? (
-    <TouchableNativeFeedback {...props}>
-      <View style={props.style}>{props.children}</View>
-    </TouchableNativeFeedback>
-  ) : (
-    <TouchableOpacity {...props}>{props.children}</TouchableOpacity>
-  );
 
 const AuthFooter = ({ navigation, onSubmit, buttonLabel }) => {
   return (
@@ -38,9 +22,11 @@ const AuthFooter = ({ navigation, onSubmit, buttonLabel }) => {
           {buttonLabel.length == 5 ? "  Register" : "  Login"}
         </Text>
       </View>
-      <Touchable onPress={onSubmit} style={s.touchable}>
-        <Text style={s.buttonLabel}>{buttonLabel}</Text>
-      </Touchable>
+      <View style={s.touchableContainer}>
+        <Touchable style={s.touchable} onPress={onSubmit}>
+          <Text style={s.buttonLabel}>{buttonLabel}</Text>
+        </Touchable>
+      </View>
     </View>
   );
 };

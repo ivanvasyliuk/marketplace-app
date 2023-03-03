@@ -1,14 +1,14 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { AntDesign, Ionicons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 import ProfileNavigator from "./ProfileNavigator";
 import BrowseNavigator from "./BrowseNavigator";
 import SavedNavigator from "./SavedNavigator";
 import InboxNavigator from "./InboxNavigator";
 import screens from "./screens";
 import colors from "../styles/colors";
-import CreatePostNavigator from "./CreatePostNavigator";
 import Touchable from "../components/Touchable/Touchable";
-import { Image, StyleSheet, View } from "react-native";
+import { Image, StyleSheet, View, Text } from "react-native";
+import CreatePostNavigator from "./CreatePostNavigator";
 
 const Tab = createBottomTabNavigator();
 
@@ -90,10 +90,14 @@ export default function AppTabNavigator() {
         <Tab.Screen name={screens.BrowseTab} component={BrowseNavigator} />
         <Tab.Screen name={screens.SavedTab} component={SavedNavigator} />
         <Tab.Screen
+          listeners={({ navigation }) => ({
+            tabPress: (event) => {
+              event.preventDefault();
+              navigation.navigate(screens.CreatePostModal);
+            },
+          })}
           options={{
-            // tabBarIcon: ({ focused }) => (
-
-            // ),
+            headerTitle: (props) => <Text>New Post</Text>,
             tabBarButton: (props) => <CustomTabBarButton {...props} />,
             tabBarLabel: () => null,
             tabBarItemStyle: {
@@ -101,9 +105,10 @@ export default function AppTabNavigator() {
               justifyContent: "center",
             },
           }}
-          name={screens.CreatePostModal}
+          name={screens.CreatePostTab}
           component={CreatePostNavigator}
         />
+
         <Tab.Screen name={screens.InboxTab} component={InboxNavigator} />
         <Tab.Screen name={screens.ProfileTab} component={ProfileNavigator} />
       </Tab.Navigator>

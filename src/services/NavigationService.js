@@ -1,3 +1,5 @@
+import { NavigationActions } from "react-navigation";
+
 class NavigationService {
   constructor() {
     this._navigation = null;
@@ -11,7 +13,15 @@ class NavigationService {
   }
 
   navigate(routeName, params) {
-    this._navigation.dispatch(NavigationActions);
+    this._navigation.dispatch(
+      NavigationActions.navigate({
+        routeName,
+        params,
+      })
+    );
+  }
+  navigateToHome() {
+    this.navigate("Home");
   }
 }
 

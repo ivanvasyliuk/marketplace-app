@@ -22,6 +22,7 @@ export default mirror([
 
   "CreatePostModal",
   "CreatePost",
+  "CreatePostTab",
 
   "SavedTab",
   "Saved",

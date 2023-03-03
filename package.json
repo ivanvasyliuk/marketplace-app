@@ -27,10 +27,12 @@
     "normalizr": "^3.6.2",
     "react": "18.1.0",
     "react-native": "0.70.5",
+    "react-native-actionsheet": "^2.4.2",
     "react-native-pager-view": "6.0.1",
     "react-native-safe-area-context": "^4.4.1",
     "react-native-screens": "~3.18.0",
     "react-native-tab-view": "^3.4.0",
+    "react-navigation": "^4.4.4",
     "schema": "^0.2.1",
     "yup": "^1.0.0"
   },

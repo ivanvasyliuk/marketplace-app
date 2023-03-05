@@ -4,4 +4,5 @@ export default {
   backgroundColor: "#F8F9FB",
   black: "#333333",
   gray: "#999999",
+  border: "#888",
 };

@@ -1,3 +1,4 @@
+import { observer } from "mobx-react";
 import React, { useState } from "react";
 import { View, Text, Button, TextInput } from "react-native";
 import screens from "../../navigation/screens";
@@ -9,6 +10,8 @@ const BrowseScreen = ({ navigation }) => {
   const store = useStore();
   const [count, setCount] = useState(0);
   const [title, setTitle] = useState("");
+  const list = store.ownStore;
+  console.log("list", list);
   return (
     <View style={styles.container}>
       <Text>BrowseScreen</Text>
@@ -49,8 +52,11 @@ const BrowseScreen = ({ navigation }) => {
           value={title}
         />
       </View>
+      {/* {list.map((item) => {
+        return <Text>item.title</Text>;
+      })} */}
     </View>
   );
 };
 
-export default BrowseScreen;
+export default observer(BrowseScreen);

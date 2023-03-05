@@ -1,3 +1,4 @@
+import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Button, StyleSheet, Text, View } from "react-native";
 import CreatePostScreen from "../screens/CreatePost/CreatePostScreen";
@@ -8,29 +9,29 @@ import Touchable from "../components/Touchable/Touchable";
 
 const Stack = createNativeStackNavigator();
 
-function CreatePostNavigator({ navigation }) {
+function CreatePostNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        options={{
+        options={({ navigation, route }) => ({
           headerTitleAlign: "center",
           headerShown: true,
           headerTitle: (props) => (
             <Text style={{ fontSize: 16 }}>New Post</Text>
           ),
-          headerLeft: () => (
-            <View>
-              <Touchable onPrees={() => navigation.navigate(screens.Browse)}>
+          headerLeft: () => {
+            return (
+              <Touchable onPress={() => navigation.goBack()}>
                 <Ionicons name="close" size={30} color={colors.primary} />
               </Touchable>
-            </View>
-          ),
-          headerRight: () => (
-            <Touchable onPrees={() => console.log("Click")}>
+            );
+          },
+          headerRight: (props) => (
+            <Touchable onPress={() => route.params.onSubmit()}>
               <Text style={style.postLabel}>Post</Text>
             </Touchable>
           ),
-        }}
+        })}
         name={screens.CreatePost}
         component={CreatePostScreen}
       />

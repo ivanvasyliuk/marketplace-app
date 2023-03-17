@@ -8,11 +8,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { useStore } from "../stores/createStore";
 import CreatePostScreen from "../screens/CreatePost/CreatePostScreen";
 import { observer } from "mobx-react";
-import Touchable from "../components/Touchable/Touchable";
-import { Ionicons } from "@expo/vector-icons";
-import colors from "../styles/colors";
-import { Text } from "react-native";
-import CreatePostNavigator from "./CreatePostNavigator";
 
 const RootStack = createStackNavigator();
 
@@ -33,7 +28,7 @@ function RootNavigator() {
             />
             <RootStack.Screen
               name={screens.CreatePostModal}
-              component={CreatePostNavigator}
+              component={CreatePostScreen}
               //   screenOptions={{ presentation: "modal" }}
             />
           </RootStack.Group>

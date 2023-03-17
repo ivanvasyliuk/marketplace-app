@@ -19,7 +19,7 @@ const CustomTabBarButton = ({ children, onPress }) => (
       width: 85,
       height: 85,
       borderRadius: 80,
-      backgroundColor: colors.backgroundColor,
+      // backgroundColor: colors.backgroundColor, //transparent
       alignItems: "center",
       justifyContent: "center",
     }}
@@ -30,7 +30,7 @@ const CustomTabBarButton = ({ children, onPress }) => (
         height: 56,
         borderRadius: 80,
         overflow: "hidden",
-        backgroundColor: colors.backgroundColor,
+        // backgroundColor: colors.backgroundColor,
       }}
     >
       <Touchable
@@ -59,7 +59,7 @@ export default function AppTabNavigator() {
     <>
       <Tab.Navigator
         screenOptions={({ route }) => ({
-          tabBarStyle: { backgroundColor: colors.white },
+          // tabBarStyle: { backgroundColor: colors.white },
           headerShown: false,
           tabBarActiveTintColor: colors.primary,
           tabBarInactiveTintColor: "grey",

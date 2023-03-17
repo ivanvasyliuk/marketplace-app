@@ -1,10 +1,9 @@
-import { Dimensions, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
+import { dimensions } from "../../styles";
 import colors from "../../styles/colors";
 
 const styles = StyleSheet.create({
   headerContainer: {
-    // height: dimensions.headerHeight
-    paddingTop: 20,
     backgroundColor: colors.white,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: colors.border,
@@ -15,5 +14,4 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
-
 export default styles;

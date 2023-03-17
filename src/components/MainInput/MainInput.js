@@ -15,10 +15,11 @@ const MainInput = ({
   const hasError = errors[name] && touched[name];
 
   return (
-    <>
+    <View style={s.container}>
       <View
         style={[
-          s.container,
+          s.containerInput,
+          style,
           isFocused && s.focusedInput,
           hasError && s.errorInput,
         ]}
@@ -30,11 +31,13 @@ const MainInput = ({
           onBlur={() => setIsFocused(false)}
           onFocus={() => setIsFocused(true)}
         />
-        <Text style={[s.inEnd, hasError ? s.redErrorText : s.grayErrorText]}>
+      </View>
+      <View style={s.inEnd}>
+        <Text style={[hasError ? s.redErrorText : s.grayErrorText]}>
           {errors[name] && errors[name]}
         </Text>
       </View>
-    </>
+    </View>
   );
 };
 export default MainInput;

@@ -2,7 +2,8 @@ import { StyleSheet } from "react-native";
 import colors from "../../styles/colors";
 
 const styles = StyleSheet.create({
-  container: {
+  container: {},
+  containerInput: {
     backgroundColor: colors.white,
     paddingHorizontal: 16,
     justifyContent: "center",
@@ -22,8 +23,8 @@ const styles = StyleSheet.create({
   },
   input: {},
   inEnd: {
-    position: "absolute",
-    bottom: -20,
+    paddingTop: 4,
+    height: 22,
   },
   errorInput: {
     borderColor: "red",

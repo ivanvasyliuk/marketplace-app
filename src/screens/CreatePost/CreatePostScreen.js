@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Formik } from "formik";
-import { Button, StyleSheet, Switch, Text, View } from "react-native";
-import s from "./styles";
+import { View } from "react-native";
 import Photos from "./components/Photos";
 import * as yup from "yup";
 import MainInputField from "../../components/Form/MainInputField";
 import Title from "../../components/Form/Title/Title";
-import colors from "../../styles/colors";
 import PriceInput from "../../components/Form/PriceInput/PriceInput";
 import { useStore } from "../../stores/createStore";
 import { observer } from "mobx-react";
-// import * as Permissions from "expo-permissions";
+import s from "./styles";
 
 const initialValues = { title: "", description: "", images: [], price: "" };
 
@@ -20,27 +18,25 @@ const validationSchema = yup.object({
     .string()
     .min(20, "Description must contain 20-100 characters.")
     .max(100, "Description must contain 20-100 characters."),
-  price: yup.number().required().integer(),
+  price: yup.number().integer(),
   images: yup.array(),
 });
 
 const CreatePostScreen = ({ navigation }) => {
   const store = useStore();
-  const [isEnabled, setIsEnabled] = useState(false);
-
-  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+  const formRef = useRef();
 
   function onSubmit(values) {
-    console.log("post");
     store.ownStore.createProduct.run(values);
   }
   useEffect(() => {
-    navigation.setParams({ onSubmit: onSubmit });
+    navigation.setParams({ onSubmit: () => formRef.current.handleSubmit() });
   }, []);
 
   return (
     <View style={s.container}>
       <Formik
+        innerRef={formRef}
         initialValues={initialValues}
         onSubmit={onSubmit}
         validationSchema={validationSchema}
@@ -61,7 +57,6 @@ const CreatePostScreen = ({ navigation }) => {
             <Photos />
             <Title title="Price" />
             <PriceInput />
-            <Button onPress={() => handleSubmit} title="submit" />
           </View>
         )}
       </Formik>

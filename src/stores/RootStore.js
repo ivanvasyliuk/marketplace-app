@@ -2,6 +2,7 @@ import { types } from "mobx-state-tree";
 import Api from "../api";
 import { AuthStore } from "./Auth/AuthStore";
 import { EntitiesStore } from "./EntitiesStore";
+import { LatestProductsStore } from "./Products/LatestProductsStore";
 import { OwnProductStore } from "./Products/OwnProductsStore";
 import { ViewerStore } from "./ViewerStore";
 
@@ -11,6 +12,7 @@ export const RootStore = types
     viewer: types.optional(ViewerStore, {}),
     entities: types.optional(EntitiesStore, {}),
     ownStore: types.optional(OwnProductStore, {}),
+    latestProducts: types.optional(LatestProductsStore, {}),
   })
   .actions((store) => ({
     async bootstrap() {

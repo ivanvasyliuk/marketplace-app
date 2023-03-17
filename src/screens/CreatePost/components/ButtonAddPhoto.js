@@ -48,7 +48,6 @@ const ButtonAddPhoto = ({ isLoadingPhoto, setIsLoadingPhoto }) => {
   }
 
   function onChoose(index) {
-    console.log(index);
     if (index == 0) {
       onOpenCamera();
     }

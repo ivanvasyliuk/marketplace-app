@@ -58,11 +58,9 @@ export const Products = {
         ownerId: "10",
         title: body.title,
         description: body.description,
-        photos: [
-          "https://www.newegg.com/insider/wp-content/uploads/windows_xp_bliss-wide.jpg",
-        ],
+        photos: body.images,
         location: body.location,
-        price: body.price,
+        price: +body.price,
         saved: false,
         createdAt: `${Date.now()}`,
         updatedAt: `${Date.now()}`,
@@ -87,6 +85,9 @@ export const Products = {
   },
   fetchLatest() {
     return axios.get("api/products/latest");
+  },
+  fetchMore({ from, limit }) {
+    return axios.get(`/products/latest?from=${from}&limit=${limit}`);
   },
   getById(id) {
     // return axios.get(`api/products/${id}`);

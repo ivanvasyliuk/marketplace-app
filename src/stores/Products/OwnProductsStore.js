@@ -17,6 +17,11 @@ export const OwnProductStore = types
     addItem(item) {
       store.items.push(item);
     },
+  }))
+  .views((store) => ({
+    get list() {
+      return store.items.slice();
+    },
   }));
 
 function fetchOwnProducts(id) {

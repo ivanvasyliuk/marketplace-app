@@ -9,6 +9,6 @@ export const statusBarHeight = isAndroid
   ? StatusBar.currentHeight
   : iosStatusBarHeight;
 
-export const appBarHeight = isAndroid ? 56 : 44;
+export const headerHeight = isAndroid ? 56 : 44;
 
-export const headerHeight = appBarHeight + statusBarHeight;
+// export const headerHeight = appBarHeight + statusBarHeight;

@@ -1,61 +1,40 @@
 import { observer } from "mobx-react";
-import React, { useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { View, Text, Button, TextInput } from "react-native";
+import Header from "../../components/Header/Header";
+import ProductList from "../../components/Products/ProductList/ProductList";
+import SearchInput from "../../components/SearchInput/SearchInput";
 import screens from "../../navigation/screens";
 import { useStore } from "../../stores/createStore";
 import colors from "../../styles/colors";
 import styles from "./styles";
 
 const BrowseScreen = ({ navigation }) => {
+  const [search, setSearch] = useState("");
   const store = useStore();
-  const [count, setCount] = useState(0);
-  const [title, setTitle] = useState("");
-  const list = store.ownStore;
-  console.log("list", list);
+
+  const list = store.ownStore.list;
+
+  useEffect(() => {
+    // store.latestProducts.fetchLatest.run();
+    // navigation.setOptions({ headerShown: false });
+  }, []);
+
   return (
-    <View style={styles.container}>
-      <Text>BrowseScreen</Text>
-      <View>
-        <Text>{title}</Text>
-        <Text style={{ textAlign: "center" }}>{count}</Text>
+    <Fragment>
+      {/* <Header>
+        <SearchInput />
+      </Header> */}
+      {/* {search.length > 0 && (
         <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "center",
-            padding: 5,
-          }}
-        >
-          <Button
-            color={colors.primary}
-            onPress={() => setCount(count - 1)}
-            title="decrement"
-          />
-          <Button
-            color={colors.primary}
-            onPress={() => setCount(count + 1)}
-            title="increment"
-          />
-          <Button
-            color={colors.primary}
-            onPress={() => store.auth.logout.run()}
-            title="logout"
-          />
-          <Button
-            color={colors.primary}
-            onPress={() => alert("Clicked")}
-            title="Click"
-          />
-        </View>
-        <TextInput
-          style={{ width: 200, height: 50, borderWidth: 1, marginTop: 5 }}
-          onChangeText={(title) => setTitle(title)}
-          value={title}
-        />
+          style={{ position: "absolute", flex: 1, backgroundColor: "green" }}
+        ></View>
+      )} */}
+
+      <View style={styles.container}>
+        <ProductList list={list} />
       </View>
-      {/* {list.map((item) => {
-        return <Text>item.title</Text>;
-      })} */}
-    </View>
+    </Fragment>
   );
 };
 

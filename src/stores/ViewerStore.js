@@ -37,6 +37,9 @@ export const ViewerStore = types
       const array = store.userModel.fullName.split(" ");
       return array.map((letter) => letter[0]).concat();
     },
+    get userId() {
+      return store.userModel?.id;
+    },
   }))
   .actions((store) => ({
     setViewer(user) {

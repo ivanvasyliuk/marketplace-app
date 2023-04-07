@@ -1,5 +1,5 @@
 import React from "react";
-import { SafeAreaView, Text } from "react-native";
+import { SafeAreaView, Text, View } from "react-native";
 import ProductItem from "../ProductItem/ProductItem";
 import { FlashList } from "@shopify/flash-list";
 import s from "./styles";
@@ -7,20 +7,22 @@ import { observer } from "mobx-react";
 import ListFooter from "../../ListFooter/ListFooter";
 
 const ProductList = ({ list }) => {
-  console.log("list", list.length);
   return (
-    <SafeAreaView style={s.container}>
+    <View style={s.container}>
       <FlashList
         data={list}
-        renderItem={({ item }) => <ProductItem product={item} />}
+        renderItem={({ item, index }) => (
+          <ProductItem index={index} product={item} />
+        )}
         numColumns={2}
         keyExtractor={(item) => item.id}
-        ListFooterComponent={() => <ListFooter />}
+        // ListFooterComponent={() => <ListFooter />}
+        // contentContainerStyle={s.listContainer}
         contentContainerStyle={s.listContainer}
         estimatedItemSize={200}
         onEndReachedThreshold={0.3}
       />
-    </SafeAreaView>
+    </View>
   );
 };
 export default observer(ProductList);

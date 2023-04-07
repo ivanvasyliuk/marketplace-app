@@ -13,11 +13,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     backgroundColor: colors.white,
   },
-  borderForSegment: {
-    borderRadius: 4,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: colors.border,
-  },
   horizontalLine: {
     borderBottomColor: colors.border,
     borderBottomWidth: StyleSheet.hairlineWidth,

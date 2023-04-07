@@ -29,4 +29,17 @@ export default mirror([
 
   "InboxTab",
   "Inbox",
+
+  "ChatModal",
+  "Chat",
+
+  "FiltersModal",
+  "Filters",
+  "FiltersScreen",
+
+  "SettingsScreen",
+  "Settings",
+
+  "PostDetails",
+  "PostDetailsNavigator",
 ]);

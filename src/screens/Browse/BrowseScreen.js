@@ -1,37 +1,32 @@
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { observer } from "mobx-react";
-import React, { Fragment, useEffect, useState } from "react";
-import { View, Text, Button, TextInput } from "react-native";
-import Header from "../../components/Header/Header";
+import React, { Fragment, useEffect } from "react";
+import { Button, View } from "react-native";
 import ProductList from "../../components/Products/ProductList/ProductList";
-import SearchInput from "../../components/SearchInput/SearchInput";
+import SearchList from "../../components/Products/SearchList/SearchList";
 import screens from "../../navigation/screens";
 import { useStore } from "../../stores/createStore";
-import colors from "../../styles/colors";
-import styles from "./styles";
+import s from "./styles";
 
-const BrowseScreen = ({ navigation }) => {
-  const [search, setSearch] = useState("");
+const BrowseScreen = () => {
+  const navigation = useNavigation();
   const store = useStore();
+  const { params } = useRoute();
 
-  const list = store.ownStore.list;
+  const list = store.latestProducts.list;
 
   useEffect(() => {
-    // store.latestProducts.fetchLatest.run();
-    // navigation.setOptions({ headerShown: false });
-  }, []);
+    if (params?.search) {
+      store.latestProducts.search(params.search);
+    }
+    store.latestProducts.fetchLatest.run();
+  }, [params?.search]);
 
   return (
     <Fragment>
-      {/* <Header>
-        <SearchInput />
-      </Header> */}
-      {/* {search.length > 0 && (
-        <View
-          style={{ position: "absolute", flex: 1, backgroundColor: "green" }}
-        ></View>
-      )} */}
+      {!!params?.search && <SearchList list={store.latestProducts.searcList} />}
 
-      <View style={styles.container}>
+      <View style={s.container}>
         <ProductList list={list} />
       </View>
     </Fragment>

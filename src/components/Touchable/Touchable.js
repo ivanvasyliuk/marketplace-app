@@ -3,7 +3,7 @@ import { TouchableNativeFeedback, TouchableOpacity, View } from "react-native";
 const isAndroid = Platform.OS === "android";
 
 const Touchable = (props) =>
-  isAndroid ? (
+  isAndroid && !props.isOpacity ? (
     <TouchableNativeFeedback {...props}>
       <View style={props.style}>{props.children}</View>
     </TouchableNativeFeedback>

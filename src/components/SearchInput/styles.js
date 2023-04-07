@@ -5,15 +5,14 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     alignItems: "center",
-    width: 231,
-    height: 36,
-    // backgroundColor: colors.white,
-    backgroundColor: "green",
+    flex: 1,
+    backgroundColor: colors.backgroundColor,
     borderColor: colors.border,
     borderWidth: StyleSheet.hairlineWidth * 2,
     borderRadius: 8,
   },
   containerOnFocus: {
+    backgroundColor: colors.white,
     borderColor: colors.primary,
   },
   input: {

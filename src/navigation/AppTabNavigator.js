@@ -1,5 +1,6 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AntDesign } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import ProfileNavigator from "./ProfileNavigator";
 import BrowseNavigator from "./BrowseNavigator";
 import SavedNavigator from "./SavedNavigator";
@@ -9,6 +10,7 @@ import colors from "../styles/colors";
 import Touchable from "../components/Touchable/Touchable";
 import { Image, StyleSheet, View, Text } from "react-native";
 import CreatePostNavigator from "./CreatePostNavigator";
+import AddPostButton from "../components/svg/AddPostButton";
 
 const Tab = createBottomTabNavigator();
 
@@ -44,11 +46,7 @@ const CustomTabBarButton = ({ children, onPress }) => (
         ]}
         onPress={onPress}
       >
-        <Image
-          source={require("../../assets/icons/add-post.png")}
-          resizeMode="contain"
-          style={{ width: 56, height: 56 }}
-        />
+        <AddPostButton />
       </Touchable>
     </View>
   </View>
@@ -59,37 +57,42 @@ export default function AppTabNavigator() {
     <>
       <Tab.Navigator
         screenOptions={({ route }) => ({
-          // tabBarStyle: { backgroundColor: colors.white },
           headerShown: false,
           tabBarActiveTintColor: colors.primary,
           tabBarInactiveTintColor: "grey",
-          //   headerShown: false,
-          tabBarIcon: ({ focused, color, size }) => {
-            let name;
-            if (focused) {
-              color = colors.primary;
-            }
-            switch (route.name) {
-              case "ProfileTab":
-                name = "user";
-                break;
-              case "BrowseTab":
-                name = "search1";
-                break;
-              case "InboxTab":
-                name = "inbox";
-                break;
-              case "SavedTab":
-                name = "save";
-                break;
-            }
-            return <AntDesign name={name} size={size} color={color} />;
-          },
         })}
       >
-        <Tab.Screen name={screens.BrowseTab} component={BrowseNavigator} />
-        <Tab.Screen name={screens.SavedTab} component={SavedNavigator} />
         <Tab.Screen
+          name={screens.BrowseTab}
+          component={BrowseNavigator}
+          options={{
+            tabBarLabel: "Browse",
+            tabBarIcon: ({ focused, color, size }) => (
+              <AntDesign
+                name="search1"
+                size={size}
+                color={focused ? colors.primary : colors.gray}
+              />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name={screens.SavedTab}
+          component={SavedNavigator}
+          options={{
+            tabBarLabel: "Saved",
+            tabBarIcon: ({ focused, color, size }) => (
+              <Ionicons
+                name="md-bookmark-outline"
+                color={focused ? colors.primary : colors.gray}
+                size={size}
+              />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name={screens.CreatePostTab}
+          component={CreatePostNavigator}
           listeners={({ navigation }) => ({
             tabPress: (event) => {
               event.preventDefault();
@@ -105,12 +108,36 @@ export default function AppTabNavigator() {
               justifyContent: "center",
             },
           }}
-          name={screens.CreatePostTab}
-          component={CreatePostNavigator}
         />
 
-        <Tab.Screen name={screens.InboxTab} component={InboxNavigator} />
-        <Tab.Screen name={screens.ProfileTab} component={ProfileNavigator} />
+        <Tab.Screen
+          name={screens.InboxTab}
+          component={InboxNavigator}
+          options={{
+            tabBarLabel: "Inbox",
+            tabBarIcon: ({ focused, color, size }) => (
+              <AntDesign
+                name="inbox"
+                size={size}
+                color={focused ? colors.primary : colors.gray}
+              />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name={screens.ProfileTab}
+          component={ProfileNavigator}
+          options={{
+            tabBarLabel: "Profile",
+            tabBarIcon: ({ focused, color, size }) => (
+              <AntDesign
+                name="user"
+                size={size}
+                color={focused ? colors.primary : colors.gray}
+              />
+            ),
+          }}
+        />
       </Tab.Navigator>
     </>
   );

@@ -4,26 +4,17 @@ import SegmentedControl from "@react-native-segmented-control/segmented-control"
 import MainInputField from "../MainInputField";
 import colors from "../../../styles/colors";
 import s from "./styles";
+import MySegmentedControl from "../MySegmentedControl/MySegmentedControl";
 
 const PriceInput = () => {
   const [index, setIndex] = useState(0);
 
   return (
     <View style={s.container}>
-      <SegmentedControl
-        style={s.borderForSegment}
+      <MySegmentedControl
         values={["Price", "Free"]}
-        selectedIndex={index}
-        tintColor={colors.primary}
-        backgroundColor={colors.white}
-        fontStyle={{
-          fontSize: 16,
-          color: colors.primary,
-        }}
-        activeFontStyle={{ fontSize: 16, color: colors.white }}
-        onChange={(event) => {
-          setIndex(event.nativeEvent.selectedSegmentIndex);
-        }}
+        index={index}
+        setIndex={setIndex}
       />
       {index == 0 && (
         <>

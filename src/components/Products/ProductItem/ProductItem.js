@@ -1,17 +1,32 @@
-import { AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 import { observer } from "mobx-react";
 import React from "react";
 import { Image, Text, View } from "react-native";
+import screens from "../../../navigation/screens";
+import Touchable from "../../Touchable/Touchable";
+import FavoriteButton from "../FavoriteButton/FavoriteButton";
 import s from "./styles";
 
-const ProductItem = ({ product }) => {
+const ProductItem = ({ product, index }) => {
+  const navigation = useNavigation();
+
+  function onPress() {
+    console.log("product", product.id);
+    navigation.navigate(screens.PostDetailsNavigator, {
+      screen: screens.PostDetails,
+      params: { product: product },
+    });
+  }
+
   return (
-    <View style={s.container}>
-      <Image style={s.image} source={{ uri: product.photos[0] }} />
-      <Text style={s.itemTitle}>{product.title}</Text>
-      <Text style={s.itemPrice}>${product.price}</Text>
-      <AntDesign style={s.saveButton} name="save" size={16} color="green" />
-    </View>
+    <Touchable onPress={onPress}>
+      <View style={[s.container, index % 2 == 0 ? s.left : s.right]}>
+        <Image style={s.image} source={{ uri: product.photos[0] }} />
+        <Text style={s.itemTitle}>{product.title}</Text>
+        <Text style={s.itemPrice}>${product.price}</Text>
+        <FavoriteButton product={product} style={s.saveButton} />
+      </View>
+    </Touchable>
   );
 };
 export default observer(ProductItem);

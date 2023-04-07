@@ -1,37 +1,47 @@
 import { StyleSheet } from "react-native";
+import { dimensions } from "../../../styles";
 import colors from "../../../styles/colors";
+
+const WIDTH = dimensions.width / 2 - 12;
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: colors.white,
-    width: 148,
-    height: 209,
+    width: WIDTH,
     borderColor: colors.border,
     borderWidth: StyleSheet.hairlineWidth * 2,
     borderRadius: 8,
     overflow: "hidden",
+    marginVertical: 4,
   },
   image: {
-    width: 148,
-    height: 148,
+    width: WIDTH,
+    height: WIDTH,
   },
   saveButton: {
     position: "absolute",
     right: 10,
     bottom: 10,
-    color: colors.border,
   },
   itemTitle: {
+    fontWeight: "400",
     fontSize: 14,
     lineHeight: 21,
     marginLeft: 12,
     marginTop: 8,
   },
   itemPrice: {
+    fontWeight: "700",
+    marginBottom: 8,
     fontSize: 16,
     lineHeight: 24,
     marginLeft: 12,
-    fontWeight: "bold",
+  },
+  left: { marginRight: 4, marginLeft: 8 },
+  right: {
+    marginLeft: 4,
+    marginRight: 8,
   },
 });
 export default styles;

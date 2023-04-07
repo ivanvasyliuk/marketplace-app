@@ -1,4 +1,4 @@
-import { Platform, StatusBar } from "react-native";
+import { Dimensions, Platform, StatusBar } from "react-native";
 import { isIphoneX } from "react-native-iphone-x-helper";
 
 const isAndroid = Platform.OS === "android";
@@ -10,5 +10,9 @@ export const statusBarHeight = isAndroid
   : iosStatusBarHeight;
 
 export const headerHeight = isAndroid ? 56 : 44;
+
+const { height, width } = Dimensions.get("window");
+
+export { height, width };
 
 // export const headerHeight = appBarHeight + statusBarHeight;

@@ -1,9 +1,9 @@
-import { types } from 'mobx-state-tree';
+import { types } from "mobx-state-tree";
 
-export const MessageModel = types.model('MessageModel', {
-  id: types.identifier,
+export const MessageModel = types.model("MessageModel", {
+  id: types.identifierNumber,
   chatId: types.number,
-  ownerId: types.number,
+  ownerId: types.string,
   text: types.string,
   read: types.boolean,
   createdAt: types.number,

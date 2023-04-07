@@ -3,13 +3,10 @@ import colors from "../../../styles/colors";
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
-    flexDirection: "row",
-    justifyContent: "center",
-    flexWrap: "wrap",
+    flex: 1,
   },
   listContainer: {
-    backgroundColor: "red",
+    // flex: 1,
   },
 });
 export default styles;

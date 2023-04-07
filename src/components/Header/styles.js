@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 import { dimensions } from "../../styles";
 import colors from "../../styles/colors";
 
@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: colors.border,
     paddingHorizontal: 8,
+    paddingVertical: Platform.OS == "android" ? 0 : 8,
     elevation: 0,
     flexDirection: "row",
     justifyContent: "space-between",

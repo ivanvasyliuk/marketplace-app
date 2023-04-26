@@ -24,6 +24,13 @@ const styles = StyleSheet.create({
     height: 76,
     padding: 16,
   },
-  contentContainer: { backgroundColor: colors.white },
+  contentContainer: { backgroundColor: colors.white, flex: 1 },
+  submitButton: {
+    width: "100%",
+    height: 44,
+    backgroundColor: colors.primary,
+    alignItems: "center",
+    justifyContent: "center",
+  },
 });
 export default styles;

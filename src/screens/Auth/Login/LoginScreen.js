@@ -7,6 +7,7 @@ import Input from "../../../components/Form/Input/Input";
 import AuthFooter from "../../../components/Form/AuthFooter/AuthFooter";
 import { useStore } from "../../../stores/createStore";
 import s from "./styles";
+import { useNavigation } from "@react-navigation/native";
 
 const validationSchema = yup.object({
   //Add .email() for email
@@ -23,6 +24,7 @@ const LoginScreen = ({ navigation }) => {
 
   async function onSubmit({ email, password }) {
     await store.auth.login.run({ email, password });
+    navigation.goBack();
   }
 
   return (

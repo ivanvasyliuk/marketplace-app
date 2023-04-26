@@ -10,6 +10,7 @@ function PostNavigation() {
       <Stack.Navigator
         screenOptions={({ route }) => ({
           headerTitleAlign: "center",
+          headerShown: false,
         })}
       >
         <Stack.Screen name={screens.PostDetails} component={PostScreen} />

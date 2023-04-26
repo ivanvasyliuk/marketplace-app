@@ -19,13 +19,47 @@ function BrowseNavigator() {
         screenOptions={({ route, navigation }) => ({
           header: () => (
             <Header>
-              <SearchInput />
-              <Touchable
-                style={{ marginHorizontal: 20 }}
-                onPress={() => navigation.navigate(screens.FiltersModal)}
-              >
-                <FiltersButton />
-              </Touchable>
+              <SearchInput placeholder="Search" />
+
+              {!!route.params?.search ? (
+                <Touchable
+                  isOpacity
+                  style={{
+                    paddingHorizontal: 16,
+                    paddingVertical: 15,
+                    // backgroundColor: "red",
+                  }}
+                  // onPress={() =>
+                  //   navigation.setParams({ ...route.params, search: "" })
+                  // }
+                >
+                  <Text
+                    style={{
+                      height: 18,
+                      fontSize: 16,
+                      color: "green",
+                    }}
+                  >
+                    Cancel
+                  </Text>
+                </Touchable>
+              ) : (
+                <Touchable
+                  isOpacity
+                  style={{ padding: 20 }}
+                  onPress={() =>
+                    navigation.navigate(screens.FiltersModal, {
+                      screen: screens.FiltersScreen,
+                      // params: {
+                      //   filtersSubmit: route.params.filtersSubmit,
+                      //   filtersValues: route.params.filtersValues,
+                      // },
+                    })
+                  }
+                >
+                  <FiltersButton />
+                </Touchable>
+              )}
             </Header>
           ),
           // header: () => (

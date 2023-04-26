@@ -16,7 +16,8 @@ export const ProductModel = types
     saved: false,
     createdAt: types.string,
     updatedAt: types.string,
-    owner: types.maybe(types.reference(UserModel)),
+    // owner: types.maybe(types.reference(UserModel)),
+    owner: types.reference(UserModel),
     toogleFavorite: asyncModel(toogleFavorite),
     createChat: asyncModel(createChat, false),
   })
@@ -25,6 +26,7 @@ export const ProductModel = types
     ...snapshot,
     owner: snapshot.ownerId,
   }))
+
   .actions((store) => ({
     fetchOwner() {
       getRoot(store).entities.users.getById.run(store.ownerId);

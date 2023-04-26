@@ -66,12 +66,33 @@ const styles = StyleSheet.create({
     top: 0,
     right: 0,
     left: 0,
-    paddingHorizontal: 18,
+    paddingHorizontal: 5,
   },
   rigthButtonsInHeader: {
     flexDirection: "row",
-    width: 120,
-    justifyContent: "space-between",
+  },
+  callAndMessageContainer: {
+    flexDirection: "row",
+  },
+  callButtonContainer: {
+    flex: 1,
+    height: 48,
+    backgroundColor: "#2ECC71",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  messageButtonContainer: {
+    flex: 1,
+    height: 48,
+    backgroundColor: "#3498DB",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  iconContainer: {
+    paddingHorizontal: 13,
+    paddingVertical: 8,
   },
 });
 export default styles;

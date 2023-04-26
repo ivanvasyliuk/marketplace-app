@@ -16,6 +16,8 @@ const InboxChatItem = ({ chat }) => {
       chat: chat,
     });
   }
+  console.log("chat", chat);
+  console.log("owner", chat.owner);
 
   return (
     <Touchable style={s.container} onPress={onPress}>
@@ -25,7 +27,9 @@ const InboxChatItem = ({ chat }) => {
       <View style={s.titlesContainer}>
         <Text style={s.productTitle}>{chat.product.title}</Text>
         <Text style={s.ownerTitle}>{chat.owner.fullName}</Text>
-        <Text style={s.lastMessageLabel}>{chat.message.text}</Text>
+        <Text style={s.lastMessageLabel}>{`${chat.message.text.slice(0, 35)}${
+          chat.message.text.length > 35 ? " ..." : ""
+        }`}</Text>
       </View>
       <View style={{}}>
         <Text style={s.time}>{now.getHours() + ":" + now.getMinutes()}</Text>

@@ -1,5 +1,5 @@
 import { types } from "mobx-state-tree";
-import { OwnProductStore } from "../Products/OwnProductsStore";
+// import { OwnProductStore } from "../Products/OwnProductsStore";
 
 export const UserModel = types.model("UserModel", {
   id: types.identifier,

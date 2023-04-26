@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
-import SegmentedControl from "@react-native-segmented-control/segmented-control";
+import { View } from "react-native";
 import MainInputField from "../MainInputField";
-import colors from "../../../styles/colors";
+import MySegmentedControl from "../MySegmentedControl.js/MySegmentedControl";
 import s from "./styles";
-import MySegmentedControl from "../MySegmentedControl/MySegmentedControl";
 
 const PriceInput = () => {
   const [index, setIndex] = useState(0);

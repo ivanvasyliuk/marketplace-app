@@ -14,6 +14,10 @@ import UserImage from "../../components/User/UserImage/UserImage";
 import { useStore } from "../../stores/createStore";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import s from "./styles";
+import GoToLoginButton from "../../components/GoToLoginButton/GoToLoginButton";
+import SettingsIcon from "../../components/svg/SettingsIcon";
+import Touchable from "../../components/Touchable/Touchable";
+import screens from "../../navigation/screens";
 
 const image =
   "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540anonymous%252Fexpoproject-aeb8be29-bf3a-4275-a960-54282c5f6b7a/ImagePicker/c3dbdf38-2c1f-463f-ba1e-97ca1d9188de.jpeg";
@@ -28,7 +32,7 @@ const TestProfileHeader = () => {
   const navigation = useNavigation();
   const store = useStore();
   const { top } = useSafeAreaInsets();
-  console.log("top", top);
+
   useEffect(() => {
     store.ownStore.fetch.run();
   }, []);
@@ -80,76 +84,94 @@ const TestProfileHeader = () => {
 
   return (
     <View style={{ flex: 1 }}>
-      <Animated.View
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          backgroundColor: "white",
-          height: headerHeight,
-          zIndex: headerZindex,
-          alignItems: "center",
-        }}
-      >
-        <Animated.View
-          style={{
-            height: imageSize,
-            width: imageSize,
-            borderRadius: PROFILE_IMAGE_MAX_HEIGHT / 2,
-            overflow: "hidden",
-            marginTop: profileImageMarginTop,
-            position: "absolute",
-            bottom: headerImageBottom,
-            left: profileImageMarginLeft,
-          }}
-        >
-          <Image
-            source={{ uri: image }}
-            style={{ flex: 1, width: null, height: null }}
-          />
-        </Animated.View>
+      <>
         <Animated.View
           style={{
             position: "absolute",
-            bottom: headerTitleBottom,
-            left: profileNameMarginLeft,
-          }}
-        >
-          <Text
-            style={{
-              fontSize: 14,
-              fontWeight: "bold",
-            }}
-          >
-            Owner Name
-          </Text>
-        </Animated.View>
-      </Animated.View>
-
-      <ScrollView
-        style={{ flex: 1 }}
-        scrollEventThrottle={16}
-        onScroll={Animated.event([
-          { nativeEvent: { contentOffset: { y: state.scrollY } } },
-        ])}
-      >
-        <Animated.View
-          style={{
-            height: 70,
-            marginTop: profileImageMarginTop,
-          }}
-        ></Animated.View>
-        <View
-          style={{
-            justifyContent: "center",
+            top: 0,
+            left: 0,
+            right: 0,
+            backgroundColor: "white",
+            height: headerHeight,
+            zIndex: headerZindex,
             alignItems: "center",
           }}
         >
-          <Text>active:145 | sold:30 | rating:4.7</Text>
-        </View>
-        <ProductList list={list} />
-      </ScrollView>
+          <Animated.View
+            style={{
+              height: imageSize,
+              width: imageSize,
+              borderRadius: PROFILE_IMAGE_MAX_HEIGHT / 2,
+              overflow: "hidden",
+              marginTop: profileImageMarginTop,
+              position: "absolute",
+              bottom: headerImageBottom,
+              left: profileImageMarginLeft,
+            }}
+          >
+            <Image
+              source={{ uri: image }}
+              style={{ flex: 1, width: null, height: null }}
+            />
+          </Animated.View>
+
+          <Animated.View
+            style={{
+              position: "absolute",
+              bottom: headerTitleBottom,
+              left: profileNameMarginLeft,
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 14,
+                fontWeight: "bold",
+              }}
+            >
+              Owner Name
+            </Text>
+          </Animated.View>
+          <Touchable
+            isOpacity
+            style={{
+              position: "absolute",
+              top: 34,
+              right: 0,
+              backgroundColor: "red",
+              padding: 11,
+            }}
+            onPress={() => navigation.navigate(screens.Settings)}
+          >
+            <View>
+              <SettingsIcon />
+            </View>
+          </Touchable>
+        </Animated.View>
+
+        <ScrollView
+          style={{ flex: 1 }}
+          scrollEventThrottle={16}
+          onScroll={Animated.event([
+            { nativeEvent: { contentOffset: { y: state.scrollY } } },
+          ])}
+        >
+          <Animated.View
+            style={{
+              height: 70,
+              marginTop: profileImageMarginTop,
+            }}
+          ></Animated.View>
+          <View
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Text>active:145 | sold:30 | rating:4.7</Text>
+          </View>
+          <ProductList list={list} />
+        </ScrollView>
+      </>
     </View>
   );
 };

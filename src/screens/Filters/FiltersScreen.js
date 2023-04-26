@@ -1,58 +1,71 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, TextInput } from "react-native";
 import { observer } from "mobx-react";
 import s from "./styles";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import Touchable from "../../components/Touchable/Touchable";
-import SegmentedControl from "@react-native-segmented-control/segmented-control";
-import colors from "../../styles/colors";
-import screens from "../../navigation/screens";
-import MySegmentedControl from "../../components/Form/MySegmentedControl/MySegmentedControl";
-import SearchInput from "../../components/SearchInput/SearchInput";
 import { useStore } from "../../stores/createStore";
+import PriceRangeInput from "../../components/Form/PriceRangeInput/PriceRangeInput";
+import SearchInputField from "../../components/SearchInputField/SearchInputField";
+import MySegmentedControlField from "../../components/Form/MySegmentedControlField/MySegmentedControlField";
 
 const FiltersScreen = () => {
-  const store = useStore();
+  const [filtersValues, setFiltersValues] = useState({
+    price: [0, 0],
+    search: "",
+    sortBy: "",
+  });
   const [index, setIndex] = useState(0);
   const [sortIndex, setSortIndex] = useState(0);
   const navigation = useNavigation();
+  const route = useRoute();
+  const store = useStore();
 
-  function onPress() {
-    navigation.navigate(screens.Browse);
+  console.log("filters", filtersValues);
+
+  // console.log("filters ", route.params);
+  // const filtersValues = route.params.filtersValues;
+  // const setFiltersValues = route.params.filtersSubmit;
+
+  function onSubmit() {
+    // if (price[0] > price[1]) price[1] = price[0];
+    // route.params.filtersSubmit(filtersValues);
+
+    navigation.goBack();
   }
 
   return (
     <View style={s.container}>
       <View style={s.contentContainer}>
         <View style={s.searchContainer}>
-          <SearchInput placeholder="Search" />
+          <SearchInputField
+            value={filtersValues.search}
+            filtersValues={filtersValues}
+            setFiltersValues={setFiltersValues}
+            placeholder="Search"
+          />
         </View>
         <View style={s.segmentContainer}>
-          <MySegmentedControl
-            values={["Price", "Free"]}
-            index={index}
-            setIndex={setIndex}
+          <PriceRangeInput
+            filtersValues={filtersValues}
+            priceRange={filtersValues.price}
+            setFiltersValues={setFiltersValues}
           />
         </View>
         <View style={s.sortSegmentContainer}>
           <Text style={s.title}>Sort by</Text>
-          <MySegmentedControl
+          <MySegmentedControlField
             values={["Lowest", "Highest", "Newest"]}
             index={sortIndex}
             setIndex={setSortIndex}
+            value={"sortBy"}
+            filtersValues={filtersValues}
+            setFiltersValues={setFiltersValues}
           />
         </View>
       </View>
-      <Touchable onPress={onPress}>
-        <View
-          style={{
-            width: "100%",
-            height: 44,
-            backgroundColor: colors.primary,
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
+      <Touchable onPress={onSubmit}>
+        <View style={s.submitButton}>
           <Text style={{ textTransform: "uppercase", color: "white" }}>
             Show results
           </Text>

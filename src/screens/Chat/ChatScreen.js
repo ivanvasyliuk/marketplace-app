@@ -1,47 +1,75 @@
 import React, { useEffect, useState } from "react";
 import { FlashList } from "@shopify/flash-list";
 import { Text, TextInput, View } from "react-native";
-import { Entypo } from "@expo/vector-icons";
+import { AntDesign, Entypo } from "@expo/vector-icons";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import s from "./styles";
-import colors from "../../styles/colors";
-import { useRoute } from "@react-navigation/native";
+import MessageItem from "../../components/Chat/MessageItem/MessageItem";
+import { observer } from "mobx-react";
+import UserImage from "../../components/User/UserImage/UserImage";
+import Touchable from "../../components/Touchable/Touchable";
+import screens from "../../navigation/screens";
 
 const ChatScreen = () => {
-  const [isFocused, setIsFocused] = useState(false);
+  const navigation = useNavigation();
   const [text, setText] = useState("");
-  const [height, setHeight] = useState(0);
   const route = useRoute();
 
-  const chat = route.params;
+  const chat = route.params.chat;
+
   useEffect(() => {
     if (chat) {
-      chat.messages;
+      chat.messages.fetch.run();
     }
   }, [chat]);
-  // console.log("chat", chat);
-  console.log("route", route.params);
-  console.log("messages", chat.messages);
-
-  // const chat = route.params;
 
   // const handleContentSizeChange = (event) => {
   //   const { height } = event.nativeEvent.contentSize;
 
   //   setHeight(height);
   // };
+  function onPress() {
+    navigation.navigate(screens.PostDetailsNavigator, {
+      screen: screens.PostDetails,
+      params: { product: chat.product },
+    });
+  }
 
   return (
     <View style={s.container}>
+      <Touchable isOpacity onPress={onPress}>
+        <View style={s.ownerBarItem}>
+          <UserImage size={32} image={chat.product.photos[0]} />
+          <View style={s.titlesContainer}>
+            <Text style={s.productTitle}>{chat.product.title}</Text>
+            <Text style={s.lastMessageLabel}>{`${chat.message.text.slice(
+              0,
+              35
+            )}${chat.message.text.length > 35 ? " ..." : ""}`}</Text>
+          </View>
+          <AntDesign
+            name="right"
+            size={24}
+            style={{
+              position: "absolute",
+              right: 20,
+            }}
+            color="gray"
+          />
+        </View>
+      </Touchable>
       <View style={{ flex: 1 }}>
         <FlashList
-          data={chat}
-          renderItem={({ item }) => <ProductItem product={item} />}
+          data={chat.messages.asList}
+          renderItem={({ item }) => <MessageItem message={item} />}
           keyExtractor={(item) => item.id}
           // refreshing={chats.fetch.isLoading}
           // ListFooterComponent={() => <ListFooter />}
           // contentContainerStyle={s.listContainer}
           // estimatedItemSize={200}
           // onEndReachedThreshold={0.3}
+          role="dialog"
+          inverted={-1}
         />
       </View>
       <View style={s.footer}>
@@ -53,8 +81,6 @@ const ChatScreen = () => {
             // onContentSizeChange={handleContentSizeChange}
             style={[s.input]}
             value={text}
-            onBlur={() => setIsFocused(false)}
-            onFocus={() => setIsFocused(true)}
             multiline
             // numberOfLines={5}
           />
@@ -64,4 +90,4 @@ const ChatScreen = () => {
     </View>
   );
 };
-export default ChatScreen;
+export default observer(ChatScreen);

@@ -18,5 +18,9 @@ const styles = StyleSheet.create({
     borderColor: colors.border,
     backgroundColor: colors.white,
   },
+  horizontalLine: {
+    backgroundColor: colors.gray,
+    height: 1,
+  },
 });
 export default styles;

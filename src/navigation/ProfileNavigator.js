@@ -4,10 +4,15 @@ import ProfileScreen from "../screens/Profile/ProfileScreen";
 import screens from "./screens";
 import SettingsNavigator from "./SettingsNavigator";
 import TestProfileHeader from "../screens/Profile/TestProfileHeader";
+import PostNavigation from "./PostNavigation";
+import { useStore } from "../stores/createStore";
+import ProfileScreenAnimated from "../screens/Profile/ProfileScreenAnimated";
 
 const Stack = createNativeStackNavigator();
 
 function ProfileNavigator() {
+  const store = useStore();
+
   return (
     <>
       <Stack.Navigator
@@ -16,11 +21,29 @@ function ProfileNavigator() {
           header: () => <ProfileHeader />,
         })}
       >
-        <Stack.Screen name={screens.Profile} component={TestProfileHeader} />
+        {/* {store.viewer.userModel ? ( */}
+        {/* <> */}
+        <Stack.Screen
+          name={screens.Profile}
+          component={ProfileScreenAnimated}
+        />
         <Stack.Screen
           options={{ headerShown: false }}
           name={screens.Settings}
           component={SettingsNavigator}
+        />
+        {/* </> */}
+        {/* ) : ( */}
+        {/* <Stack.Screen
+            options={{ headerShown: false }}
+            name={screens.Settings}
+            component={SettingsNavigator}
+          /> */}
+        {/* )} */}
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name={screens.PostDetailsNavigator}
+          component={PostNavigation}
         />
       </Stack.Navigator>
     </>

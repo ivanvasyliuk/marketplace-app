@@ -5,7 +5,8 @@ export const Product = new schema.Entity("products", {
   owner: User,
 });
 export const ProductCollection = [Product];
-export const LatestProduct = new schema.Entity("products");
+// TODO: remove and use  Product  schema
+export const LatestProduct = new schema.Entity("products", { owner: User });
 export const LatestProductCollection = [LatestProduct];
 export const OwnProducts = [LatestProduct];
 export const MessageSchema = new schema.Entity("messages");

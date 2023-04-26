@@ -7,10 +7,12 @@ import { useNavigation } from "@react-navigation/native";
 import EmptyInboxSvg from "../../components/svg/EmptyInboxSvg";
 import InboxChatItem from "../../components/Chat/InboxChatItem/InboxChatItem";
 import s from "./styles";
+import GoToLoginButton from "../../components/GoToLoginButton/GoToLoginButton";
 
 const InboxScreen = () => {
   const navigation = useNavigation();
-  const chats = useStore((store) => store.chats);
+  const store = useStore();
+  const chats = store.chats;
 
   useEffect(() => {
     chats.fetch.run();
@@ -18,12 +20,13 @@ const InboxScreen = () => {
 
   return (
     <View style={s.container}>
-      {chats.list ? (
+      {store.viewer.userModel ? (
         <FlashList
           data={chats.list}
           renderItem={({ item }) => <InboxChatItem chat={item} />}
           keyExtractor={(item) => item.id}
           refreshing={chats.fetch.isLoading}
+          ListEmptyComponent={<EmptyInboxSvg />}
           // contentContainerStyle={{ backgroundColor: "red" }}
           // ListFooterComponent={() => <ListFooter />}
           // contentContainerStyle={s.listContainer}
@@ -31,7 +34,28 @@ const InboxScreen = () => {
           // onEndReachedThreshold={0.3}
         />
       ) : (
-        <EmptyInboxSvg />
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 16,
+              fontWeight: "400",
+              lineHeight: 24,
+              letterSpacing: 0,
+              textAlign: "center",
+              color: "gray",
+              marginBottom: 8,
+            }}
+          >
+            Login to check your Inbox
+          </Text>
+          <GoToLoginButton />
+        </View>
       )}
     </View>
   );

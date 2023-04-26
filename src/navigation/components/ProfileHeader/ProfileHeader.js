@@ -17,7 +17,11 @@ const ProfileHeader = () => {
     <View
       style={[
         s.container,
-        { paddingTop: top, height: top + dimensions.headerHeight },
+        {
+          paddingTop: top,
+          height: top + dimensions.headerHeight,
+          backgroundColor: "red",
+        },
       ]}
     >
       <View

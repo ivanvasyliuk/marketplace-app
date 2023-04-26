@@ -1,4 +1,5 @@
 import { getParent, getRoot, types } from "mobx-state-tree";
+import Api from "../../api";
 import { MessageCollectionSchema, MessageSchema } from "../schemas";
 import { asyncModel } from "../utils";
 import { MessageModel } from "./MessageModel";
@@ -11,7 +12,7 @@ export const MessageStore = types
   })
   .views((store) => ({
     get asList() {
-      return store.items.slice().reverse();
+      return store.items.slice();
     },
     get chatId() {
       return getParent(store).id;
@@ -31,7 +32,6 @@ export const MessageStore = types
 function fetchMessages() {
   return async function fetchMessagesFlow(flow, store) {
     const res = await Api.Chats.getMessages(store.chatId);
-    console.log("res", res);
     const result = flow.merge(res.data, MessageCollectionSchema);
 
     store.setItems(result);

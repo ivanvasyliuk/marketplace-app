@@ -1,10 +1,27 @@
+import { AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 import { Text, View } from "react-native";
+import screens from "../../../navigation/screens";
+import Touchable from "../../Touchable/Touchable";
 import s from "./styles";
 const SearchItem = ({ product }) => {
+  const navigation = useNavigation();
+
+  function onPress() {
+    console.log("product", product.id);
+    navigation.navigate(screens.PostDetailsNavigator, {
+      screen: screens.PostDetails,
+      params: { product: product },
+    });
+  }
+
   return (
-    <View style={s.container}>
-      <Text>{product.title}</Text>
-    </View>
+    <Touchable onPress={onPress}>
+      <View style={s.container}>
+        <Text style={s.text}>{product.title}</Text>
+        <AntDesign name="right" size={24} style={s.iconLeft} />
+      </View>
+    </Touchable>
   );
 };
 export default SearchItem;

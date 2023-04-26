@@ -14,6 +14,7 @@ function FiltersNavigator() {
     <Stack.Navigator
       screenOptions={({ route, navigation }) => ({
         // headerShown: false,
+        headerTitleAlign: "center",
         headerLeft: () => {
           return (
             <Touchable onPress={() => navigation.goBack()}>
@@ -21,7 +22,11 @@ function FiltersNavigator() {
             </Touchable>
           );
         },
-        headerTitle: (props) => <Text style={{ fontSize: 16 }}>Filters</Text>,
+        headerTitle: (props) => (
+          <Text style={{ fontSize: 16, lineHeight: 24, fontWeight: "500" }}>
+            Filters
+          </Text>
+        ),
       })}
     >
       <Stack.Screen

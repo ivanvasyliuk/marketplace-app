@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { CHATS, createNewProduct, TEST_PRODUCTS } from "./data";
+import { CHATS, createNewProduct, MESSAGES, TEST_PRODUCTS } from "./data";
 
 // axios.defaults.baseURL = ''
 
@@ -112,8 +112,24 @@ export const Products = {
 };
 
 export const Users = {
-  getByID(id) {
-    return axios.get(`/api/users/${id}`);
+  getById(id) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({
+          data: {
+            email: "testuser@gamil.com",
+            fullName: "Test User",
+            id: "10",
+            location: "fdsf",
+            avatar: "dffdsffdsf",
+            phone: "sdfdfdfdsf",
+            createdAt: "dfsf",
+            updatedAt: "gksfngkf",
+          },
+        });
+      }, 300);
+    });
+    // return axios.get(`/api/users/${id}`);
   },
 };
 

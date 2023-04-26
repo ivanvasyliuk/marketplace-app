@@ -2,6 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import { observer } from "mobx-react";
 import React from "react";
 import { Button, Text, View } from "react-native";
+import GoToLoginButton from "../../components/GoToLoginButton/GoToLoginButton";
 import BigLogo from "../../components/svg/BigLogo";
 import LogOutIcon from "../../components/svg/LogOutIcon";
 import Touchable from "../../components/Touchable/Touchable";
@@ -34,12 +35,7 @@ const SettingsScreen = () => {
           >
             Login to view your profile
           </Text>
-          <Touchable
-            style={s.loginBotton}
-            onPress={() => navigation.navigate(screens.Auth)}
-          >
-            <Text style={s.loginButtonText}>Login</Text>
-          </Touchable>
+          <GoToLoginButton />
         </View>
       )}
       {/* <Button title="logout" onPress={() => store.auth.logout.run()} /> */}

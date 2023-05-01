@@ -18,7 +18,6 @@ import { dimensions } from "../../styles";
 import s from "./styles";
 import CallIcon from "../../components/svg/CallIcon";
 import MessageIcon from "../../components/svg/MessageIcon";
-import Carousel from "react-native-snap-carousel";
 // import Carousel from "react-native-snap-carousel";
 
 const PostScreen = () => {
@@ -58,7 +57,7 @@ const PostScreen = () => {
     <View style={s.container}>
       <ScrollView style={[s.contentContainer]}>
         <View>
-          <Carousel
+          {/* <Carousel
             layout="default"
             ref={(c) => (carouselRef = c)}
             data={product.photos}
@@ -70,15 +69,16 @@ const PostScreen = () => {
                 }}
               />
             )}
+            containerCustomStyle={ViewPropTypes.style}
             sliderWidth={300}
             itemWidth={300}
-          />
-          {/* <Image
+          /> */}
+          <Image
             style={[s.image, { backgroundColor: "green" }]}
             source={{
               uri: product.photos[0],
             }}
-          /> */}
+          />
           <LinearGradient
             colors={["rgba(0,0,0,0.7)", "rgba(0, 0, 0, 0.32)", "transparent"]}
             style={[
@@ -163,17 +163,19 @@ const PostScreen = () => {
               isOpacity
               onPress={() => setAllDescriptionVisible(!allDescriptionVisible)}
             >
-              <Text
-                style={{
-                  fontStyle: "normal",
-                  fontWeight: "500",
-                  fontSize: 16,
-                  lineHeight: 24,
-                  color: colors.primary,
-                }}
-              >
-                {allDescriptionVisible ? "Hide more..." : "Read more..."}
-              </Text>
+              {product.description.length > 90 && (
+                <Text
+                  style={{
+                    fontStyle: "normal",
+                    fontWeight: "500",
+                    fontSize: 16,
+                    lineHeight: 24,
+                    color: colors.primary,
+                  }}
+                >
+                  {allDescriptionVisible ? "Hide more..." : "Read more..."}
+                </Text>
+              )}
             </Touchable>
           </View>
           <View style={s.horizontalLine} />

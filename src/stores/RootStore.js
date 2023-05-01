@@ -5,6 +5,7 @@ import { ChatStore } from "./Chats/ChatStore";
 import { EntitiesStore } from "./EntitiesStore";
 import { LatestProductsStore } from "./Products/LatestProductsStore";
 import { OwnProductStore } from "./Products/OwnProductsStore";
+import { ProductsStore } from "./Products/ProductsStore";
 import { ViewerStore } from "./ViewerStore";
 
 export const RootStore = types
@@ -15,6 +16,7 @@ export const RootStore = types
     ownStore: types.optional(OwnProductStore, {}),
     latestProducts: types.optional(LatestProductsStore, {}),
     chats: types.optional(ChatStore, {}),
+    // products: types.optional(ProductsStore, {}),
   })
   .actions((store) => ({
     async bootstrap() {

@@ -1,12 +1,16 @@
-import { AntDesign } from "@expo/vector-icons";
 import React from "react";
 import { Text, View } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
 import Touchable from "../Touchable/Touchable";
 
-const FiltersListItem = ({ filter }) => {
+const FiltersListItem = ({ filter, setFiltersValues, filtersValues }) => {
   const filterValue = Array.isArray(filter)
     ? `${filter[0]} - ${filter[1]}`
     : filter;
+
+  const filterKey = Object.keys(filtersValues).find(
+    (key) => filtersValues[key] === filter
+  );
 
   return (
     <View
@@ -24,7 +28,7 @@ const FiltersListItem = ({ filter }) => {
       <Touchable
         style={{ paddingLeft: 8 }}
         isOpacity
-        // onPress={() => filter}
+        onPress={() => setFiltersValues({ ...filtersValues, [filterKey]: "" })}
       >
         <AntDesign name="close" color="gray" size={16} />
       </Touchable>

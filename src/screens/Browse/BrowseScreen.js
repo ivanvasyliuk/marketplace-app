@@ -11,43 +11,49 @@ import { useStore } from "../../stores/createStore";
 import s from "./styles";
 
 const BrowseScreen = () => {
-  // const [filtersValues, setFiltersValues] = useState({
-  //   price: [0, 0],
-  //   search: "",
-  //   sortBy: "",
-  // });
+  const [filtersValues, setFiltersValues] = useState({
+    price: "",
+    search: "",
+    sortBy: "",
+  });
   const navigation = useNavigation();
   const store = useStore();
   const { params } = useRoute();
 
   const list = store.latestProducts.list;
 
-  // function handlerFiltersSubmit(values) {
-  //   setFiltersValues({ ...filtersValues, ...values });
+  function handlerFiltersSubmit(values) {
+    setFiltersValues({ ...filtersValues, ...values });
 
-  //   console.log("filters submit");
-  // }
+    console.log("filters submit");
+  }
 
   useEffect(() => {
     if (params?.search) {
       store.latestProducts.search(params.search);
     }
     store.latestProducts.fetchLatest.run();
-    // navigation.setParams({
-    //   filtersSubmit: setFiltersValues,
-    //   filtersValues: filtersValues,
-    // });
-  }, [params?.search]);
+    navigation.setParams({
+      filtersSubmit: handlerFiltersSubmit,
+      filtersValues: filtersValues,
+    });
+  }, [params?.search, filtersValues]);
 
   return (
     <Fragment>
       {!!params?.search && <SearchList list={store.latestProducts.searcList} />}
       <View style={{ height: 52, justifyContent: "center" }}>
-        {/* <FlashList
+        <FlashList
           data={Object.values(filtersValues).filter((item) => item)}
-          renderItem={({ item }) => <FiltersListItem filter={item} />}
+          renderItem={({ item }) => (
+            <FiltersListItem
+              setFiltersValues={setFiltersValues}
+              filtersValues={filtersValues}
+              filter={item}
+            />
+          )}
           horizontal
-        /> */}
+        />
       </View>
       <View style={s.container}>
         <ProductList list={list} />

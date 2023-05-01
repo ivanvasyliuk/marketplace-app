@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TextInput } from "react-native";
 import { observer } from "mobx-react";
 import s from "./styles";
@@ -11,7 +11,7 @@ import MySegmentedControlField from "../../components/Form/MySegmentedControlFie
 
 const FiltersScreen = () => {
   const [filtersValues, setFiltersValues] = useState({
-    price: [0, 0],
+    price: "",
     search: "",
     sortBy: "",
   });
@@ -23,13 +23,22 @@ const FiltersScreen = () => {
 
   console.log("filters", filtersValues);
 
+  useEffect(() => {
+    setFiltersValues({ ...filtersValues, ...route.params.filtersValues });
+    if (filtersValues.sortBy) {
+      setSortIndex(
+        ["Lowest", "Highest", "Newest"].indexOf(filtersValues.sortBy)
+      );
+    }
+  }, []);
+
   // console.log("filters ", route.params);
   // const filtersValues = route.params.filtersValues;
   // const setFiltersValues = route.params.filtersSubmit;
 
   function onSubmit() {
     // if (price[0] > price[1]) price[1] = price[0];
-    // route.params.filtersSubmit(filtersValues);
+    route.params.filtersSubmit(filtersValues);
 
     navigation.goBack();
   }

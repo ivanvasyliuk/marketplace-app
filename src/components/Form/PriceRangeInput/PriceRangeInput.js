@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Text, TextInput, TouchableWithoutFeedback, View } from "react-native";
 import MySegmentedControl from "../MySegmentedControl.js/MySegmentedControl";
 import s from "./styles";
@@ -6,6 +6,16 @@ import s from "./styles";
 const PriceRangeInput = ({ priceRange, setFiltersValues, filtersValues }) => {
   const [index, setIndex] = useState(0);
   const inputRef = useRef([]);
+
+  useEffect(() => {
+    if (index == 1) {
+      setFiltersValues({
+        ...filtersValues,
+        price: [0, 0],
+      });
+    }
+  }, [index]);
+
   return (
     <View style={s.container}>
       <MySegmentedControl

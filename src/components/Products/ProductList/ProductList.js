@@ -6,7 +6,7 @@ import s from "./styles";
 import { observer } from "mobx-react";
 import ListFooter from "../../ListFooter/ListFooter";
 
-const ProductList = ({ list }) => {
+const ProductList = ({ list, onScroll }) => {
   return (
     <View style={s.container}>
       <FlashList
@@ -21,6 +21,7 @@ const ProductList = ({ list }) => {
         contentContainerStyle={s.listContainer}
         estimatedItemSize={200}
         onEndReachedThreshold={0.3}
+        onScroll={onScroll}
       />
     </View>
   );

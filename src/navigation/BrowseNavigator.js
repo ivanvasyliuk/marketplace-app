@@ -50,10 +50,10 @@ function BrowseNavigator() {
                   onPress={() =>
                     navigation.navigate(screens.FiltersModal, {
                       screen: screens.FiltersScreen,
-                      // params: {
-                      //   filtersSubmit: route.params.filtersSubmit,
-                      //   filtersValues: route.params.filtersValues,
-                      // },
+                      params: {
+                        filtersSubmit: route.params.filtersSubmit,
+                        filtersValues: route.params.filtersValues,
+                      },
                     })
                   }
                 >

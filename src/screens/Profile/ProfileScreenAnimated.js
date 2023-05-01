@@ -44,21 +44,32 @@ const ProfileScreenAnimated = () => {
   const PROFILE_IMAGE_MIN_HEIGHT = 36;
   const headerChangeRange = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
 
-  const scrollHandler = useAnimatedScrollHandler({
-    onScroll: (event) => {
-      scrollOffset.value = event.contentOffset.y;
-      if (event.contentOffset.y < HEADER_MAX_HEIGHT) {
-        headerHeight.value = HEADER_MAX_HEIGHT - event.contentOffset.y;
-      }
-    },
-  });
+  // const scrollHandler = useAnimatedScrollHandler({
+  //   onScroll: (event) => {
+  //     scrollOffset.value = event.contentOffset.y;
+  //     if (event.contentOffset.y < HEADER_MAX_HEIGHT) {
+  //       headerHeight.value = HEADER_MAX_HEIGHT - event.contentOffset.y;
+  //     }
+  //   },
+  // });
+
+  function scrollHandler(e) {
+    console.log("e", e.nativeEvent);
+    scrollOffset.value = e.nativeEvent.contentOffset.y;
+    headerHeight.value = interpolate(
+      scrollOffset.value,
+      [0, headerChangeRange],
+      [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT]
+    );
+  }
+
   const headerContainer = useAnimatedStyle(() => {
     return {
       marginTop: top,
       minHeight: HEADER_MIN_HEIGHT,
       height: withSpring(headerHeight.value, {
-        // damping: 20,
-        // stiffness: 90,
+        damping: 10,
+        stiffness: 100,
       }),
     };
   });
@@ -172,9 +183,9 @@ const ProfileScreenAnimated = () => {
           </Touchable>
         </Animated.View>
       </Animated.View>
-      <Animated.ScrollView onScroll={scrollHandler}>
-        <ProductList list={list} />
-      </Animated.ScrollView>
+      {/* <Animated.ScrollView onScroll={scrollHandler}> */}
+      <ProductList list={list} onScroll={scrollHandler} />
+      {/* </Animated.ScrollView> */}
     </View>
   );
 };

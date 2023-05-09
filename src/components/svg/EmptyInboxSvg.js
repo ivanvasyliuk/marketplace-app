@@ -7,6 +7,10 @@ const EmptyInboxSvg = () => {
   return (
     <View
       style={{
+        position: "absolute",
+        top: 180,
+        right: 0,
+        left: 0,
         justifyContent: "center",
         flex: 1,
         alignItems: "center",

@@ -31,6 +31,7 @@ const SearchInput = ({ sizes, style, ...props }) => {
     // if (search) {
     changeTextDebouncer(search);
     console.log("inputRef", inputRef.current.value);
+
     // }
   };
 

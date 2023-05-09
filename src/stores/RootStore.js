@@ -13,10 +13,10 @@ export const RootStore = types
     auth: types.optional(AuthStore, {}),
     viewer: types.optional(ViewerStore, {}),
     entities: types.optional(EntitiesStore, {}),
-    ownStore: types.optional(OwnProductStore, {}),
-    latestProducts: types.optional(LatestProductsStore, {}),
+    // ownStore: types.optional(OwnProductStore, {}),
+    // latestProducts: types.optional(LatestProductsStore, {}),
     chats: types.optional(ChatStore, {}),
-    // products: types.optional(ProductsStore, {}),
+    products: types.optional(ProductsStore, {}),
   })
   .actions((store) => ({
     async bootstrap() {

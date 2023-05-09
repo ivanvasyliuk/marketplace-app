@@ -24,6 +24,7 @@ const CustomTabBarButton = ({ children, onPress }) => (
       // backgroundColor: colors.backgroundColor, //transparent
       alignItems: "center",
       justifyContent: "center",
+      backgroundColor: "red",
     }}
   >
     <View

@@ -1,29 +1,57 @@
-// import { types } from "mobx-state-tree";
-// import { asyncModel } from "../utils";
-// import { LatestProductsStore } from "./LatestProductsStore";
-// import { OwnProductStore } from "./OwnProductsStore";
-// import { ProductModel } from "./ProductModel";
+import { types } from "mobx-state-tree";
+import { LatestProductCollection } from "../schemas";
+import { asyncModel, createList } from "../utils";
+import { LatestProductsStore } from "./LatestProductsStore";
+import { OwnProductStore } from "./OwnProductsStore";
+import { ProductModel } from "./ProductModel";
+import Fuse from "fuse.js";
+import Api from "../../api";
 
-// export const ProductsStore = types
-//   .model("ProductsStore", {
-//     ownStore: types.optional(OwnProductStore, {}),
-//     latestProducts: types.optional(LatestProductsStore, {}),
-//     // items: types.array(types.reference(ProductModel)),
-//     // searchItems: types.array(types.reference(types.late(() => ProductModel))),
-//     // hasNoMore: false,
-//     // fetchLatest: asyncModel(fetchLatest),
-//     // fetchMore: asyncModel(fetchMore, false),
-//   })
-//   .views((store) => ({
-//     get savedList() {
-//       return [
-//         ...store.ownStore.filter((item) => item.saved),
-//         ...store.latestProducts.filter((item) => item.saved),
-//       ];
-//     },
-//   }))
-//   .actions((store) => ({
-//     addFavoriteProduct(id) {
-//       store.savedProducts.push(id);
-//     },
-//   }));
+export const ProductsStore = types
+  .model("ProductsStore", {
+    ownStore: types.optional(OwnProductStore, {}),
+    latestProducts: types.optional(LatestProductsStore, {}),
+    savedProductsList: createList("testArray", {
+      of: types.reference(ProductModel),
+      schema: LatestProductCollection,
+    }),
+    searchSavedProducts: types.array(
+      types.reference(types.late(() => ProductModel))
+    ),
+    fetchSaved: asyncModel(fetchSaved),
+  })
+  .views((store) => ({
+    get searchSavedList() {
+      return store.searchSavedProducts.slice();
+    },
+    get fuse() {
+      const fuse = new Fuse(store.savedProductsList.items, {
+        keys: ["title", "description"],
+        shouldSort: true,
+        includeMatches: true,
+        threshold: 0.3,
+        location: 0,
+        distance: 100,
+        maxPatternLength: 32,
+        minMatchCharLength: 1,
+        findAllMatches: true,
+      });
+      return fuse;
+    },
+  }))
+  .actions((store) => ({
+    search(text) {
+      const fuse = store.fuse;
+      const result = fuse.search(text);
+      store.searchSavedProducts = result.map((product) => product.item);
+    },
+  }));
+
+function fetchSaved() {
+  return async function fetchSavedFlow(flow, store, rootStore) {
+    await Api.Products.fetchSaved();
+    // const res = { data: array.filter((item) => item.saved) };
+
+    // store.savedProductsList.set(array.filter((item) => item.saved));
+  };
+}

@@ -8,15 +8,21 @@ import s from "./styles";
 const FavoriteButton = ({ product, style }) => {
   return (
     <View style={style}>
-      <View style={s.container}>
-        <Touchable onPress={() => product.toogleFavorite.run(product)}>
+      <Touchable
+        style={s.container}
+        isOpacity
+        onPress={() => product.toogleFavorite.run(product)}
+      >
+        {product.saved ? (
+          <Ionicons style={[s.grayButton]} name="md-bookmark" size={24} />
+        ) : (
           <Ionicons
-            style={[product.saved ? s.greenButton : s.grayButton]}
-            name="md-bookmark"
+            style={[s.grayButton]}
+            name="md-bookmark-outline"
             size={24}
           />
-        </Touchable>
-      </View>
+        )}
+      </Touchable>
     </View>
   );
 };

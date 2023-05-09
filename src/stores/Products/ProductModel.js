@@ -35,7 +35,29 @@ export const ProductModel = types
     },
     update(product) {
       Object.assign(store, product);
+      if (product.saved) {
+        getRoot(store).products.savedProductsList.add(store);
+      } else {
+        getRoot(store).products.savedProductsList.removeById(store.id);
+      }
     },
+    // toggleFavorite: flow(function* () {
+    //   const oldValue = store.isFavorite;
+
+    //   store.isTooglingFavorite = true;
+    //   store.isTooglingFavoriteError = false;
+    //   store.isFavorite = !store.isFavorite;
+
+    //   try {
+    //     yield Api.Todos.update({ id: store.id, isFavorite: store.isFavorite });
+    //   } catch (error) {
+    //     console.log(error);
+    //     store.isTooglingFavoriteError = true;
+    //     store.isFavorite = oldValue;
+    //   } finally {
+    //     store.isTooglingFavorite = false;
+    //   }
+    // }),
   }));
 
 function createChat(message) {
@@ -61,7 +83,13 @@ function createChat(message) {
 
 function toogleFavorite(product) {
   return async function toogleFavoriteFlow(flow, store, rootStore) {
-    store.update({ saved: !store.saved });
-    await Api.Products.toggeFavorite(product);
+    try {
+      flow.start();
+      store.update({ saved: !store.saved });
+      await Api.Products.update(store);
+      flow.success();
+    } catch (error) {
+      flow.error();
+    }
   };
 }

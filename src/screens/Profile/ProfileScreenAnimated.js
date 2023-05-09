@@ -1,4 +1,4 @@
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { observer } from "mobx-react";
 import React, { useEffect } from "react";
 import { SafeAreaView, ScrollView, Text, View } from "react-native";
@@ -20,6 +20,7 @@ import Touchable from "../../components/Touchable/Touchable";
 import SettingsIcon from "../../components/svg/SettingsIcon";
 import screens from "../../navigation/screens";
 import { AntDesign } from "@expo/vector-icons";
+import NotSellYetIcon from "../../components/svg/NotSellYetIcon";
 
 const ProfileScreenAnimated = () => {
   const navigation = useNavigation();
@@ -30,13 +31,24 @@ const ProfileScreenAnimated = () => {
   const textWidth = useSharedValue(0);
   const { top } = useSafeAreaInsets();
 
+  const route = useRoute();
+
+  const owner = !!route.params?.owner
+    ? route.params?.owner.owner
+    : store.viewer.userModel;
+
+  console.log("owner", owner);
+
   useEffect(() => {
-    store.ownStore.fetch.run();
-  }, []);
+    if (!owner) {
+      navigation.navigate(screens.Settings);
+    }
+    store.products.ownStore.fetch.run("20");
+  }, [store.products.ownStore.list]);
 
-  const list = store.ownStore.list;
+  const list = store.products.ownStore.list;
 
-  const owner = { fullName: "Joseph" };
+  // const owner = { fullName: "Joseph" };
 
   const HEADER_MAX_HEIGHT = 172;
   const HEADER_MIN_HEIGHT = 56;
@@ -152,7 +164,7 @@ const ProfileScreenAnimated = () => {
               textWidth.value = e.nativeEvent.layout.width;
             }}
           >
-            {owner.fullName}
+            {owner?.fullName}
           </Text>
         </Animated.View>
         <View style={{ backgroundColor: "green" }}>
@@ -184,7 +196,11 @@ const ProfileScreenAnimated = () => {
         </Animated.View>
       </Animated.View>
       {/* <Animated.ScrollView onScroll={scrollHandler}> */}
-      <ProductList list={list} onScroll={scrollHandler} />
+      <ProductList
+        list={list}
+        onScroll={scrollHandler}
+        ListEmptyComponent={<NotSellYetIcon />}
+      />
       {/* </Animated.ScrollView> */}
     </View>
   );

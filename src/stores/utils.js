@@ -1,5 +1,6 @@
 import { getParent, getRoot, types } from "mobx-state-tree";
 import { normalize } from "normalizr";
+import Fuse from "fuse.js";
 
 export function asyncModel(thunk, auto = true) {
   const model = types
@@ -73,4 +74,31 @@ export function createCollection(ofModel, asyncModels = {}) {
 
 export function suspenseModel() {
   return "";
+}
+
+export function createList(name, { of, schema }) {
+  const model = types
+    .model(name, {
+      items: types.array(of),
+    })
+    .views((store) => ({
+      get asArray() {
+        return store.items.slice();
+      },
+    }))
+    .actions((store) => ({
+      set(items) {
+        const { entities, result } = normalize(items, schema);
+        getRoot(store).entities.merge(entities);
+        store.items.replace(result);
+      },
+      add(item) {
+        store.items.unshift(item);
+      },
+      removeById(id) {
+        const index = store.items.findIndex((i) => (i.id = id));
+        store.items.splice(index, 1);
+      },
+    }));
+  return types.optional(model, {});
 }

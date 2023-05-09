@@ -58,10 +58,14 @@ export const Products = {
       }, 300);
     });
   },
-  toggeFavorite(body) {
-    return {
-      data: { saved: !body.seved, ...body },
-    };
+  update(body) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({
+          data: { saved: !body.seved, ...body },
+        });
+      }, 300);
+    });
   },
   fetchLatest() {
     return new Promise((resolve) => {
@@ -73,6 +77,13 @@ export const Products = {
   },
   fetchMore({ from, limit }) {
     return axios.get(`/products/latest?from=${from}&limit=${limit}`);
+  },
+  fetchSaved() {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({ data: TEST_PRODUCTS.slice(1, 3) });
+      }, 300);
+    });
   },
   getById(id) {
     // return axios.get(`api/products/${id}`);

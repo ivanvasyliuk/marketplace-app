@@ -6,4 +6,5 @@ export default {
   gray: "#999999",
   border: "#888",
   blue: "#3498DB",
+  ligthgreen: "#2ECC71",
 };

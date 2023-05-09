@@ -6,7 +6,12 @@ import s from "./styles";
 import { observer } from "mobx-react";
 import ListFooter from "../../ListFooter/ListFooter";
 
-const ProductList = ({ list, onScroll }) => {
+const ProductList = ({
+  list,
+  onScroll,
+  ListEmptyComponent,
+  ListHeaderComponent,
+}) => {
   return (
     <View style={s.container}>
       <FlashList
@@ -18,10 +23,12 @@ const ProductList = ({ list, onScroll }) => {
         keyExtractor={(item) => item.id}
         // ListFooterComponent={() => <ListFooter />}
         // contentContainerStyle={s.listContainer}
+        ListEmptyComponent={ListEmptyComponent}
         contentContainerStyle={s.listContainer}
         estimatedItemSize={200}
         onEndReachedThreshold={0.3}
         onScroll={onScroll}
+        ListHeaderComponent={ListHeaderComponent}
       />
     </View>
   );

@@ -18,7 +18,13 @@ import { dimensions } from "../../styles";
 import s from "./styles";
 import CallIcon from "../../components/svg/CallIcon";
 import MessageIcon from "../../components/svg/MessageIcon";
-// import Carousel from "react-native-snap-carousel";
+import screens from "../../navigation/screens";
+import SellerInfo from "../../components/SellerInfo/SellerInfo";
+import HeaderPost from "../../components/HeaderPost/HeaderPost";
+import Carousel from "react-native-reanimated-carousel";
+import AnimatedDotsCarousel from "react-native-animated-dots-carousel";
+import DotsCarousel from "../../components/DotsCarousel/DotsCarousel";
+import ImagesCarousel from "../../components/ImagesCarousel/ImagesCarousel";
 
 const PostScreen = () => {
   const store = useStore();
@@ -26,6 +32,7 @@ const PostScreen = () => {
   const route = useRoute();
   const navigation = useNavigation();
   const [allDescriptionVisible, setAllDescriptionVisible] = useState(false);
+  const [index, setIndex] = useState(0);
 
   function openCall(phoneNumber) {
     if (phoneNumber) {
@@ -37,7 +44,6 @@ const PostScreen = () => {
       });
     }
   }
-
   const product = route.params.product;
 
   const isOwnerPost = store.viewer.userId === product.ownerId;
@@ -46,96 +52,13 @@ const PostScreen = () => {
     +product.createdAt
   ).getMinutes()}`;
 
-  const { top } = useSafeAreaInsets();
-
-  useEffect(() => {
-    // Question: is it need?
-    // product.fetchOwner();
-  }, []);
-
   return (
     <View style={s.container}>
+      <HeaderPost product={product} isOwnerPost={isOwnerPost} />
       <ScrollView style={[s.contentContainer]}>
         <View>
-          {/* <Carousel
-            layout="default"
-            ref={(c) => (carouselRef = c)}
-            data={product.photos}
-            renderItem={({ index }) => (
-              <Image
-                style={[s.image, { backgroundColor: "green" }]}
-                source={{
-                  uri: product.photos[index],
-                }}
-              />
-            )}
-            containerCustomStyle={ViewPropTypes.style}
-            sliderWidth={300}
-            itemWidth={300}
-          /> */}
-          <Image
-            style={[s.image, { backgroundColor: "green" }]}
-            source={{
-              uri: product.photos[0],
-            }}
-          />
-          <LinearGradient
-            colors={["rgba(0,0,0,0.7)", "rgba(0, 0, 0, 0.32)", "transparent"]}
-            style={[
-              s.header,
-              { paddingTop: top, height: top + dimensions.headerHeight },
-            ]}
-          >
-            <Touchable
-              style={s.iconContainer}
-              isOpacity
-              onPress={() => navigation.goBack()}
-            >
-              <AntDesign name="left" size={24} color={colors.white} />
-            </Touchable>
-            <View style={s.rigthButtonsInHeader}>
-              {isOwnerPost ? (
-                <Touchable style={s.iconContainer} isOpacity>
-                  <MaterialIcons name="edit" size={24} color={colors.white} />
-                </Touchable>
-              ) : (
-                <Touchable
-                  isOpacity
-                  style={s.iconContainer}
-                  onPress={() => product.toogleFavorite.run()}
-                >
-                  {product.saved ? (
-                    <Ionicons
-                      name="md-bookmark"
-                      color={colors.white}
-                      size={24}
-                    />
-                  ) : (
-                    <Ionicons
-                      name="md-bookmark-outline"
-                      color={colors.white}
-                      size={24}
-                    />
-                  )}
-                </Touchable>
-              )}
-
-              <Touchable style={s.iconContainer} isOpacity>
-                <MaterialCommunityIcons
-                  name="share-variant"
-                  size={24}
-                  color={colors.white}
-                />
-              </Touchable>
-              <Touchable style={s.iconContainer} isOpacity>
-                <MaterialIcons
-                  name="more-vert"
-                  size={24}
-                  color={colors.white}
-                />
-              </Touchable>
-            </View>
-          </LinearGradient>
+          <ImagesCarousel list={product.photos} setIndex={setIndex} />
+          <DotsCarousel list={product.photos} index={index} />
           <LinearGradient
             colors={["transparent", "rgba(0, 0, 0, 0.2)", "rgba(0,0,0,0.6)"]}
             style={s.titleAndPriceContainer}
@@ -157,13 +80,13 @@ const PostScreen = () => {
             <Text style={s.descrioption}>
               {allDescriptionVisible
                 ? product.description
-                : product.description.slice(0, 90)}
+                : product.description.slice(0, 145)}
             </Text>
             <Touchable
               isOpacity
               onPress={() => setAllDescriptionVisible(!allDescriptionVisible)}
             >
-              {product.description.length > 90 && (
+              {product.description.length > 145 && (
                 <Text
                   style={{
                     fontStyle: "normal",
@@ -179,25 +102,7 @@ const PostScreen = () => {
             </Touchable>
           </View>
           <View style={s.horizontalLine} />
-          <View style={{ flexDirection: "row" }}>
-            <UserImage image={product.owner.avatar} size={48} />
-            <View>
-              <Text>
-                {product.owner.fullName} is {`${"online"}`}
-              </Text>
-              <Text
-                style={{
-                  fontStyle: "normal",
-                  fontWeight: "400",
-                  fontSize: 16,
-                  lineHeight: 24,
-                  color: colors.blue,
-                }}
-              >
-                See all James’s posts
-              </Text>
-            </View>
-          </View>
+          <SellerInfo product={product} />
         </View>
       </ScrollView>
       <Toast position="bottom" bottomOffset={50} />
@@ -208,33 +113,11 @@ const PostScreen = () => {
             onPress={() => openCall(product.owner.phone)}
           >
             <CallIcon />
-            <Text
-              style={{
-                color: "white",
-                fontStyle: "normal",
-                marginLeft: 8,
-                fontWeight: "400",
-                fontSize: 16,
-                lineHeight: 24,
-              }}
-            >
-              Call
-            </Text>
+            <Text style={s.buttonLabel}>Call</Text>
           </Touchable>
           <Touchable style={s.messageButtonContainer}>
             <MessageIcon />
-            <Text
-              style={{
-                color: "white",
-                fontStyle: "normal",
-                marginLeft: 8,
-                fontWeight: "400",
-                fontSize: 16,
-                lineHeight: 24,
-              }}
-            >
-              Message
-            </Text>
+            <Text style={s.buttonLabel}>Message</Text>
           </Touchable>
         </View>
       )}

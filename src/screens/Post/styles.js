@@ -3,7 +3,6 @@ import colors from "../../styles/colors";
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  image: { width: "100%", minHeight: 356 },
   titleAndPriceContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -77,7 +76,7 @@ const styles = StyleSheet.create({
   callButtonContainer: {
     flex: 1,
     height: 48,
-    backgroundColor: "#2ECC71",
+    backgroundColor: colors.ligthgreen,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
@@ -85,7 +84,7 @@ const styles = StyleSheet.create({
   messageButtonContainer: {
     flex: 1,
     height: 48,
-    backgroundColor: "#3498DB",
+    backgroundColor: colors.blue,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
@@ -93,6 +92,14 @@ const styles = StyleSheet.create({
   iconContainer: {
     paddingHorizontal: 13,
     paddingVertical: 8,
+  },
+  buttonLabel: {
+    color: "white",
+    fontStyle: "normal",
+    marginLeft: 8,
+    fontWeight: "400",
+    fontSize: 16,
+    lineHeight: 24,
   },
 });
 export default styles;

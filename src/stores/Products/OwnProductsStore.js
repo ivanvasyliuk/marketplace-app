@@ -56,7 +56,6 @@ function fetchOwnProducts(id) {
     const userId = userStore.id;
     const res = await Api.Products.byUserId(id);
     const result = flow.merge(res.data.list, OwnProducts);
-
     store.setItems(result);
   };
 }

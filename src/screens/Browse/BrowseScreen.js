@@ -20,7 +20,7 @@ const BrowseScreen = () => {
   const store = useStore();
   const { params } = useRoute();
 
-  const list = store.latestProducts.list;
+  const list = store.products.latestProducts.list;
 
   function handlerFiltersSubmit(values) {
     setFiltersValues({ ...filtersValues, ...values });
@@ -30,9 +30,9 @@ const BrowseScreen = () => {
 
   useEffect(() => {
     if (params?.search) {
-      store.latestProducts.search(params.search);
+      store.products.latestProducts.search(params.search);
     }
-    store.latestProducts.fetchLatest.run();
+    store.products.latestProducts.fetchLatest.run();
     navigation.setParams({
       filtersSubmit: handlerFiltersSubmit,
       filtersValues: filtersValues,

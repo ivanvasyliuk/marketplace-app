@@ -28,7 +28,7 @@ export const TEST_PRODUCTS = [
     },
   },
   {
-    id: Date.now() + 1,
+    id: 1112,
     ownerId: "20",
     title: "Test product 2",
     description:
@@ -43,7 +43,7 @@ export const TEST_PRODUCTS = [
     updatedAt: `${Date.now()}`,
     owner: {
       email: "testuser@gamil.com",
-      fullName: "Test User",
+      fullName: "Test User 2",
       id: "20",
       location: "fdsf",
       avatar:
@@ -54,7 +54,7 @@ export const TEST_PRODUCTS = [
     },
   },
   {
-    id: Date.now() + 2,
+    id: 1113,
     ownerId: "10",
     title: "Test product 3",
     description: "Test product description",
@@ -104,7 +104,32 @@ export const TEST_PRODUCTS = [
     },
   },
   {
-    id: Date.now() + 4,
+    id: 1114,
+    ownerId: "10",
+    title: "Test product H",
+    description: "Test product description",
+    photos: [
+      "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540anonymous%252Fexpoproject-aeb8be29-bf3a-4275-a960-54282c5f6b7a/ImagePicker/c3dbdf38-2c1f-463f-ba1e-97ca1d9188de.jpeg",
+    ],
+    location: "ladssd",
+    price: 332,
+    saved: false,
+    createdAt: `${Date.now()}`,
+    updatedAt: `${Date.now()}`,
+    owner: {
+      email: "testuser@gamil.com",
+      fullName: "Test User",
+      id: "10",
+      location: "fdsf",
+      avatar:
+        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
+      phone: "sdfdfdfdsf",
+      createdAt: "dfsf",
+      updatedAt: "gksfngkf",
+    },
+  },
+  {
+    id: 1115,
     ownerId: "10",
     title: "Test product",
     description: "Test product description",
@@ -129,7 +154,7 @@ export const TEST_PRODUCTS = [
     },
   },
   {
-    id: Date.now() + 5,
+    id: 1116,
     ownerId: "10",
     title: "Test product",
     description: "Test product description",
@@ -154,7 +179,7 @@ export const TEST_PRODUCTS = [
     },
   },
   {
-    id: Date.now() + 6,
+    id: 1117,
     ownerId: "10",
     title: "Test product",
     description: "Test product description",
@@ -179,7 +204,7 @@ export const TEST_PRODUCTS = [
     },
   },
   {
-    id: Date.now() + 7,
+    id: 1118,
     ownerId: "10",
     title: "Test product",
     description: "Test product description",
@@ -204,32 +229,7 @@ export const TEST_PRODUCTS = [
     },
   },
   {
-    id: Date.now() + 8,
-    ownerId: "10",
-    title: "Test product",
-    description: "Test product description",
-    photos: [
-      "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540anonymous%252Fexpoproject-aeb8be29-bf3a-4275-a960-54282c5f6b7a/ImagePicker/c3dbdf38-2c1f-463f-ba1e-97ca1d9188de.jpeg",
-    ],
-    location: "ladssd",
-    price: 332,
-    saved: false,
-    createdAt: `${Date.now()}`,
-    updatedAt: `${Date.now()}`,
-    owner: {
-      email: "testuser@gamil.com",
-      fullName: "Test User",
-      id: "10",
-      location: "fdsf",
-      avatar:
-        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
-      phone: "sdfdfdfdsf",
-      createdAt: "dfsf",
-      updatedAt: "gksfngkf",
-    },
-  },
-  {
-    id: Date.now() + 9,
+    id: 1119,
     ownerId: "33",
     title: "Test product!!!!",
     description: "Test product description",

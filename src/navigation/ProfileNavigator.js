@@ -7,6 +7,7 @@ import TestProfileHeader from "../screens/Profile/TestProfileHeader";
 import PostNavigation from "./PostNavigation";
 import { useStore } from "../stores/createStore";
 import ProfileScreenAnimated from "../screens/Profile/ProfileScreenAnimated";
+import { observer } from "mobx-react";
 
 const Stack = createNativeStackNavigator();
 
@@ -21,25 +22,17 @@ function ProfileNavigator() {
           header: () => <ProfileHeader />,
         })}
       >
-        {/* {store.viewer.userModel ? ( */}
-        {/* <> */}
-        <Stack.Screen
-          name={screens.Profile}
-          component={ProfileScreenAnimated}
-        />
+        {store.viewer.userModel && (
+          <Stack.Screen
+            name={screens.Profile}
+            component={ProfileScreenAnimated}
+          />
+        )}
         <Stack.Screen
           options={{ headerShown: false }}
           name={screens.Settings}
           component={SettingsNavigator}
         />
-        {/* </> */}
-        {/* ) : ( */}
-        {/* <Stack.Screen
-            options={{ headerShown: false }}
-            name={screens.Settings}
-            component={SettingsNavigator}
-          /> */}
-        {/* )} */}
         <Stack.Screen
           options={{ headerShown: false }}
           name={screens.PostDetailsNavigator}
@@ -50,4 +43,4 @@ function ProfileNavigator() {
   );
 }
 
-export default ProfileNavigator;
+export default observer(ProfileNavigator);

@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   },
   searchIcon: {
     margin: 10,
-    color: colors.border,
+    color: colors.gray,
   },
   focusedIcon: {
     color: colors.primary,

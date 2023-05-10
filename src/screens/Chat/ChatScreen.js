@@ -27,6 +27,7 @@ const ChatScreen = () => {
   //   const { height } = event.nativeEvent.contentSize;
 
   //   setHeight(height);
+
   // };
   function onPress() {
     navigation.navigate(screens.PostDetailsNavigator, {
@@ -60,7 +61,7 @@ const ChatScreen = () => {
       </Touchable>
       <View style={{ flex: 1 }}>
         <FlashList
-          data={chat.messages.asList}
+          data={chat.messages.messagesArray.asArray}
           renderItem={({ item }) => <MessageItem message={item} />}
           keyExtractor={(item) => item.id}
           // refreshing={chats.fetch.isLoading}
@@ -78,14 +79,19 @@ const ChatScreen = () => {
             maxLength={400}
             placeholder="Message..."
             onChange={setText}
-            // onContentSizeChange={handleContentSizeChange}
+            // onContentSizeChange={handleContentSizeChange}d
             style={[s.input]}
             value={text}
             multiline
             // numberOfLines={5}
           />
         </View>
-        <Entypo name="chevron-with-circle-right" size={40} style={s.icon} />
+        <Touchable
+          isOpacity
+          onPress={() => chat.sendMessage.run(`${Math.random()}`)}
+        >
+          <Entypo name="chevron-with-circle-right" size={40} style={s.icon} />
+        </Touchable>
       </View>
     </View>
   );

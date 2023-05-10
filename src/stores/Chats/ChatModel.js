@@ -38,6 +38,9 @@ export const ChatModel = types
 function sendMessage(text) {
   return async function sendMessageFlow(flow, store) {
     const res = await Api.Chats.sendMessage(store.id, text);
+    const result = flow.merge(res.data, MessageSchema);
+
+    store.messages.messagesArray.add(result);
+    //
   };
-  const result = flow.merge(res.data, MessageSchema);
 }

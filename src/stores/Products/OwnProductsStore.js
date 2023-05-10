@@ -1,32 +1,24 @@
 import { getParent, types } from "mobx-state-tree";
 import Api from "../../api";
 import Fuse from "fuse.js";
-import { OwnProducts, Product } from "../schemas";
-import { asyncModel } from "../utils";
+import { LatestProductCollection, OwnProducts, Product } from "../schemas";
+import { asyncModel, createList } from "../utils";
 import { ProductModel } from "./ProductModel";
 
 export const OwnProductStore = types
   .model("OwnProducts", {
-    items: types.array(types.reference(types.late(() => ProductModel))),
-    searchItems: types.array(types.reference(types.late(() => ProductModel))),
+    ownProductsArray: createList("LatestProductsArray", {
+      of: types.reference(types.late(() => ProductModel)),
+      schema: LatestProductCollection,
+    }),
+    searchProducts: createList("SearchLatestProducts", {
+      of: types.reference(types.late(() => ProductModel)),
+      schema: LatestProductCollection,
+    }),
     fetch: asyncModel(fetchOwnProducts),
     createProduct: asyncModel(createProduct),
   })
-  .actions((store) => ({
-    setItems(items) {
-      store.items = items;
-    },
-    addItem(item) {
-      store.items.push(item);
-    },
-  }))
   .views((store) => ({
-    get list() {
-      return store.items.slice();
-    },
-    get searcList() {
-      return store.searchItems.slice();
-    },
     get fuse() {
       const fuse = new Fuse(store.items, {
         keys: ["title", "description"],
@@ -46,7 +38,7 @@ export const OwnProductStore = types
     search(text) {
       const fuse = store.fuse;
       const result = fuse.search(text);
-      store.searchItems = result.map((product) => product.item);
+      store.searchProducts.set(result.map((product) => product.item));
     },
   }));
 
@@ -55,8 +47,7 @@ function fetchOwnProducts(id) {
     const userStore = getParent(store);
     const userId = userStore.id;
     const res = await Api.Products.byUserId(id);
-    const result = flow.merge(res.data.list, OwnProducts);
-    store.setItems(result);
+    store.ownProductsArray.set(res.data.list);
   };
 }
 
@@ -67,6 +58,6 @@ function createProduct(values) {
     const result = flow.merge(res.data, Product);
     console.log("ProductSchema", result);
     console.log(result);
-    rootStore.ownStore.addItem(result);
+    store.ownProductsArray.add(result);
   };
 }

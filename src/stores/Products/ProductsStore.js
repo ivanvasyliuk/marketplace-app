@@ -11,19 +11,17 @@ export const ProductsStore = types
   .model("ProductsStore", {
     ownStore: types.optional(OwnProductStore, {}),
     latestProducts: types.optional(LatestProductsStore, {}),
-    savedProductsList: createList("testArray", {
+    savedProducts: createList("savedProducts", {
       of: types.reference(ProductModel),
       schema: LatestProductCollection,
     }),
-    searchSavedProducts: types.array(
-      types.reference(types.late(() => ProductModel))
-    ),
+    searchSavedProducts: createList("searchSavedProducts", {
+      of: types.reference(types.reference(types.late(() => ProductModel))),
+      schema: LatestProductCollection,
+    }),
     fetchSaved: asyncModel(fetchSaved),
   })
   .views((store) => ({
-    get searchSavedList() {
-      return store.searchSavedProducts.slice();
-    },
     get fuse() {
       const fuse = new Fuse(store.savedProductsList.items, {
         keys: ["title", "description"],
@@ -43,7 +41,7 @@ export const ProductsStore = types
     search(text) {
       const fuse = store.fuse;
       const result = fuse.search(text);
-      store.searchSavedProducts = result.map((product) => product.item);
+      store.searchSavedProducts.set(result.map((product) => product.item));
     },
   }));
 

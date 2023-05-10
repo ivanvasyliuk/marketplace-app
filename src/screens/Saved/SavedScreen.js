@@ -10,18 +10,18 @@ const SavedScreen = () => {
   const store = useStore();
   const route = useRoute();
 
-  console.log("test", store.products.savedProductsList);
+  console.log("test", store.products.savedProducts);
 
   useEffect(() => {
     if (route.params?.search) {
       store.products.search(route.params.search);
     }
     store.products.fetchSaved.run();
-  }, [route.params?.search, store.products.savedProductsList.items]);
+  }, [route.params?.search, store.products.savedProducts.items]);
 
   const list = !route.params?.search
-    ? store.products.savedProductsList.asArray
-    : store.products.searchSavedList;
+    ? store.products.savedProducts.asArray
+    : store.products.searchSavedProducts.asArray;
 
   return (
     <View style={s.container}>

@@ -48,7 +48,7 @@ const ProfileScreenAnimated = () => {
     store.products.ownStore.fetch.run("20");
   }, [store.products.ownStore.list]);
 
-  const list = store.products.ownStore.list;
+  const list = store.products.ownStore.ownProductsArray.asArray;
 
   // const owner = { fullName: "Joseph" };
 

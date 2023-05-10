@@ -16,8 +16,6 @@ const InboxChatItem = ({ chat }) => {
       chat: chat,
     });
   }
-  console.log("chat", chat);
-  console.log("owner", chat.owner);
 
   return (
     <Touchable style={s.container} onPress={onPress}>

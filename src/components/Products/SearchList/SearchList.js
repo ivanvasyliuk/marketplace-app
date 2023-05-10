@@ -19,8 +19,8 @@ const SearchList = ({ list }) => {
         contentContainerStyle={s.searchContainer}
         renderItem={({ item }) => <SearchItem product={item} />}
         ListEmptyComponent={ListEmptyComponent}
-        ListHeaderComponent={() => <View style={s.horizontalLine} />}
         ListFooterComponent={() => <View style={s.horizontalLine} />}
+        ListHeaderComponent={() => <View style={s.horizontalLine} />}
         ItemSeparatorComponent={() => (
           <View
             style={[

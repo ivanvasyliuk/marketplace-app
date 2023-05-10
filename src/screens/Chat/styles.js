@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     fontSize: 14,
     lineHeight: 21,
-    color: colors.border,
+    color: colors.gray,
   },
 });
 export default styles;

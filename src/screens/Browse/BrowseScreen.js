@@ -20,7 +20,7 @@ const BrowseScreen = () => {
   const store = useStore();
   const { params } = useRoute();
 
-  const list = store.products.latestProducts.list;
+  const list = store.products.latestProducts.latestProductsArray.asArray;
 
   function handlerFiltersSubmit(values) {
     setFiltersValues({ ...filtersValues, ...values });
@@ -41,7 +41,11 @@ const BrowseScreen = () => {
 
   return (
     <Fragment>
-      {!!params?.search && <SearchList list={store.latestProducts.searcList} />}
+      {!!params?.search && (
+        <SearchList
+          list={store.products.latestProducts.searchProducts.asArray}
+        />
+      )}
       <View style={{ height: 52, justifyContent: "center" }}>
         <FlashList
           data={Object.values(filtersValues).filter((item) => item)}

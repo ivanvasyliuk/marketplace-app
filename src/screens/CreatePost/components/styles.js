@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   addIcon: {
-    color: colors.border,
+    color: colors.gray,
   },
   imagesList: {
     flexDirection: "row",

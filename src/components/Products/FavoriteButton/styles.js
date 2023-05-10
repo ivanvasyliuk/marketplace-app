@@ -8,10 +8,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
   },
   grayButton: {
-    color: colors.border,
-  },
-  greenButton: {
-    color: colors.primary,
+    color: colors.gray,
   },
 });
 export default styles;

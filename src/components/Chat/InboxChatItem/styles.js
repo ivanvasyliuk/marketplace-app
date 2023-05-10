@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 21,
     textAlign: "right",
-    color: colors.border,
+    color: colors.gray,
   },
 });
 export default styles;

@@ -168,6 +168,21 @@ export const Chats = {
     return;
   },
   sendMessage(id, message) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({
+          data: {
+            id: +(Math.random() * 10000).toFixed(0),
+            chatId: id,
+            ownerId: "10",
+            text: message,
+            read: false,
+            createdAt: 11,
+            updatedAt: 11,
+          },
+        });
+      }, 300);
+    });
     // return axios.post(`/api/chats/${id}/messages`, {
     //   message,
     // });

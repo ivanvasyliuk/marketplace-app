@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   horizontalLine: {
-    backgroundColor: colors.gray,
+    backgroundColor: colors.border,
     height: 1,
   },
 });

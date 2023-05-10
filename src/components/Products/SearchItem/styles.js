@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     lineHeight: 24,
   },
   iconLeft: {
-    color: colors.gray,
+    color: colors.border,
   },
 });
 export default styles;

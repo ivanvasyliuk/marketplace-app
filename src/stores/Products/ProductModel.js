@@ -35,10 +35,10 @@ export const ProductModel = types
     },
     update(product) {
       Object.assign(store, product);
-      if (product.saved) {
-        getRoot(store).products.savedProductsList.add(store);
+      if (store.saved) {
+        getRoot(store).products.savedProducts.add(store);
       } else {
-        getRoot(store).products.savedProductsList.removeById(store.id);
+        getRoot(store).products.savedProducts.removeById(store.id);
       }
     },
     // toggleFavorite: flow(function* () {

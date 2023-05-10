@@ -1,6 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Text, View } from "react-native";
+import screens from "../../navigation/screens";
 import colors from "../../styles/colors";
 import Touchable from "../Touchable/Touchable";
 import UserImage from "../User/UserImage/UserImage";

@@ -18,7 +18,7 @@ export const TEST_PRODUCTS = [
     owner: {
       id: "10",
       email: "testuser@gamil.com",
-      fullName: "Test User",
+      fullName: "Test User 1 ",
       location: "fdsf",
       avatar:
         "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
@@ -68,8 +68,8 @@ export const TEST_PRODUCTS = [
     updatedAt: `${Date.now()}`,
     owner: {
       email: "testuser@gamil.com",
-      fullName: "Test User",
-      id: "10",
+      fullName: "Test User 3 ",
+      id: "30",
       location: "fdsf",
       avatar:
         "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
@@ -93,8 +93,8 @@ export const TEST_PRODUCTS = [
     updatedAt: `${Date.now()}`,
     owner: {
       email: "testuser@gamil.com",
-      fullName: "Test User",
-      id: "30",
+      fullName: "Test User 4",
+      id: "40",
       location: "fdsf",
       avatar:
         "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",

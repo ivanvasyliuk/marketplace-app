@@ -11,6 +11,7 @@ import Touchable from "../components/Touchable/Touchable";
 import { Image, StyleSheet, View, Text } from "react-native";
 import CreatePostNavigator from "./CreatePostNavigator";
 import AddPostButton from "../components/svg/AddPostButton";
+import { observer } from "mobx-react";
 
 const Tab = createBottomTabNavigator();
 
@@ -24,7 +25,6 @@ const CustomTabBarButton = ({ children, onPress }) => (
       // backgroundColor: colors.backgroundColor, //transparent
       alignItems: "center",
       justifyContent: "center",
-      backgroundColor: "red",
     }}
   >
     <View
@@ -53,7 +53,7 @@ const CustomTabBarButton = ({ children, onPress }) => (
   </View>
 );
 
-export default function AppTabNavigator() {
+function AppTabNavigator() {
   return (
     <>
       <Tab.Navigator
@@ -151,3 +151,5 @@ const style = StyleSheet.create({
     alignItems: "center",
   },
 });
+
+export default observer(AppTabNavigator);

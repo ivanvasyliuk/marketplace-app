@@ -42,6 +42,7 @@ function RootNavigator() {
           <RootStack.Screen
             options={({ navigation, route }) => ({
               headerShown: true,
+              presentation: "card",
               headerTitleAlign: "center",
               headerTitle: (props) => <Text style={{ fontSize: 16 }}></Text>,
               headerLeft: () => <ChatLeftHeader chat={route.params.chat} />,

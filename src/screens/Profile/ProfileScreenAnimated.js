@@ -37,6 +37,8 @@ const ProfileScreenAnimated = () => {
     ? route.params?.owner.owner
     : store.viewer.userModel;
 
+  const isOwnerPost = store.viewer.userId === owner.id;
+
   console.log("owner", owner);
 
   useEffect(() => {
@@ -67,9 +69,10 @@ const ProfileScreenAnimated = () => {
 
   function scrollHandler(e) {
     console.log("e", e.nativeEvent);
+    console.log("headerHeight.value", headerHeight.value);
     scrollOffset.value = e.nativeEvent.contentOffset.y;
     headerHeight.value = interpolate(
-      scrollOffset.value,
+      e.nativeEvent.contentOffset.y,
       [0, headerChangeRange],
       [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT]
     );
@@ -167,7 +170,7 @@ const ProfileScreenAnimated = () => {
             {owner?.fullName}
           </Text>
         </Animated.View>
-        <View style={{ backgroundColor: "green" }}>
+        {isOwnerPost && (
           <Touchable
             style={{
               position: "absolute",
@@ -176,11 +179,12 @@ const ProfileScreenAnimated = () => {
               // backgroundColor: "red",
             }}
             isOpacity
-            // onPress={() => navigation.navigate(screens.Settings)}
+            onPress={() => navigation.navigate(screens.Settings)}
           >
             <SettingsIcon />
           </Touchable>
-        </View>
+        )}
+
         <Animated.View style={backButtonContainer}>
           <Touchable
             style={{

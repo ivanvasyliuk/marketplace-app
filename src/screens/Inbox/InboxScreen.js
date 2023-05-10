@@ -8,6 +8,7 @@ import EmptyInboxSvg from "../../components/svg/EmptyInboxSvg";
 import InboxChatItem from "../../components/Chat/InboxChatItem/InboxChatItem";
 import s from "./styles";
 import GoToLoginButton from "../../components/GoToLoginButton/GoToLoginButton";
+import colors from "../../styles/colors";
 
 const InboxScreen = () => {
   const navigation = useNavigation();
@@ -27,6 +28,41 @@ const InboxScreen = () => {
           keyExtractor={(item) => item.id}
           refreshing={chats.fetch.isLoading}
           ListEmptyComponent={<EmptyInboxSvg />}
+          ListFooterComponent={() => (
+            <View
+              style={{
+                borderBottomColor: colors.border,
+                borderBottomWidth: 1,
+              }}
+            />
+          )}
+          ListHeaderComponent={() => (
+            <View
+              style={{
+                borderBottomColor: colors.border,
+                borderBottomWidth: 1,
+              }}
+            />
+          )}
+          ItemSeparatorComponent={() => (
+            <View
+              style={{
+                borderBottomColor: "white",
+                borderBottomWidth: 1,
+                paddingLeft: 72,
+                backgroundColor: "white",
+              }}
+            >
+              <View
+                style={{
+                  borderBottomColor: colors.border,
+                  borderBottomWidth: 1,
+
+                  backgroundColor: "white",
+                }}
+              />
+            </View>
+          )}
           // contentContainerStyle={{ backgroundColor: "red" }}
           // ListFooterComponent={() => <ListFooter />}
           // contentContainerStyle={s.listContainer}

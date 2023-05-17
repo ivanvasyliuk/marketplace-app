@@ -1,38 +1,26 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { observer } from "mobx-react";
 import { Linking } from "react-native";
-import { useNavigation, useRoute } from "@react-navigation/native";
-import { Image, View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView } from "react-native";
+import { useRoute } from "@react-navigation/native";
 import Toast from "react-native-toast-message";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { AntDesign } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import Touchable from "../../components/Touchable/Touchable";
-import UserImage from "../../components/User/UserImage/UserImage";
 import { useStore } from "../../stores/createStore";
-import colors from "../../styles/colors";
-import { dimensions } from "../../styles";
-import s from "./styles";
 import CallIcon from "../../components/svg/CallIcon";
 import MessageIcon from "../../components/svg/MessageIcon";
-import screens from "../../navigation/screens";
 import SellerInfo from "../../components/SellerInfo/SellerInfo";
 import HeaderPost from "../../components/HeaderPost/HeaderPost";
-import Carousel from "react-native-reanimated-carousel";
-import AnimatedDotsCarousel from "react-native-animated-dots-carousel";
 import DotsCarousel from "../../components/DotsCarousel/DotsCarousel";
 import ImagesCarousel from "../../components/ImagesCarousel/ImagesCarousel";
+import s from "./styles";
 
 const PostScreen = () => {
-  const store = useStore();
-  const carouselRef = useRef();
-  const route = useRoute();
-  const navigation = useNavigation();
   const [allDescriptionVisible, setAllDescriptionVisible] = useState(false);
   const [index, setIndex] = useState(0);
+  const route = useRoute();
+  const store = useStore();
 
   function openCall(phoneNumber) {
     if (phoneNumber) {
@@ -87,15 +75,7 @@ const PostScreen = () => {
               onPress={() => setAllDescriptionVisible(!allDescriptionVisible)}
             >
               {product.description.length > 145 && (
-                <Text
-                  style={{
-                    fontStyle: "normal",
-                    fontWeight: "500",
-                    fontSize: 16,
-                    lineHeight: 24,
-                    color: colors.primary,
-                  }}
-                >
+                <Text style={s.readMore}>
                   {allDescriptionVisible ? "Hide more..." : "Read more..."}
                 </Text>
               )}

@@ -1,12 +1,11 @@
+import React, { Fragment, useEffect, useState } from "react";
+import { View } from "react-native";
+import { observer } from "mobx-react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { FlashList } from "@shopify/flash-list";
-import { observer } from "mobx-react";
-import React, { Fragment, useEffect, useState } from "react";
-import { Button, ScrollView, Text, View } from "react-native";
 import FiltersListItem from "../../components/FiltersListItem/FiltersListItem";
 import ProductList from "../../components/Products/ProductList/ProductList";
 import SearchList from "../../components/Products/SearchList/SearchList";
-import screens from "../../navigation/screens";
 import { useStore } from "../../stores/createStore";
 import s from "./styles";
 

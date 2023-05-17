@@ -1,14 +1,13 @@
+import React from "react";
 import { Field, Formik } from "formik";
 import { observer } from "mobx-react";
-import React from "react";
-import { View, Text, TextInput } from "react-native";
+import { View } from "react-native";
 import * as yup from "yup";
 import AuthFooter from "../../../components/Form/AuthFooter/AuthFooter";
 import Input from "../../../components/Form/Input/Input";
 import s from "./styles";
 
 const validationSchema = yup.object({
-  //Add required for email
   email: yup.string().email().required("Email is required"),
   password: yup
     .string()

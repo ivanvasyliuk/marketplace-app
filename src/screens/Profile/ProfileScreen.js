@@ -1,14 +1,12 @@
-import { useNavigation } from "@react-navigation/native";
-import { observer } from "mobx-react";
 import React, { useEffect } from "react";
-import { SafeAreaView, ScrollView, Text, View } from "react-native";
+import { observer } from "mobx-react";
+import { Text, View } from "react-native";
 import GoToLoginButton from "../../components/GoToLoginButton/GoToLoginButton";
 import ProductList from "../../components/Products/ProductList/ProductList";
 import { useStore } from "../../stores/createStore";
 import s from "./styles";
 
 const ProfileScreen = () => {
-  const navigation = useNavigation();
   const store = useStore();
 
   useEffect(() => {

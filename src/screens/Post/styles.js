@@ -101,5 +101,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 24,
   },
+  readMore: {
+    fontStyle: "normal",
+    fontWeight: "500",
+    fontSize: 16,
+    lineHeight: 24,
+    color: colors.primary,
+  },
 });
 export default styles;

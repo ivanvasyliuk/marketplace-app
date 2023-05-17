@@ -1,17 +1,15 @@
 import React, { useEffect } from "react";
-import { Button, Text, View } from "react-native";
-import { useStore } from "../../stores/createStore";
+import { Text, View } from "react-native";
 import { FlashList } from "@shopify/flash-list";
 import { observer } from "mobx-react";
-import { useNavigation } from "@react-navigation/native";
+import { useStore } from "../../stores/createStore";
 import EmptyInboxSvg from "../../components/svg/EmptyInboxSvg";
 import InboxChatItem from "../../components/Chat/InboxChatItem/InboxChatItem";
-import s from "./styles";
 import GoToLoginButton from "../../components/GoToLoginButton/GoToLoginButton";
 import colors from "../../styles/colors";
+import s from "./styles";
 
 const InboxScreen = () => {
-  const navigation = useNavigation();
   const store = useStore();
   const chats = store.chats;
 
@@ -63,11 +61,6 @@ const InboxScreen = () => {
               />
             </View>
           )}
-          // contentContainerStyle={{ backgroundColor: "red" }}
-          // ListFooterComponent={() => <ListFooter />}
-          // contentContainerStyle={s.listContainer}
-          // estimatedItemSize={200}
-          // onEndReachedThreshold={0.3}
         />
       ) : (
         <View

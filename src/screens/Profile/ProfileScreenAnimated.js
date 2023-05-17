@@ -1,37 +1,33 @@
-import { useNavigation, useRoute } from "@react-navigation/native";
-import { observer } from "mobx-react";
 import React, { useEffect } from "react";
-import { SafeAreaView, ScrollView, Text, View } from "react-native";
-import ProductList from "../../components/Products/ProductList/ProductList";
-import { useStore } from "../../stores/createStore";
+import { Text, View } from "react-native";
+import { observer } from "mobx-react";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { AntDesign } from "@expo/vector-icons";
 import Animated, {
   useSharedValue,
-  useAnimatedScrollHandler,
   useAnimatedStyle,
   withSpring,
-  useAnimatedGestureHandler,
   interpolate,
 } from "react-native-reanimated";
-import s from "./styles";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import UserImage from "../../components/User/UserImage/UserImage";
+import ProductList from "../../components/Products/ProductList/ProductList";
+import { useStore } from "../../stores/createStore";
 import { width } from "../../styles/dimensions";
 import Touchable from "../../components/Touchable/Touchable";
 import SettingsIcon from "../../components/svg/SettingsIcon";
 import screens from "../../navigation/screens";
-import { AntDesign } from "@expo/vector-icons";
 import NotSellYetIcon from "../../components/svg/NotSellYetIcon";
+import s from "./styles";
 
 const ProfileScreenAnimated = () => {
   const navigation = useNavigation();
-  const store = useStore();
+  const route = useRoute();
   const headerHeight = useSharedValue(172);
-  const scrollY = useSharedValue(0);
   const scrollOffset = useSharedValue(0);
   const textWidth = useSharedValue(0);
-  const { top } = useSafeAreaInsets();
+  const store = useStore();
 
-  const route = useRoute();
+  const { top } = useSafeAreaInsets();
 
   const owner = !!route.params?.owner
     ? route.params?.owner.owner
@@ -39,18 +35,14 @@ const ProfileScreenAnimated = () => {
 
   const isOwnerPost = store.viewer.userId === owner.id;
 
-  console.log("owner", owner);
-
   useEffect(() => {
     if (!owner) {
       navigation.navigate(screens.Settings);
     }
-    store.products.ownStore.fetch.run("20");
+    store.products.ownStore.fetch.run(owner.id);
   }, [store.products.ownStore.list]);
 
   const list = store.products.ownStore.ownProductsArray.asArray;
-
-  // const owner = { fullName: "Joseph" };
 
   const HEADER_MAX_HEIGHT = 172;
   const HEADER_MIN_HEIGHT = 56;
@@ -58,18 +50,7 @@ const ProfileScreenAnimated = () => {
   const PROFILE_IMAGE_MIN_HEIGHT = 36;
   const headerChangeRange = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
 
-  // const scrollHandler = useAnimatedScrollHandler({
-  //   onScroll: (event) => {
-  //     scrollOffset.value = event.contentOffset.y;
-  //     if (event.contentOffset.y < HEADER_MAX_HEIGHT) {
-  //       headerHeight.value = HEADER_MAX_HEIGHT - event.contentOffset.y;
-  //     }
-  //   },
-  // });
-
   function scrollHandler(e) {
-    console.log("e", e.nativeEvent);
-    console.log("headerHeight.value", headerHeight.value);
     scrollOffset.value = e.nativeEvent.contentOffset.y;
     headerHeight.value = interpolate(
       e.nativeEvent.contentOffset.y,
@@ -155,13 +136,11 @@ const ProfileScreenAnimated = () => {
   return (
     <View style={[s.container, { paddingtop: top }]}>
       <Animated.View style={[headerContainer]}>
-        <Animated.View style={[avatarContainer]}>
-          {/* <UserImage /> */}
-        </Animated.View>
+        <Animated.View style={[avatarContainer]}></Animated.View>
 
         <Animated.View style={textContainer}>
           <Text
-            style={{ fontSize: 16, fontWeight: "500" }}
+            style={s.boldText}
             onLayout={(e) => {
               console.log("e");
               textWidth.value = e.nativeEvent.layout.width;
@@ -172,12 +151,7 @@ const ProfileScreenAnimated = () => {
         </Animated.View>
         {isOwnerPost && (
           <Touchable
-            style={{
-              position: "absolute",
-              top: 19.5,
-              right: 10,
-              // backgroundColor: "red",
-            }}
+            style={s.settingsButton}
             isOpacity
             onPress={() => navigation.navigate(screens.Settings)}
           >
@@ -199,13 +173,11 @@ const ProfileScreenAnimated = () => {
           </Touchable>
         </Animated.View>
       </Animated.View>
-      {/* <Animated.ScrollView onScroll={scrollHandler}> */}
       <ProductList
         list={list}
         onScroll={scrollHandler}
         ListEmptyComponent={<NotSellYetIcon />}
       />
-      {/* </Animated.ScrollView> */}
     </View>
   );
 };

@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Formik } from "formik";
 import { View } from "react-native";
-import Photos from "./components/Photos";
+import { observer } from "mobx-react";
+import { Formik } from "formik";
 import * as yup from "yup";
+import Photos from "./components/Photos";
 import MainInputField from "../../components/Form/MainInputField";
 import Title from "../../components/Form/Title/Title";
 import PriceInput from "../../components/Form/PriceInput/PriceInput";
 import { useStore } from "../../stores/createStore";
-import { observer } from "mobx-react";
 import s from "./styles";
 
 const initialValues = { title: "", description: "", images: [], price: "" };

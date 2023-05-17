@@ -27,10 +27,11 @@ const styles = StyleSheet.create({
   contentContainer: { backgroundColor: colors.white, flex: 1 },
   submitButton: {
     width: "100%",
-    height: 44,
+    paddingVertical: 14,
     backgroundColor: colors.primary,
     alignItems: "center",
     justifyContent: "center",
   },
+  submitButtonText: { textTransform: "uppercase", color: "white" },
 });
 export default styles;

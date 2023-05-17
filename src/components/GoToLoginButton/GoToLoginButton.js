@@ -5,12 +5,13 @@ import screens from "../../navigation/screens";
 import Touchable from "../Touchable/Touchable";
 import s from "./styles";
 
-const GoToLoginButton = () => {
+const GoToLoginButton = ({ resetAction }) => {
   const navigation = useNavigation();
 
   function onPress() {
     navigation.navigate(screens.Auth, {
       screen: screens.Login,
+      params: { resetAction: resetAction },
     });
   }
 

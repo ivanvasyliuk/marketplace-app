@@ -17,24 +17,19 @@ function ProfileNavigator() {
   return (
     <>
       <Stack.Navigator
+        initialRouteName={screens.Profile}
         screenOptions={({ route }) => ({
           headerShown: false,
-          header: () => <ProfileHeader />,
         })}
       >
-        {store.viewer.userModel && (
+        {!!store.viewer.userModel && (
           <Stack.Screen
             name={screens.Profile}
             component={ProfileScreenAnimated}
           />
         )}
+        <Stack.Screen name={screens.Settings} component={SettingsNavigator} />
         <Stack.Screen
-          options={{ headerShown: false }}
-          name={screens.Settings}
-          component={SettingsNavigator}
-        />
-        <Stack.Screen
-          options={{ headerShown: false }}
           name={screens.PostDetailsNavigator}
           component={PostNavigation}
         />

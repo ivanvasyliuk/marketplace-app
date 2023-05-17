@@ -1,12 +1,15 @@
 import React from "react";
 import { Text, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import screens from "../../../navigation/screens";
 import Touchable from "../../Touchable/Touchable";
 import s from "./styles";
 
 const AuthFooter = ({ navigation, onSubmit, buttonLabel }) => {
+  const { bottom } = useSafeAreaInsets();
+
   return (
-    <View style={s.container}>
+    <View style={[s.container, { paddingBottom: bottom }]}>
       <View style={s.labelContainer}>
         <Text style={s.doYouHaveAcc}>
           {buttonLabel.length == 5 ? "Don’t have" : "Have"} an account?

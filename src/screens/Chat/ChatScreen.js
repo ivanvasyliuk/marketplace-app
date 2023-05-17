@@ -9,6 +9,7 @@ import { observer } from "mobx-react";
 import UserImage from "../../components/User/UserImage/UserImage";
 import Touchable from "../../components/Touchable/Touchable";
 import screens from "../../navigation/screens";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const ChatScreen = () => {
   const navigation = useNavigation();
@@ -16,6 +17,8 @@ const ChatScreen = () => {
   const route = useRoute();
 
   const chat = route.params.chat;
+
+  const { bottom } = useSafeAreaInsets();
 
   useEffect(() => {
     if (chat) {
@@ -29,16 +32,20 @@ const ChatScreen = () => {
   //   setHeight(height);
 
   // };
-  function onPress() {
+  function navigateToPost() {
     navigation.navigate(screens.PostDetailsNavigator, {
       screen: screens.PostDetails,
       params: { product: chat.product },
     });
   }
+  function sendMessage() {
+    chat.sendMessage.run(text);
+    setText("");
+  }
 
   return (
     <View style={s.container}>
-      <Touchable isOpacity onPress={onPress}>
+      <Touchable isOpacity onPress={navigateToPost}>
         <View style={s.ownerBarItem}>
           <UserImage size={32} image={chat.product.photos[0]} />
           <View style={s.titlesContainer}>
@@ -73,12 +80,12 @@ const ChatScreen = () => {
           inverted={-1}
         />
       </View>
-      <View style={s.footer}>
+      <View style={[s.footer, { paddingBottom: bottom }]}>
         <View style={[s.inputContainer]}>
           <TextInput
             maxLength={400}
             placeholder="Message..."
-            onChange={setText}
+            onChangeText={setText}
             // onContentSizeChange={handleContentSizeChange}d
             style={[s.input]}
             value={text}
@@ -86,10 +93,7 @@ const ChatScreen = () => {
             // numberOfLines={5}
           />
         </View>
-        <Touchable
-          isOpacity
-          onPress={() => chat.sendMessage.run(`${Math.random()}`)}
-        >
+        <Touchable isOpacity onPress={sendMessage}>
           <Entypo name="chevron-with-circle-right" size={40} style={s.icon} />
         </Touchable>
       </View>

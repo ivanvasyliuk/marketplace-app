@@ -5,12 +5,12 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.white,
     paddingHorizontal: 8,
+    paddingVertical: 8,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     borderTopColor: colors.gray,
     borderTopWidth: 0.5,
-    height: 60,
   },
   labelContainer: {
     flexDirection: "row",

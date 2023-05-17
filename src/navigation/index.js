@@ -22,7 +22,6 @@ function RootNavigator() {
       <RootStack.Navigator
         screenOptions={({ route }) => ({
           headerShown: false,
-          presentation: "modal",
         })}
       >
         {/* {store.viewer.userModel ? ( */}

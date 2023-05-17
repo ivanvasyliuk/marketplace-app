@@ -1,4 +1,9 @@
 import React from "react";
+import {
+  CommonActions,
+  useNavigation,
+  useRoute,
+} from "@react-navigation/native";
 import { View, KeyboardAvoidingView } from "react-native";
 import { Formik } from "formik";
 import { observer } from "mobx-react";
@@ -7,7 +12,7 @@ import Input from "../../../components/Form/Input/Input";
 import AuthFooter from "../../../components/Form/AuthFooter/AuthFooter";
 import { useStore } from "../../../stores/createStore";
 import s from "./styles";
-import { useNavigation } from "@react-navigation/native";
+import screens from "../../../navigation/screens";
 
 const validationSchema = yup.object({
   //Add .email() for email
@@ -19,12 +24,16 @@ const validationSchema = yup.object({
     .required("Password is required"),
 });
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = () => {
   const store = useStore();
+  const route = useRoute();
+  const navigation = useNavigation();
+
+  const resetAction = route.params.resetAction;
 
   async function onSubmit({ email, password }) {
     await store.auth.login.run({ email, password });
-    navigation.goBack();
+    resetAction();
   }
 
   return (

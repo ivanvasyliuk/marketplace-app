@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, TextInput } from "react-native";
 import { observer } from "mobx-react";
-import s from "./styles";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import Touchable from "../../components/Touchable/Touchable";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useStore } from "../../stores/createStore";
+import Touchable from "../../components/Touchable/Touchable";
 import PriceRangeInput from "../../components/Form/PriceRangeInput/PriceRangeInput";
 import SearchInputField from "../../components/SearchInputField/SearchInputField";
 import MySegmentedControlField from "../../components/Form/MySegmentedControlField/MySegmentedControlField";
+import s from "./styles";
 
 const FiltersScreen = () => {
   const [filtersValues, setFiltersValues] = useState({
@@ -21,7 +22,7 @@ const FiltersScreen = () => {
   const route = useRoute();
   const store = useStore();
 
-  console.log("filters", filtersValues);
+  const { bottom } = useSafeAreaInsets();
 
   useEffect(() => {
     setFiltersValues({ ...filtersValues, ...route.params.filtersValues });
@@ -32,12 +33,7 @@ const FiltersScreen = () => {
     }
   }, []);
 
-  // console.log("filters ", route.params);
-  // const filtersValues = route.params.filtersValues;
-  // const setFiltersValues = route.params.filtersSubmit;
-
   function onSubmit() {
-    // if (price[0] > price[1]) price[1] = price[0];
     route.params.filtersSubmit(filtersValues);
 
     navigation.goBack();
@@ -74,10 +70,8 @@ const FiltersScreen = () => {
         </View>
       </View>
       <Touchable onPress={onSubmit}>
-        <View style={s.submitButton}>
-          <Text style={{ textTransform: "uppercase", color: "white" }}>
-            Show results
-          </Text>
+        <View style={[s.submitButton, { marginBottom: bottom }]}>
+          <Text style={s.submitButtonText}>Show results</Text>
         </View>
       </Touchable>
     </View>

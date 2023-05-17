@@ -1,3 +1,4 @@
+import React from "react";
 import { TouchableNativeFeedback, TouchableOpacity, View } from "react-native";
 
 const isAndroid = Platform.OS === "android";

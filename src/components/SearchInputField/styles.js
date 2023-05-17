@@ -26,5 +26,10 @@ const styles = StyleSheet.create({
   focusedIcon: {
     color: colors.primary,
   },
+  cleanTextButtonContainer: {
+    padding: 12,
+    flex: 1,
+  },
+  cleanTextButton: { color: colors.gray, alignSelf: "flex-end" },
 });
 export default styles;

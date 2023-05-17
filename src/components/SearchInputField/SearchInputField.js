@@ -42,15 +42,9 @@ const SearchInputField = ({
             isOpacity
             onPress={() => setFiltersValues({ ...filtersValues, search: "" })}
           >
-            <View
-              style={{
-                color: "green",
-                padding: 12,
-                flex: 1,
-              }}
-            >
+            <View style={s.cleanTextButtonContainer}>
               <AntDesign
-                style={{ color: "gray", alignSelf: "flex-end" }}
+                style={s.cleanTextButton}
                 name="closecircle"
                 size={16}
               />

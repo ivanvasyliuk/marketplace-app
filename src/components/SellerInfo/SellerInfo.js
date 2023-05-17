@@ -1,8 +1,7 @@
-import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Text, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import screens from "../../navigation/screens";
-import colors from "../../styles/colors";
 import Touchable from "../Touchable/Touchable";
 import UserImage from "../User/UserImage/UserImage";
 import s from "./styles";
@@ -27,17 +26,7 @@ const SellerInfo = ({ product }) => {
           <Text style={s.onlineStatus}>{`${"online"}`}</Text>
         </Text>
         <Touchable onPress={onPress}>
-          <Text
-            style={{
-              fontStyle: "normal",
-              fontWeight: "400",
-              fontSize: 16,
-              lineHeight: 24,
-              color: colors.blue,
-            }}
-          >
-            See all James’s posts
-          </Text>
+          <Text style={s.seeAllPostText}>See all James’s posts</Text>
         </Touchable>
       </View>
     </View>

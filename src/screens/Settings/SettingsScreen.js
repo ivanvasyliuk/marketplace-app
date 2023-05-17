@@ -26,23 +26,6 @@ const SettingsScreen = () => {
         },
       ],
     });
-
-    navigation
-      .getParent()
-      .getParent()
-      .getParent()
-      .dispatch((state) => {
-        // state.routes[0].state.routes[4].state.routes = [
-        //   { name: screens.Profile },
-        // ];
-        const routes = state.routes.filter((r) => r.name !== screens.Auth);
-
-        return CommonActions.reset({
-          ...state,
-          routes,
-          index: routes.length - 1,
-        });
-      });
   }
 
   return (
@@ -63,28 +46,3 @@ const SettingsScreen = () => {
 };
 
 export default observer(SettingsScreen);
-
-// navigation.dispatch(
-//   CommonActions.reset({
-//     index: 0,
-//     routes: [
-//       {
-//         name: "ProfileTab",
-//       },
-//     ],
-//   })
-// );
-
-// const MainApp = state.routes.find((r) => r.name == screens.MainApp);
-
-// const ProfileTab = MainApp.state.routes.find(
-//   (r) => r.name == screens.ProfileTab
-// );
-// ProfileHeader.route =
-// console.log("ProfileTab", ProfileTab);
-// console.log("ProfileTab", ProfileTab.state.routes);
-// ProfileTab.state.routes = [{ name: screens.Profile }];
-// console.log("ProfileTab", ProfileTab);
-
-// console.log("routes", routes[0].state.routes[4].state.routes);
-// console.log("stateAfter", state.routes[0].state.routes[4].state.routes);

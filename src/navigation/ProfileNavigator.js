@@ -1,9 +1,5 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import ProfileHeader from "./components/ProfileHeader/ProfileHeader";
-import ProfileScreen from "../screens/Profile/ProfileScreen";
-import screens from "./screens";
 import SettingsNavigator from "./SettingsNavigator";
-import TestProfileHeader from "../screens/Profile/TestProfileHeader";
 import PostNavigation from "./PostNavigation";
 import { useStore } from "../stores/createStore";
 import ProfileScreenAnimated from "../screens/Profile/ProfileScreenAnimated";

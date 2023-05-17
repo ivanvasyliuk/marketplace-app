@@ -33,7 +33,18 @@ const LoginScreen = () => {
 
   async function onSubmit({ email, password }) {
     await store.auth.login.run({ email, password });
-    resetAction();
+    if (route.params.resetAction) {
+      resetAction();
+    }
+    navigation.getParent().dispatch((state) => {
+      const routes = state.routes.filter((r) => r.name !== screens.Auth);
+
+      return CommonActions.reset({
+        ...state,
+        routes,
+        index: routes.length - 1,
+      });
+    });
   }
 
   return (

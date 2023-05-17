@@ -1,7 +1,7 @@
-import { Ionicons } from "@expo/vector-icons";
-import { observer } from "mobx-react";
 import React from "react";
 import { View } from "react-native";
+import { observer } from "mobx-react";
+import { Ionicons } from "@expo/vector-icons";
 import Touchable from "../../Touchable/Touchable";
 import s from "./styles";
 

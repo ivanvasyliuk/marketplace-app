@@ -1,7 +1,8 @@
+import React from "react";
 import { SafeAreaView, Text, View } from "react-native";
 import { FlashList } from "@shopify/flash-list";
-import s from "./styles";
 import SearchItem from "../SearchItem/SearchItem";
+import s from "./styles";
 
 const ListEmptyComponent = () => {
   return (

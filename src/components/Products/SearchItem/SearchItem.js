@@ -1,14 +1,15 @@
+import React from "react";
+import { Text, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import { Text, View } from "react-native";
 import screens from "../../../navigation/screens";
 import Touchable from "../../Touchable/Touchable";
 import s from "./styles";
+
 const SearchItem = ({ product }) => {
   const navigation = useNavigation();
 
   function onPress() {
-    console.log("product", product.id);
     navigation.navigate(screens.PostDetailsNavigator, {
       screen: screens.PostDetails,
       params: { product: product },

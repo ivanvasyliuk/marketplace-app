@@ -1,20 +1,16 @@
-import { AntDesign } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Text, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { AntDesign } from "@expo/vector-icons";
 import Touchable from "../../../components/Touchable/Touchable";
 import UserImage from "../../../components/User/UserImage/UserImage";
 import colors from "../../../styles/colors";
+import s from "./styles";
 
 const ChatLeftHeader = ({ chat }) => {
   const navigation = useNavigation();
   return (
-    <View
-      style={{
-        flexDirection: "row",
-        alignItems: "center",
-      }}
-    >
+    <View style={s.container}>
       <Touchable isOpacity onPress={() => navigation.goBack()}>
         <AntDesign
           name="left"
@@ -24,16 +20,7 @@ const ChatLeftHeader = ({ chat }) => {
         />
       </Touchable>
       <UserImage image={chat.owner.avatar} size={36} />
-      <Text
-        style={{
-          marginLeft: 8,
-          fontWeight: "500",
-          fontSize: 16,
-          lineHeight: 24,
-        }}
-      >
-        {chat.owner.fullName}
-      </Text>
+      <Text style={s.ownerNameTitle}>{chat.owner.fullName}</Text>
     </View>
   );
 };

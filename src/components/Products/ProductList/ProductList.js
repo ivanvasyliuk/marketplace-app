@@ -1,10 +1,9 @@
 import React from "react";
-import { SafeAreaView, Text, View } from "react-native";
-import ProductItem from "../ProductItem/ProductItem";
-import { FlashList } from "@shopify/flash-list";
-import s from "./styles";
+import { View } from "react-native";
 import { observer } from "mobx-react";
-import ListFooter from "../../ListFooter/ListFooter";
+import { FlashList } from "@shopify/flash-list";
+import ProductItem from "../ProductItem/ProductItem";
+import s from "./styles";
 
 const ProductList = ({
   list,
@@ -21,8 +20,6 @@ const ProductList = ({
         )}
         numColumns={2}
         keyExtractor={(item) => item.id}
-        // ListFooterComponent={() => <ListFooter />}
-        // contentContainerStyle={s.listContainer}
         ListEmptyComponent={ListEmptyComponent}
         contentContainerStyle={s.listContainer}
         estimatedItemSize={200}

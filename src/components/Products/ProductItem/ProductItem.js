@@ -1,7 +1,7 @@
-import { useNavigation } from "@react-navigation/native";
-import { observer } from "mobx-react";
 import React from "react";
+import { observer } from "mobx-react";
 import { Image, Text, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import screens from "../../../navigation/screens";
 import Touchable from "../../Touchable/Touchable";
 import FavoriteButton from "../FavoriteButton/FavoriteButton";
@@ -11,7 +11,6 @@ const ProductItem = ({ product, index }) => {
   const navigation = useNavigation();
 
   function onPress() {
-    console.log("product", product.id);
     navigation.navigate(screens.PostDetailsNavigator, {
       screen: screens.PostDetails,
       params: { product: product },

@@ -1,13 +1,7 @@
-import { AntDesign } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
 import React, { useCallback, useRef, useState } from "react";
-import {
-  Button,
-  TextInput,
-  TouchableWithoutFeedback,
-  View,
-} from "react-native";
-
+import { useNavigation } from "@react-navigation/native";
+import { TextInput, TouchableWithoutFeedback, View } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
 import Touchable from "../Touchable/Touchable";
 import s from "./styles";
 
@@ -15,8 +9,8 @@ const debounce = require("lodash.debounce");
 
 const SearchInput = ({ sizes, style, ...props }) => {
   const [text, setText] = useState("");
-  const navigation = useNavigation();
   const [isFocused, setIsFocused] = useState(false);
+  const navigation = useNavigation();
   const inputRef = useRef();
 
   const changeTextDebouncer = useCallback(
@@ -30,7 +24,6 @@ const SearchInput = ({ sizes, style, ...props }) => {
     setText(search);
     // if (search) {
     changeTextDebouncer(search);
-    console.log("inputRef", inputRef.current.value);
 
     // }
   };
@@ -58,15 +51,9 @@ const SearchInput = ({ sizes, style, ...props }) => {
         />
         {text && (
           <Touchable isOpacity onPress={onPress}>
-            <View
-              style={{
-                color: "green",
-                paddingHorizontal: 10,
-                paddingVertical: 8,
-              }}
-            >
+            <View style={s.cleanTextButtonContainer}>
               <AntDesign
-                style={{ color: "gray", alignSelf: "flex-end" }}
+                style={s.cleanTextButton}
                 name="closecircle"
                 size={16}
               />

@@ -4,6 +4,7 @@ import PostNavigation from "./PostNavigation";
 import { useStore } from "../stores/createStore";
 import ProfileScreenAnimated from "../screens/Profile/ProfileScreenAnimated";
 import { observer } from "mobx-react";
+import screens from "./screens";
 
 const Stack = createNativeStackNavigator();
 

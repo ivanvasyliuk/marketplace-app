@@ -1,4 +1,7 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import {
+  BottomTabBar,
+  createBottomTabNavigator,
+} from "@react-navigation/bottom-tabs";
 import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import ProfileNavigator from "./ProfileNavigator";
@@ -12,8 +15,11 @@ import { Image, StyleSheet, View, Text } from "react-native";
 import CreatePostNavigator from "./CreatePostNavigator";
 import AddPostButton from "../components/svg/AddPostButton";
 import { observer } from "mobx-react";
+import TabBar from "./components/MyTabBar";
 
 const Tab = createBottomTabNavigator();
+
+const IS_IPHONE_X = false;
 
 const CustomTabBarButton = ({ children, onPress }) => (
   <View
@@ -53,15 +59,31 @@ const CustomTabBarButton = ({ children, onPress }) => (
   </View>
 );
 
-function AppTabNavigator() {
+function AppTabNavigator({ barColor = "#FFFFFF" }) {
   return (
     <>
       <Tab.Navigator
-        screenOptions={({ route }) => ({
+        tabBar={(props) => {
+          return <TabBar props={props} />;
+        }}
+        // tabBar={(props) => (
+        //   <View style={styles.navigatorContainer}>
+        //     <BottomTabBar {...props} />
+        //     {IS_IPHONE_X && (
+        //       <View
+        //         style={[
+        //           styles.xFillLine,
+        //           {
+        //             backgroundColor: barColor,
+        //           },
+        //         ]}
+        //       />
+        //     )}
+        //   </View>
+        // )}
+        screenOptions={{
           headerShown: false,
-          tabBarActiveTintColor: colors.primary,
-          tabBarInactiveTintColor: "grey",
-        })}
+        }}
       >
         <Tab.Screen
           name={screens.BrowseTab}
@@ -102,7 +124,9 @@ function AppTabNavigator() {
           })}
           options={{
             headerTitle: (props) => <Text>New Post</Text>,
-            tabBarButton: (props) => <CustomTabBarButton {...props} />,
+            tabBarButton: (props) => (
+              <TabBarAdvancedButton bgColor={barColor} {...props} />
+            ),
             tabBarLabel: () => null,
             tabBarItemStyle: {
               alignItems: "center",
@@ -144,11 +168,40 @@ function AppTabNavigator() {
   );
 }
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   createPostButton: {
     top: -25,
     justifyContent: "center",
     alignItems: "center",
+  },
+  container: {
+    flex: 1,
+  },
+  navigatorContainer: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    // SHADOW
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+  },
+  navigator: {
+    borderTopWidth: 0,
+    backgroundColor: "transparent",
+    elevation: 30,
+  },
+  xFillLine: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 34,
   },
 });
 

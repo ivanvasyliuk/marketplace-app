@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import colors from "../../styles/colors";
+import { TAB_BAR_HEIGHT_SIZE } from "../../styles/dimensions";
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
@@ -72,6 +73,10 @@ const styles = StyleSheet.create({
   },
   callAndMessageContainer: {
     flexDirection: "row",
+    position: "absolute",
+    right: 0,
+    left: 0,
+    bottom: TAB_BAR_HEIGHT_SIZE,
   },
   callButtonContainer: {
     flex: 1,

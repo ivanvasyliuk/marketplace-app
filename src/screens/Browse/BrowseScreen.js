@@ -21,6 +21,9 @@ const BrowseScreen = () => {
 
   const list = store.products.latestProducts.latestProductsArray.asArray;
 
+  const filtersContainerVisible =
+    Object.values(filtersValues).filter((i) => i).length > 0;
+
   function handlerFiltersSubmit(values) {
     setFiltersValues({ ...filtersValues, ...values });
 
@@ -45,19 +48,21 @@ const BrowseScreen = () => {
           list={store.products.latestProducts.searchProducts.asArray}
         />
       )}
-      <View style={{ height: 52, justifyContent: "center" }}>
-        <FlashList
-          data={Object.values(filtersValues).filter((item) => item)}
-          renderItem={({ item }) => (
-            <FiltersListItem
-              setFiltersValues={setFiltersValues}
-              filtersValues={filtersValues}
-              filter={item}
-            />
-          )}
-          horizontal
-        />
-      </View>
+      {filtersContainerVisible && (
+        <View style={{ height: 52, justifyContent: "center" }}>
+          <FlashList
+            data={Object.values(filtersValues).filter((item) => item)}
+            renderItem={({ item }) => (
+              <FiltersListItem
+                setFiltersValues={setFiltersValues}
+                filtersValues={filtersValues}
+                filter={item}
+              />
+            )}
+            horizontal
+          />
+        </View>
+      )}
       <View style={s.container}>
         <ProductList list={list} />
       </View>

@@ -21,12 +21,11 @@ const SellerInfo = ({ product }) => {
         <UserImage image={product.owner.avatar} size={48} />
       </View>
       <View>
-        <Text>
-          {product.owner.fullName} is{" "}
-          <Text style={s.onlineStatus}>{`${"online"}`}</Text>
-        </Text>
+        <Text>{product.owner.fullName}</Text>
         <Touchable onPress={onPress}>
-          <Text style={s.seeAllPostText}>See all James’s posts</Text>
+          <Text style={s.seeAllPostText}>
+            See all {product.owner.fullName} posts
+          </Text>
         </Touchable>
       </View>
     </View>

@@ -5,14 +5,23 @@ import screens from "../../navigation/screens";
 import Touchable from "../Touchable/Touchable";
 import UserImage from "../User/UserImage/UserImage";
 import s from "./styles";
+import { useStore } from "../../stores/createStore";
 
 const SellerInfo = ({ product }) => {
   const navigation = useNavigation();
+  const store = useStore();
 
   function onPress() {
-    navigation.navigate(screens.Profile, {
-      owner: { owner: product.owner },
-    });
+    if (product.owner.id === store.viewer.userModel?.id) {
+      navigation.navigate(screens.ProfileTab, {
+        screen: screens.Profile,
+        params: { owner: { owner: product.owner } },
+      });
+    } else {
+      navigation.navigate(screens.Profile, {
+        owner: { owner: product.owner },
+      });
+    }
   }
 
   return (

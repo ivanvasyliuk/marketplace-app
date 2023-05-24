@@ -1,26 +1,53 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react";
-import { Linking } from "react-native";
-import { View, Text, ScrollView } from "react-native";
+import { View, Share, Text, ScrollView, Linking } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import Toast from "react-native-toast-message";
 import { LinearGradient } from "expo-linear-gradient";
 import { MaterialIcons } from "@expo/vector-icons";
 import Touchable from "../../components/Touchable/Touchable";
 import { useStore } from "../../stores/createStore";
-import CallIcon from "../../components/svg/CallIcon";
-import MessageIcon from "../../components/svg/MessageIcon";
 import SellerInfo from "../../components/SellerInfo/SellerInfo";
 import HeaderPost from "../../components/HeaderPost/HeaderPost";
 import DotsCarousel from "../../components/DotsCarousel/DotsCarousel";
 import ImagesCarousel from "../../components/ImagesCarousel/ImagesCarousel";
+import CallAndMessageButtons from "../../components/CallAndMessageButtons/CallAndMessageButtons";
 import s from "./styles";
+import { TAB_BAR_HEIGHT_SIZE } from "../../styles/dimensions";
 
 const PostScreen = () => {
   const [allDescriptionVisible, setAllDescriptionVisible] = useState(false);
   const [index, setIndex] = useState(0);
   const route = useRoute();
   const store = useStore();
+
+  const product = route.params.product;
+
+  const isOwnerPost = store.viewer.userId === product.ownerId;
+
+  const timeCreatedAt = `${new Date(+product.createdAt).getHours()}:${new Date(
+    +product.createdAt
+  ).getMinutes()}`;
+
+  async function onShare() {
+    try {
+      const result = await Share.share({
+        message:
+          "React Native | A framework for building native apps using React",
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      Alert.alert(error.message);
+    }
+  }
 
   function openCall(phoneNumber) {
     if (phoneNumber) {
@@ -32,17 +59,14 @@ const PostScreen = () => {
       });
     }
   }
-  const product = route.params.product;
-
-  const isOwnerPost = store.viewer.userId === product.ownerId;
-
-  const timeCreatedAt = `${new Date(+product.createdAt).getHours()}:${new Date(
-    +product.createdAt
-  ).getMinutes()}`;
 
   return (
     <View style={s.container}>
-      <HeaderPost product={product} isOwnerPost={isOwnerPost} />
+      <HeaderPost
+        product={product}
+        isOwnerPost={isOwnerPost}
+        onShare={onShare}
+      />
       <ScrollView style={[s.contentContainer]}>
         <View>
           <ImagesCarousel list={product.photos} setIndex={setIndex} />
@@ -85,21 +109,9 @@ const PostScreen = () => {
           <SellerInfo product={product} />
         </View>
       </ScrollView>
-      <Toast position="bottom" bottomOffset={50} />
+      <Toast position="bottom" bottomOffset={TAB_BAR_HEIGHT_SIZE * 2} />
       {!isOwnerPost && (
-        <View style={s.callAndMessageContainer}>
-          <Touchable
-            style={s.callButtonContainer}
-            onPress={() => openCall(product.owner.phone)}
-          >
-            <CallIcon />
-            <Text style={s.buttonLabel}>Call</Text>
-          </Touchable>
-          <Touchable style={s.messageButtonContainer}>
-            <MessageIcon />
-            <Text style={s.buttonLabel}>Message</Text>
-          </Touchable>
-        </View>
+        <CallAndMessageButtons product={product} openCall={openCall} />
       )}
     </View>
   );

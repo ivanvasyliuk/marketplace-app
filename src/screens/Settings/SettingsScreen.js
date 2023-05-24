@@ -1,15 +1,11 @@
-import { CommonActions, useNavigation } from "@react-navigation/native";
-import { observer } from "mobx-react";
 import React from "react";
-import { Button, Text, View } from "react-native";
-import { NavigationActions, StackActions } from "react-navigation";
+import { Text, View } from "react-native";
+import { observer } from "mobx-react";
+import { useNavigation } from "@react-navigation/native";
 import GoToLoginButton from "../../components/GoToLoginButton/GoToLoginButton";
 import LogoutButton from "../../components/LogoutButton/LogoutButton";
+import SettingsItemsBar from "../../components/SettingsItemsBar/SettingsItemsBar";
 import BigLogo from "../../components/svg/BigLogo";
-import LogOutIcon from "../../components/svg/LogOutIcon";
-import Touchable from "../../components/Touchable/Touchable";
-import ProfileHeader from "../../navigation/components/ProfileHeader/ProfileHeader";
-import screens from "../../navigation/screens";
 import { useStore } from "../../stores/createStore";
 import s from "./styles";
 
@@ -33,6 +29,7 @@ const SettingsScreen = () => {
       <View style={s.logo}>
         <BigLogo />
       </View>
+      <SettingsItemsBar />
       {store.viewer.userModel ? (
         <LogoutButton />
       ) : (

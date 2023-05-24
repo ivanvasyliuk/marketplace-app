@@ -15,7 +15,7 @@ import colors from "../../styles/colors";
 import Touchable from "../Touchable/Touchable";
 import s from "./styles";
 
-const HeaderPost = ({ product, isOwnerPost }) => {
+const HeaderPost = ({ product, isOwnerPost, onShare }) => {
   const navigation = useNavigation();
 
   const { top } = useSafeAreaInsets();
@@ -58,7 +58,7 @@ const HeaderPost = ({ product, isOwnerPost }) => {
           </Touchable>
         )}
 
-        <Touchable style={s.iconContainer} isOpacity>
+        <Touchable style={s.iconContainer} isOpacity onPress={onShare}>
           <MaterialCommunityIcons
             name="share-variant"
             size={24}

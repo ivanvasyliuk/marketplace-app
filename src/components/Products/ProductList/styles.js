@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import colors from "../../../styles/colors";
+import { TAB_BAR_HEIGHT_SIZE } from "../../../styles/dimensions";
 
 const styles = StyleSheet.create({
   container: {
@@ -7,6 +8,7 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     // flex: 1,
+    paddingBottom: TAB_BAR_HEIGHT_SIZE,
   },
 });
 export default styles;

@@ -71,41 +71,7 @@ const styles = StyleSheet.create({
   rigthButtonsInHeader: {
     flexDirection: "row",
   },
-  callAndMessageContainer: {
-    flexDirection: "row",
-    position: "absolute",
-    right: 0,
-    left: 0,
-    bottom: TAB_BAR_HEIGHT_SIZE,
-  },
-  callButtonContainer: {
-    flex: 1,
-    height: 48,
-    backgroundColor: colors.ligthgreen,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  messageButtonContainer: {
-    flex: 1,
-    height: 48,
-    backgroundColor: colors.blue,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  iconContainer: {
-    paddingHorizontal: 13,
-    paddingVertical: 8,
-  },
-  buttonLabel: {
-    color: "white",
-    fontStyle: "normal",
-    marginLeft: 8,
-    fontWeight: "400",
-    fontSize: 16,
-    lineHeight: 24,
-  },
+
   readMore: {
     fontStyle: "normal",
     fontWeight: "500",

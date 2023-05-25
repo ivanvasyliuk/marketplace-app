@@ -2,13 +2,11 @@ import { StyleSheet } from "react-native";
 import colors from "../../../styles/colors";
 
 const styles = StyleSheet.create({
-  touchableContainer: {},
   container: {
     width: "100%",
     height: 82,
     padding: 8,
     backgroundColor: colors.white,
-    // alignItems: "center",
     flexDirection: "row",
   },
   titlesContainer: { flex: 1 },
@@ -43,6 +41,15 @@ const styles = StyleSheet.create({
     lineHeight: 21,
     textAlign: "right",
     color: colors.gray,
+  },
+  readIndicator: {
+    borderRadius: 10,
+    width: 20,
+    height: 20,
+    backgroundColor: colors.primary,
+    bottom: 0,
+    right: 0,
+    position: "absolute",
   },
 });
 export default styles;

@@ -26,12 +26,7 @@ const PriceRangeInput = ({ priceRange, setFiltersValues, filtersValues }) => {
       {index == 0 && (
         <View style={s.inputRangeContainer}>
           <TouchableWithoutFeedback onPress={() => inputRef.current[0].focus()}>
-            <View
-              style={[
-                s.priceContainer,
-                // priceRange[0] && { backgroundColor: "red" },
-              ]}
-            >
+            <View style={s.priceContainer}>
               <Text>From</Text>
               <TextInput
                 ref={(element) => {

@@ -1,5 +1,5 @@
-import React, { useCallback, useRef, useState } from "react";
-import { useNavigation } from "@react-navigation/native";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { TextInput, TouchableWithoutFeedback, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import Touchable from "../Touchable/Touchable";
@@ -11,6 +11,7 @@ const SearchInput = ({ sizes, style, ...props }) => {
   const [text, setText] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const navigation = useNavigation();
+  const { params } = useRoute();
   const inputRef = useRef();
 
   const changeTextDebouncer = useCallback(
@@ -22,15 +23,16 @@ const SearchInput = ({ sizes, style, ...props }) => {
 
   const onChangeHandler = (search) => {
     setText(search);
-    // if (search) {
     changeTextDebouncer(search);
-
-    // }
   };
 
   function onPress() {
     onChangeHandler("");
   }
+
+  useEffect(() => {
+    setText(params.search);
+  }, [params.search]);
 
   return (
     <TouchableWithoutFeedback onPress={() => inputRef.current.focus()}>

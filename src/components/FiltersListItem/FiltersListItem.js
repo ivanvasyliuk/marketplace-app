@@ -2,6 +2,7 @@ import React from "react";
 import { Text, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import Touchable from "../Touchable/Touchable";
+import s from "./styles";
 
 const FiltersListItem = ({ filter, setFiltersValues, filtersValues }) => {
   const filterValue = Array.isArray(filter)
@@ -13,20 +14,10 @@ const FiltersListItem = ({ filter, setFiltersValues, filtersValues }) => {
   );
 
   return (
-    <View
-      style={{
-        paddingHorizontal: 8,
-        paddingVertical: 6,
-        borderWidth: 1,
-        borderColor: "gray",
-        borderRadius: 5,
-        marginHorizontal: 5,
-        flexDirection: "row",
-      }}
-    >
+    <View style={s.container}>
       <Text>{filterValue}</Text>
       <Touchable
-        style={{ paddingLeft: 8 }}
+        style={s.touchable}
         isOpacity
         onPress={() => setFiltersValues({ ...filtersValues, [filterKey]: "" })}
       >

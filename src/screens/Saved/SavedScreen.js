@@ -10,8 +10,6 @@ const SavedScreen = () => {
   const store = useStore();
   const route = useRoute();
 
-  console.log("test", store.products.savedProducts);
-
   useEffect(() => {
     if (route.params?.search) {
       store.products.search(route.params.search);

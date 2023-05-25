@@ -316,7 +316,7 @@ export const CHATS = [
     productId: 33,
     ownerId: "10",
     createdAt: 22,
-    updatedAt: 22,
+    updatedAt: 1685041046826,
 
     message: {
       id: 3384,
@@ -437,7 +437,7 @@ export const CHATS = [
     productId: 33,
     ownerId: "20",
     createdAt: 22,
-    updatedAt: 22,
+    updatedAt: 1682704857674,
     messages: {},
     message: {
       id: 3385,

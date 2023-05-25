@@ -1,15 +1,27 @@
-import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Text, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { format, isToday, isYesterday } from "date-fns";
 import screens from "../../../navigation/screens";
 import Touchable from "../../Touchable/Touchable";
 import UserImage from "../../User/UserImage/UserImage";
 import s from "./styles";
+import { observer } from "mobx-react";
 
 const InboxChatItem = ({ chat }) => {
   const navigation = useNavigation();
 
-  const now = new Date();
+  let date = new Date(chat.updatedAt);
+
+  const renderTime = isToday(date)
+    ? format(date, "HH:mm")
+    : isYesterday(date)
+    ? `Yesterday, ${format(date, "HH:mm")}`
+    : format(date, "MMM dd");
+
+  const lastMessage = `${chat.message.text.slice(0, 30)}${
+    chat.message.text.length > 30 ? " ..." : ""
+  }`;
 
   function onPress() {
     navigation.navigate(screens.Chat, {
@@ -25,27 +37,13 @@ const InboxChatItem = ({ chat }) => {
       <View style={s.titlesContainer}>
         <Text style={s.productTitle}>{chat.product.title}</Text>
         <Text style={s.ownerTitle}>{chat.owner.fullName}</Text>
-        <Text style={s.lastMessageLabel}>{`${chat.message.text.slice(0, 35)}${
-          chat.message.text.length > 35 ? " ..." : ""
-        }`}</Text>
+        <Text style={s.lastMessageLabel}>{lastMessage}</Text>
       </View>
       <View style={{}}>
-        <Text style={s.time}>{now.getHours() + ":" + now.getMinutes()}</Text>
-        {!chat.message.read && (
-          <View
-            style={{
-              borderRadius: 10,
-              width: 20,
-              height: 20,
-              backgroundColor: "#349A89",
-              bottom: 0,
-              right: 0,
-              position: "absolute",
-            }}
-          ></View>
-        )}
+        <Text style={s.time}>{`${renderTime}`}</Text>
+        {!chat.message.read && <View style={s.readIndicator}></View>}
       </View>
     </Touchable>
   );
 };
-export default InboxChatItem;
+export default observer(InboxChatItem);

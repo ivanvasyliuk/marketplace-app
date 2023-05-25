@@ -5,8 +5,6 @@ import { dimensions } from "../../styles";
 import s from "./styles";
 
 function Header({ children }) {
-  // safeAriaContex
-
   const { top } = useSafeAreaInsets();
 
   return (

@@ -1,5 +1,6 @@
+import { useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import Header from "../components/Header/Header";
 import SearchInput from "../components/SearchInput/SearchInput";
 import FiltersButton from "../components/svg/FiltersButton";
@@ -12,6 +13,20 @@ import screens from "./screens";
 
 const Stack = createNativeStackNavigator();
 
+const CancelButton = () => {
+  const navigation = useNavigation();
+
+  function onPress() {
+    navigation.setParams({ search: "" });
+  }
+
+  return (
+    <Touchable onPress={onPress} isOpacity style={styles.touchable}>
+      <Text style={styles.cancelButtonLabel}>Cancel</Text>
+    </Touchable>
+  );
+};
+
 function BrowseNavigator() {
   return (
     <>
@@ -20,29 +35,9 @@ function BrowseNavigator() {
           header: () => (
             <Header>
               <SearchInput placeholder="Search" />
-
+              {console.log("route", route.params)}
               {!!route.params?.search ? (
-                <Touchable
-                  isOpacity
-                  style={{
-                    paddingHorizontal: 16,
-                    paddingVertical: 15,
-                    // backgroundColor: "red",
-                  }}
-                  // onPress={() =>
-                  //   navigation.setParams({ ...route.params, search: "" })
-                  // }
-                >
-                  <Text
-                    style={{
-                      height: 18,
-                      fontSize: 16,
-                      color: "green",
-                    }}
-                  >
-                    Cancel
-                  </Text>
-                </Touchable>
+                <CancelButtondsad />
               ) : (
                 <Touchable
                   isOpacity
@@ -62,13 +57,6 @@ function BrowseNavigator() {
               )}
             </Header>
           ),
-          // header: () => (
-          //   <View style={{ height: 120, backgroundColor: "red" }} />
-          // ),
-          headerStyle: {
-            // height: 200,
-            // backgroundColor: "green",
-          },
         })}
       >
         <Stack.Screen name={screens.Browse} component={BrowseScreen} />
@@ -82,5 +70,17 @@ function BrowseNavigator() {
     </>
   );
 }
+
+const styles = StyleSheet.create({
+  touchable: {
+    paddingHorizontal: 16,
+    paddingVertical: 15,
+  },
+  cancelButtonLabel: {
+    height: 18,
+    fontSize: 16,
+    color: "green",
+  },
+});
 
 export default BrowseNavigator;

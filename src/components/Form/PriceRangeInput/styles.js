@@ -4,7 +4,6 @@ import colors from "../../../styles/colors";
 const styles = StyleSheet.create({
   container: {},
   inputRangeContainer: {
-    // flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
     marginTop: 16,

@@ -1,12 +1,10 @@
 import React from "react";
 import { Text, View } from "react-native";
 import { useStore } from "../../../stores/createStore";
-import { width } from "../../../styles/dimensions";
 import s from "./styles";
+
 const MessageItem = ({ message }) => {
   const store = useStore();
-
-  //   const maxMassegeWidth = (width / 3) * 2;
 
   const isViewerMessage = message.ownerId == store.viewer.userModel.id;
   return (

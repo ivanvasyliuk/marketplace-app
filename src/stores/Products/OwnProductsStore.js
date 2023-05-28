@@ -1,17 +1,17 @@
-import { getParent, types } from "mobx-state-tree";
-import Api from "../../api";
-import Fuse from "fuse.js";
-import { LatestProductCollection, OwnProducts, Product } from "../schemas";
-import { asyncModel, createList } from "../utils";
-import { ProductModel } from "./ProductModel";
+import { getParent, types } from 'mobx-state-tree';
+import Api from '../../api';
+import Fuse from 'fuse.js';
+import { LatestProductCollection, Product } from '../schemas';
+import { asyncModel, createList } from '../utils';
+import { ProductModel } from './ProductModel';
 
 export const OwnProductStore = types
-  .model("OwnProducts", {
-    ownProductsArray: createList("LatestProductsArray", {
+  .model('OwnProducts', {
+    ownProductsArray: createList('LatestProductsArray', {
       of: types.reference(types.late(() => ProductModel)),
       schema: LatestProductCollection,
     }),
-    searchProducts: createList("SearchLatestProducts", {
+    searchProducts: createList('SearchLatestProducts', {
       of: types.reference(types.late(() => ProductModel)),
       schema: LatestProductCollection,
     }),
@@ -21,7 +21,7 @@ export const OwnProductStore = types
   .views((store) => ({
     get fuse() {
       const fuse = new Fuse(store.items, {
-        keys: ["title", "description"],
+        keys: ['title', 'description'],
         shouldSort: true,
         includeMatches: true,
         threshold: 0.3,
@@ -56,7 +56,7 @@ function createProduct(values) {
     const res = await Api.Products.createProduct(values);
 
     const result = flow.merge(res.data, Product);
-    console.log("ProductSchema", result);
+    console.log('ProductSchema', result);
     console.log(result);
     store.ownProductsArray.add(result);
   };

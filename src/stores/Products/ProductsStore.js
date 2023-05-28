@@ -1,22 +1,24 @@
-import { types } from "mobx-state-tree";
-import { LatestProductCollection } from "../schemas";
-import { asyncModel, createList } from "../utils";
-import { LatestProductsStore } from "./LatestProductsStore";
-import { OwnProductStore } from "./OwnProductsStore";
-import { ProductModel } from "./ProductModel";
-import Fuse from "fuse.js";
-import Api from "../../api";
+import { types } from 'mobx-state-tree';
+import { LatestProductCollection } from '../schemas';
+import { asyncModel, createList } from '../utils';
+import { LatestProductsStore } from './LatestProductsStore';
+import { OwnProductStore } from './OwnProductsStore';
+import { ProductModel } from './ProductModel';
+import Fuse from 'fuse.js';
+import Api from '../../api';
 
 export const ProductsStore = types
-  .model("ProductsStore", {
+  .model('ProductsStore', {
     ownStore: types.optional(OwnProductStore, {}),
     latestProducts: types.optional(LatestProductsStore, {}),
-    savedProducts: createList("savedProducts", {
+    savedProducts: createList('savedProducts', {
       of: types.reference(ProductModel),
       schema: LatestProductCollection,
     }),
-    searchSavedProducts: createList("searchSavedProducts", {
-      of: types.reference(types.reference(types.late(() => ProductModel))),
+    searchSavedProducts: createList('searchSavedProducts', {
+      of: types.reference(
+        types.reference(types.late(() => ProductModel)),
+      ),
       schema: LatestProductCollection,
     }),
     fetchSaved: asyncModel(fetchSaved),
@@ -24,7 +26,7 @@ export const ProductsStore = types
   .views((store) => ({
     get fuse() {
       const fuse = new Fuse(store.savedProductsList.items, {
-        keys: ["title", "description"],
+        keys: ['title', 'description'],
         shouldSort: true,
         includeMatches: true,
         threshold: 0.3,
@@ -41,15 +43,14 @@ export const ProductsStore = types
     search(text) {
       const fuse = store.fuse;
       const result = fuse.search(text);
-      store.searchSavedProducts.set(result.map((product) => product.item));
+      store.searchSavedProducts.set(
+        result.map((product) => product.item),
+      );
     },
   }));
 
 function fetchSaved() {
   return async function fetchSavedFlow(flow, store, rootStore) {
     await Api.Products.fetchSaved();
-    // const res = { data: array.filter((item) => item.saved) };
-
-    // store.savedProductsList.set(array.filter((item) => item.saved));
   };
 }

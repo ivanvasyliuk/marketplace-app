@@ -1,10 +1,9 @@
-import { getParent, getRoot, types } from "mobx-state-tree";
-import { normalize } from "normalizr";
-import Fuse from "fuse.js";
+import { getParent, getRoot, types } from 'mobx-state-tree';
+import { normalize } from 'normalizr';
 
 export function asyncModel(thunk, auto = true) {
   const model = types
-    .model("AsyncModel", {
+    .model('AsyncModel', {
       isLoading: false,
       isError: false,
     })
@@ -22,7 +21,11 @@ export function asyncModel(thunk, auto = true) {
         store.isError = true;
       },
       run(...args) {
-        const promise = thunk(...args)(store, getParent(store), getRoot(store));
+        const promise = thunk(...args)(
+          store,
+          getParent(store),
+          getRoot(store),
+        );
 
         if (auto) {
           return store._auto(promise);
@@ -49,13 +52,12 @@ export function asyncModel(thunk, auto = true) {
         }
       },
     }));
-  // return model.create({});
   return types.optional(model, {});
 }
 
 export function createCollection(ofModel, asyncModels = {}) {
   const collection = types
-    .model("CollectionModel", {
+    .model('CollectionModel', {
       collection: types.map(ofModel),
       ...asyncModels,
     })
@@ -73,7 +75,7 @@ export function createCollection(ofModel, asyncModels = {}) {
 }
 
 export function suspenseModel() {
-  return "";
+  return '';
 }
 
 export function createList(name, { of, schema }) {

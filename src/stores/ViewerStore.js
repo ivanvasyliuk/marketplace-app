@@ -1,21 +1,6 @@
-import { types } from "mobx-state-tree";
+import { types } from 'mobx-state-tree';
 
-// export function safeReference(T) {
-//   return types.reference(T, {
-//     get(identifier, parent) {
-//       if (isStateTreeNode(identifier)) {
-//         identifier = getIdentifier(identifier);
-//       }
-//       return resolveIdentifier(T, parent, identifier);
-//     },
-
-//     set(value) {
-//       return value;
-//     },
-//   });
-// }
-
-const ViewerModel = types.model("ViewerModel", {
+const ViewerModel = types.model('ViewerModel', {
   id: types.string,
   fullName: types.string,
   location: types.maybeNull(types.string),
@@ -26,15 +11,13 @@ const ViewerModel = types.model("ViewerModel", {
   email: types.string,
 });
 
-// const ViewerModel = UserModel.named('ViewerModel');
-
 export const ViewerStore = types
-  .model("ViewerStore", {
+  .model('ViewerStore', {
     userModel: types.maybe(ViewerModel),
   })
   .views((store) => ({
     get initials() {
-      const array = store.userModel.fullName.split(" ");
+      const array = store.userModel.fullName.split(' ');
       return array.map((letter) => letter[0]).concat();
     },
     get userId() {

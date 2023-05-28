@@ -1,14 +1,8 @@
-// import makeInspectable from "mobx-devtools-mst";
-import { createContext, useContext } from "react";
-import { RootStore } from "./RootStore";
-// import { connectToDevTools } from "mobx-devtools/lib/mobxDevtoolsBackend";
-
-// connectToDevTools({ host: "localhost", port: 8098 });
+import { createContext, useContext } from 'react';
+import { RootStore } from './RootStore';
 
 export function createStore() {
   const root = RootStore.create();
-
-  // makeInspectable(root);
 
   return root;
 }
@@ -21,7 +15,7 @@ export const Provider = MSTContext.Provider;
 export function useStore(mapStateToProps) {
   const store = useContext(MSTContext);
 
-  if (typeof mapStateToProps === "function") {
+  if (typeof mapStateToProps === 'function') {
     return mapStateToProps(store);
   }
 

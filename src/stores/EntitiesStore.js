@@ -1,12 +1,12 @@
-import { types } from "mobx-state-tree";
-import { normalize } from "normalizr";
-import { ChatsCollection } from "./Chats/ChatsCollection";
-import { MessagesCollection } from "./Chats/MessagesCollection";
-import { ProductsCollection } from "./Products/ProductsCollection";
-import { UsersCollection } from "./users/UsersCollection";
+import { types } from 'mobx-state-tree';
+import { normalize } from 'normalizr';
+import { ChatsCollection } from './Chats/ChatsCollection';
+import { MessagesCollection } from './Chats/MessagesCollection';
+import { ProductsCollection } from './Products/ProductsCollection';
+import { UsersCollection } from './users/UsersCollection';
 
 export const EntitiesStore = types
-  .model("EntitiesStore", {
+  .model('EntitiesStore', {
     products: ProductsCollection,
     users: UsersCollection,
     chats: ChatsCollection,
@@ -32,30 +32,3 @@ export const EntitiesStore = types
       return result;
     },
   }));
-
-// const UserSettingsModel = ResolveUser.named("UserSettings").props({
-//   height: types.number,
-//   color: types.string,
-// });
-// const UserShopModel = ResolveUser.named("UserShop").props({
-//   name: types.string,
-// });
-
-// UserModel = types
-//   .model("User", {
-//     id: types.identifier,
-//     firstName: types.string,
-//     lastName: types.string,
-//     settings: types.reference(UserSettingsModel),
-//     shop: types.reference(UserShopModel),
-//   })
-//   .preProcessSnapshot((snapshot) => ({
-//     settings: snapshot.id,
-//     shop: snapshot.id,
-//   }));
-
-// const UserStore = types.model("UserStore", {
-//   users: types.map(UserModel),
-//   shopUsers: types.map(UserShopModel),
-//   settingsUsers: types.map(UserSettingsModel),
-// });

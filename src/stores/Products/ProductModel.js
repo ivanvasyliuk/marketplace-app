@@ -1,11 +1,11 @@
-import { getRoot, getSnapshot, types } from "mobx-state-tree";
-import Api from "../../api";
-import { ChatSchema } from "../schemas";
-import { UserModel } from "../users/UserModel";
-import { asyncModel } from "../utils";
+import { getRoot, getSnapshot, types } from 'mobx-state-tree';
+import Api from '../../api';
+import { ChatSchema } from '../schemas';
+import { UserModel } from '../users/UserModel';
+import { asyncModel } from '../utils';
 
 export const ProductModel = types
-  .model("ProductModel", {
+  .model('ProductModel', {
     id: types.identifierNumber,
     ownerId: types.string,
     title: types.string,
@@ -16,7 +16,6 @@ export const ProductModel = types
     saved: false,
     createdAt: types.string,
     updatedAt: types.string,
-    // owner: types.maybe(types.reference(UserModel)),
     owner: types.reference(UserModel),
     toogleFavorite: asyncModel(toogleFavorite),
     createChat: asyncModel(createChat, false),
@@ -41,23 +40,6 @@ export const ProductModel = types
         getRoot(store).products.savedProducts.removeById(store.id);
       }
     },
-    // toggleFavorite: flow(function* () {
-    //   const oldValue = store.isFavorite;
-
-    //   store.isTooglingFavorite = true;
-    //   store.isTooglingFavoriteError = false;
-    //   store.isFavorite = !store.isFavorite;
-
-    //   try {
-    //     yield Api.Todos.update({ id: store.id, isFavorite: store.isFavorite });
-    //   } catch (error) {
-    //     console.log(error);
-    //     store.isTooglingFavoriteError = true;
-    //     store.isFavorite = oldValue;
-    //   } finally {
-    //     store.isTooglingFavorite = false;
-    //   }
-    // }),
   }));
 
 function createChat(message) {

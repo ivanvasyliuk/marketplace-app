@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { ActivityIndicator, Image, View } from "react-native";
-import s from "./styles";
-import ButtonAddPhoto from "./ButtonAddPhoto";
 import { useFormikContext } from "formik";
-import { useState } from "react";
+import ButtonAddPhoto from "./ButtonAddPhoto";
+import s from "./styles";
 
 const Photos = () => {
   const [isLoadingPhoto, setIsLoadingPhoto] = useState(false);

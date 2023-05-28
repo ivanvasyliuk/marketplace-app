@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react";
-import { Ionicons } from "@expo/vector-icons";
-import { useFormikContext } from "formik";
 import { Text, View } from "react-native";
-import ActionSheet from "react-native-actionsheet";
+import { Ionicons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
+import ActionSheet from "react-native-actionsheet";
+import { useFormikContext } from "formik";
 import Touchable from "../../../components/Touchable/Touchable";
 import s from "./styles";
 

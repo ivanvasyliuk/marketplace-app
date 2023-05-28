@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Text, View } from "react-native";
-import { FlashList } from "@shopify/flash-list";
 import { observer } from "mobx-react";
+import { FlashList } from "@shopify/flash-list";
 import { useStore } from "../../stores/createStore";
 import EmptyInboxSvg from "../../components/svg/EmptyInboxSvg";
 import InboxChatItem from "../../components/Chat/InboxChatItem/InboxChatItem";

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TextInput } from "react-native";
+import { View, Text } from "react-native";
 import { observer } from "mobx-react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useStore } from "../../stores/createStore";
 import Touchable from "../../components/Touchable/Touchable";
 import PriceRangeInput from "../../components/Form/PriceRangeInput/PriceRangeInput";
 import SearchInputField from "../../components/SearchInputField/SearchInputField";
@@ -16,11 +15,9 @@ const FiltersScreen = () => {
     search: "",
     sortBy: "",
   });
-  const [index, setIndex] = useState(0);
   const [sortIndex, setSortIndex] = useState(0);
   const navigation = useNavigation();
   const route = useRoute();
-  const store = useStore();
 
   const { bottom } = useSafeAreaInsets();
 

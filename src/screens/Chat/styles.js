@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
   },
   input: {
     fontSize: 16,
-    //TODO: lineHeight doesn't work
     lineHeight: 24,
     backgroundColor: colors.backgroundColor,
     maxHeight: 200,

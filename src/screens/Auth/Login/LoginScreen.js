@@ -11,12 +11,11 @@ import * as yup from "yup";
 import Input from "../../../components/Form/Input/Input";
 import AuthFooter from "../../../components/Form/AuthFooter/AuthFooter";
 import { useStore } from "../../../stores/createStore";
-import s from "./styles";
 import screens from "../../../navigation/screens";
+import s from "./styles";
 
 const validationSchema = yup.object({
-  //Add .email() for email
-  email: yup.string().required("Email is required"),
+  email: yup.string().required("Email is required").email(),
   password: yup
     .string()
     .min(6, "Password must contain 6-20 characters.")

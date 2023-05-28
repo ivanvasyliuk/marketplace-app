@@ -1,11 +1,11 @@
 import React from "react";
+import { StyleSheet, Text } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Button, StyleSheet, Text, View } from "react-native";
-import CreatePostScreen from "../screens/CreatePost/CreatePostScreen";
 import { Ionicons } from "@expo/vector-icons";
+import Touchable from "../components/Touchable/Touchable";
+import CreatePostScreen from "../screens/CreatePost/CreatePostScreen";
 import screens from "./screens";
 import colors from "../styles/colors";
-import Touchable from "../components/Touchable/Touchable";
 
 const Stack = createNativeStackNavigator();
 
@@ -40,7 +40,6 @@ function CreatePostNavigator() {
 }
 
 const style = StyleSheet.create({
-  headerRightButton: {},
   postLabel: {
     fontSize: 18,
     color: colors.primary,

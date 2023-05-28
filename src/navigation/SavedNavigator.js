@@ -1,7 +1,7 @@
+import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Header from "../components/Header/Header";
 import SearchInput from "../components/SearchInput/SearchInput";
-import BrowseScreen from "../screens/Browse/BrowseScreen";
 import SavedScreen from "../screens/Saved/SavedScreen";
 import PostNavigation from "./PostNavigation";
 import screens from "./screens";
@@ -12,19 +12,19 @@ function SavedNavigator() {
   return (
     <>
       <Stack.Navigator
-        screenOptions={({ route }) => ({
+        screenOptions={{
           headerTitleAlign: "center",
-        })}
+        }}
       >
         <Stack.Screen
           name={screens.Saved}
-          options={({ route, navigation }) => ({
+          options={{
             header: () => (
               <Header>
                 <SearchInput placeholder="Search" />
               </Header>
             ),
-          })}
+          }}
           component={SavedScreen}
         />
         <Stack.Screen

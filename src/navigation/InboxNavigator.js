@@ -9,9 +9,9 @@ function InboxNavigator() {
   return (
     <>
       <Stack.Navigator
-        screenOptions={({ route }) => ({
+        screenOptions={{
           headerTitleAlign: "center",
-        })}
+        }}
       >
         <Stack.Screen name={screens.Inbox} component={InboxScreen} />
         <Stack.Screen

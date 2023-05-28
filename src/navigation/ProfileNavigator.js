@@ -1,9 +1,10 @@
+import React from "react";
+import { observer } from "mobx-react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import SettingsNavigator from "./SettingsNavigator";
-import PostNavigation from "./PostNavigation";
 import { useStore } from "../stores/createStore";
 import ProfileScreenAnimated from "../screens/Profile/ProfileScreenAnimated";
-import { observer } from "mobx-react";
+import PostNavigation from "./PostNavigation";
+import SettingsNavigator from "./SettingsNavigator";
 import screens from "./screens";
 
 const Stack = createNativeStackNavigator();
@@ -15,9 +16,9 @@ function ProfileNavigator() {
     <>
       <Stack.Navigator
         initialRouteName={screens.Profile}
-        screenOptions={({ route }) => ({
+        screenOptions={{
           headerShown: false,
-        })}
+        }}
       >
         {!!store.viewer.userModel && (
           <Stack.Screen

@@ -1,17 +1,17 @@
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import AuthNavigator from "./AuthNavigator";
-import AppTabNavigator from "./AppTabNavigator";
-import screens from "./screens";
-import { createStackNavigator } from "@react-navigation/stack";
-import { useStore } from "../stores/createStore";
-import { observer } from "mobx-react";
-import CreatePostNavigator from "./CreatePostNavigator";
-import theme from "../styles/theme";
-import FiltersNavigator from "./FiltersNavigator";
-import ChatScreen from "../screens/Chat/ChatScreen";
 import { Text } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { observer } from "mobx-react";
+import ChatScreen from "../screens/Chat/ChatScreen";
+import AppTabNavigator from "./AppTabNavigator";
+import { useStore } from "../stores/createStore";
+import AuthNavigator from "./AuthNavigator";
+import CreatePostNavigator from "./CreatePostNavigator";
+import FiltersNavigator from "./FiltersNavigator";
 import ChatLeftHeader from "./components/ChatLeftHeader/ChatLeftHeader";
+import screens from "./screens";
+import theme from "../styles/theme";
 
 const RootStack = createStackNavigator();
 
@@ -20,11 +20,10 @@ function RootNavigator() {
   return (
     <NavigationContainer theme={theme}>
       <RootStack.Navigator
-        screenOptions={({ route }) => ({
+        screenOptions={{
           headerShown: false,
-        })}
+        }}
       >
-        {/* {store.viewer.userModel ? ( */}
         <RootStack.Group>
           <RootStack.Screen
             name={screens.MainApp}
@@ -39,34 +38,20 @@ function RootNavigator() {
             component={FiltersNavigator}
           />
           <RootStack.Screen
-            options={({ navigation, route }) => ({
+            options={({ route }) => ({
               headerShown: true,
               presentation: "card",
               headerTitleAlign: "center",
-              headerTitle: (props) => <Text style={{ fontSize: 16 }}></Text>,
+              headerTitle: () => <Text style={{ fontSize: 16 }}></Text>,
               headerLeft: () => <ChatLeftHeader chat={route.params.chat} />,
-              // {
-              //   return (
-              //     <Touchable onPress={() => navigation.goBack()}>
-              //       <AntDesign
-              //         name="left"
-              //         size={24}
-              //         style={{ marginLeft: 20 }}
-              //         color={colors.primary}
-              //       />
-              //     </Touchable>
-              //   );
-              // },
             })}
             name={screens.Chat}
             component={ChatScreen}
           />
         </RootStack.Group>
-        {/* // ) : ( */}
         <RootStack.Group>
           <RootStack.Screen name={screens.Auth} component={AuthNavigator} />
         </RootStack.Group>
-        {/* // )} */}
       </RootStack.Navigator>
     </NavigationContainer>
   );

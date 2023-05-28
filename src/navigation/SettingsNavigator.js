@@ -1,6 +1,7 @@
-import { AntDesign } from "@expo/vector-icons";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import React from "react";
 import { observer } from "mobx-react";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { AntDesign } from "@expo/vector-icons";
 import Touchable from "../components/Touchable/Touchable";
 import SettingsScreen from "../screens/Settings/SettingsScreen";
 import { useStore } from "../stores/createStore";

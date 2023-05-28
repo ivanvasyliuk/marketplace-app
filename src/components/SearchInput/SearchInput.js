@@ -30,9 +30,9 @@ const SearchInput = ({ sizes, style, ...props }) => {
     onChangeHandler("");
   }
 
-  useEffect(() => {
-    setText(params.search);
-  }, [params.search]);
+  // useEffect(() => {
+  //   setText(params.search);
+  // }, [params.search]);
 
   return (
     <TouchableWithoutFeedback onPress={() => inputRef.current.focus()}>

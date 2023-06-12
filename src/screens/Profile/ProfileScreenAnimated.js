@@ -1,23 +1,23 @@
-import React, { useEffect } from "react";
-import { Text, View } from "react-native";
-import { observer } from "mobx-react";
-import { useNavigation, useRoute } from "@react-navigation/native";
-import { AntDesign } from "@expo/vector-icons";
+import React, { useEffect } from 'react';
+import { Text, View } from 'react-native';
+import { observer } from 'mobx-react';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { AntDesign } from '@expo/vector-icons';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withSpring,
   interpolate,
-} from "react-native-reanimated";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import ProductList from "../../components/Products/ProductList/ProductList";
-import { useStore } from "../../stores/createStore";
-import { width } from "../../styles/dimensions";
-import Touchable from "../../components/Touchable/Touchable";
-import SettingsIcon from "../../components/svg/SettingsIcon";
-import screens from "../../navigation/screens";
-import NotSellYetIcon from "../../components/svg/NotSellYetIcon";
-import s from "./styles";
+} from 'react-native-reanimated';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import ProductList from '../../components/Products/ProductList/ProductList';
+import { useStore } from '../../stores/createStore';
+import { width } from '../../styles/dimensions';
+import Touchable from '../../components/Touchable/Touchable';
+import SettingsIcon from '../../components/svg/SettingsIcon';
+import screens from '../../navigation/screens';
+import NotSellYetIcon from '../../components/svg/NotSellYetIcon';
+import s from './styles';
 
 const ProfileScreenAnimated = () => {
   const navigation = useNavigation();
@@ -55,7 +55,7 @@ const ProfileScreenAnimated = () => {
     headerHeight.value = interpolate(
       e.nativeEvent.contentOffset.y,
       [0, headerChangeRange],
-      [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT]
+      [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT],
     );
   }
 
@@ -74,11 +74,11 @@ const ProfileScreenAnimated = () => {
     const opacity = interpolate(
       scrollOffset.value,
       [0, headerChangeRange - 10, headerChangeRange],
-      [0, 0, 1]
+      [0, 0, 1],
     );
     return {
       opacity: opacity,
-      position: "absolute",
+      position: 'absolute',
       top: top,
       left: 10,
       width: 36,
@@ -93,13 +93,17 @@ const ProfileScreenAnimated = () => {
       left = interpolate(
         scrollOffset.value,
         [0, headerChangeRange],
-        [middle, 92]
+        [middle, 92],
       );
-      top = interpolate(scrollOffset.value, [0, headerChangeRange], [99, 17]);
+      top = interpolate(
+        scrollOffset.value,
+        [0, headerChangeRange],
+        [99, 17],
+      );
     }
     return {
       transform: [{ translateX: withSpring(left) }],
-      position: "absolute",
+      position: 'absolute',
       top: withSpring(top),
     };
   });
@@ -112,24 +116,28 @@ const ProfileScreenAnimated = () => {
       left = interpolate(
         scrollOffset.value,
         [0, headerChangeRange],
-        [middle, 48]
+        [middle, 48],
       );
       imageSize = interpolate(
         scrollOffset.value,
         [0, headerChangeRange],
-        [72, 36]
+        [72, 36],
       );
-      top = interpolate(scrollOffset.value, [0, headerChangeRange], [19, 11]);
+      top = interpolate(
+        scrollOffset.value,
+        [0, headerChangeRange],
+        [19, 11],
+      );
     }
     return {
       transform: [{ translateX: withSpring(left) }],
-      backgroundColor: "red",
+      backgroundColor: 'red',
       top: withSpring(top),
       width: withSpring(imageSize),
       height: withSpring(imageSize),
       borderRadius: PROFILE_IMAGE_MAX_HEIGHT / 2,
-      overflow: "hidden",
-      position: "absolute",
+      overflow: 'hidden',
+      position: 'absolute',
     };
   });
 
@@ -142,7 +150,6 @@ const ProfileScreenAnimated = () => {
           <Text
             style={s.boldText}
             onLayout={(e) => {
-              console.log("e");
               textWidth.value = e.nativeEvent.layout.width;
             }}
           >
@@ -162,8 +169,8 @@ const ProfileScreenAnimated = () => {
         <Animated.View style={backButtonContainer}>
           <Touchable
             style={{
-              justifyContent: "center",
-              alignItems: "center",
+              justifyContent: 'center',
+              alignItems: 'center',
               flex: 1,
             }}
             isOpacity

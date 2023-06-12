@@ -1,5 +1,10 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { CHATS, createNewProduct, MESSAGES, TEST_PRODUCTS } from "./data";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {
+  CHATS,
+  createNewProduct,
+  MESSAGES,
+  TEST_PRODUCTS,
+} from './data';
 
 // axios.defaults.baseURL = ''
 
@@ -8,7 +13,7 @@ export const Auth = {
 
   setToken(token) {
     this._token = token;
-    AsyncStorage.setItem("__token", token);
+    AsyncStorage.setItem('__token', token);
   },
 
   isLoggedIn() {
@@ -24,17 +29,17 @@ export const Auth = {
       setTimeout(() => {
         resolve({
           data: {
-            token: "fksdnfkndlf",
+            token: 'fksdnfkndlf',
             user: {
               email,
-              fullName: "Test User",
-              id: "10",
-              location: "fdsf",
+              fullName: 'Test User',
+              id: '10',
+              location: 'fdsf',
               avatar:
-                "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
-              phone: "sdfdfdfdsf",
-              createdAt: "dfsf",
-              updatedAt: "gksfngkf",
+                'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
+              phone: 'sdfdfdfdsf',
+              createdAt: 'dfsf',
+              updatedAt: 'gksfngkf',
             },
           },
         });
@@ -42,7 +47,7 @@ export const Auth = {
     });
   },
   register({ email, password, fullName }) {
-    return axios.post("/api/auth/register", {
+    return axios.post('/api/auth/register', {
       email,
       password,
       fullName,
@@ -90,7 +95,7 @@ export const Products = {
     return {
       data: {
         id,
-        ownerId: "10",
+        ownerId: '10',
         title: body.title,
         description: body.description,
         photos: null,
@@ -100,14 +105,14 @@ export const Products = {
         createdAt: `${Date.now()}`,
         updatedAt: `${Date.now()}`,
         owner: {
-          email: "testuser@gamil.com",
-          fullName: "Test User",
-          id: "10",
-          location: "fdsf",
-          avatar: "dffdsffdsf",
-          phone: "sdfdfdfdsf",
-          createdAt: "dfsf",
-          updatedAt: "gksfngkf",
+          email: 'testuser@gamil.com',
+          fullName: 'Test User',
+          id: '10',
+          location: 'fdsf',
+          avatar: 'dffdsffdsf',
+          phone: 'sdfdfdfdsf',
+          createdAt: 'dfsf',
+          updatedAt: 'gksfngkf',
         },
       },
     };
@@ -128,14 +133,14 @@ export const Users = {
       setTimeout(() => {
         resolve({
           data: {
-            email: "testuser@gamil.com",
-            fullName: "Test User",
-            id: "10",
-            location: "fdsf",
-            avatar: "dffdsffdsf",
-            phone: "sdfdfdfdsf",
-            createdAt: "dfsf",
-            updatedAt: "gksfngkf",
+            email: 'testuser@gamil.com',
+            fullName: 'Test User',
+            id: '10',
+            location: 'fdsf',
+            avatar: 'dffdsffdsf',
+            phone: 'sdfdfdfdsf',
+            createdAt: 'dfsf',
+            updatedAt: 'gksfngkf',
           },
         });
       }, 300);
@@ -174,7 +179,7 @@ export const Chats = {
           data: {
             id: +(Math.random() * 10000).toFixed(0),
             chatId: id,
-            ownerId: "10",
+            ownerId: '10',
             text: message,
             read: false,
             createdAt: 11,

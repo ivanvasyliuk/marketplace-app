@@ -1,12 +1,12 @@
-import React from "react";
-import { Text, View } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { format, isToday, isYesterday } from "date-fns";
-import screens from "../../../navigation/screens";
-import Touchable from "../../Touchable/Touchable";
-import UserImage from "../../User/UserImage/UserImage";
-import s from "./styles";
-import { observer } from "mobx-react";
+import React from 'react';
+import { Text, View } from 'react-native';
+import { observer } from 'mobx-react';
+import { useNavigation } from '@react-navigation/native';
+import { format, isToday, isYesterday } from 'date-fns';
+import screens from '../../../navigation/screens';
+import Touchable from '../../Touchable/Touchable';
+import UserImage from '../../User/UserImage/UserImage';
+import s from './styles';
 
 const InboxChatItem = ({ chat }) => {
   const navigation = useNavigation();
@@ -14,14 +14,10 @@ const InboxChatItem = ({ chat }) => {
   let date = new Date(chat.updatedAt);
 
   const renderTime = isToday(date)
-    ? format(date, "HH:mm")
+    ? format(date, 'HH:mm')
     : isYesterday(date)
-    ? `Yesterday, ${format(date, "HH:mm")}`
-    : format(date, "MMM dd");
-
-  const lastMessage = `${chat.message.text.slice(0, 30)}${
-    chat.message.text.length > 30 ? " ..." : ""
-  }`;
+    ? `Yesterday, ${format(date, 'HH:mm')}`
+    : format(date, 'MMM dd');
 
   function onPress() {
     navigation.navigate(screens.Chat, {
@@ -37,7 +33,9 @@ const InboxChatItem = ({ chat }) => {
       <View style={s.titlesContainer}>
         <Text style={s.productTitle}>{chat.product.title}</Text>
         <Text style={s.ownerTitle}>{chat.owner.fullName}</Text>
-        <Text style={s.lastMessageLabel}>{lastMessage}</Text>
+        <Text style={s.lastMessageLabel} numberOfLines={1}>
+          {chat.message.text}
+        </Text>
       </View>
       <View style={{}}>
         <Text style={s.time}>{`${renderTime}`}</Text>

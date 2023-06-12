@@ -1,11 +1,11 @@
-import { types } from "mobx-state-tree";
-import Api from "../../api";
-import { ChatCollectionSchema } from "../schemas";
-import { asyncModel } from "../utils";
-import { ChatModel } from "./ChatModel";
+import { types } from 'mobx-state-tree';
+import Api from '../../api';
+import { ChatCollectionSchema } from '../schemas';
+import { asyncModel } from '../utils';
+import { ChatModel } from './ChatModel';
 
 export const ChatStore = types
-  .model("Chat", {
+  .model('Chat', {
     items: types.array(types.reference(ChatModel)),
     fetch: asyncModel(fetchChats),
   })
@@ -22,11 +22,10 @@ export const ChatStore = types
       store.items = items;
     },
     handleMessage(message) {
-      console.log("handle message");
-      if (message.type == "ADD") {
+      if (message.type == 'ADD') {
         const chat = store.getById(message.message, id);
 
-        if (typeof chat !== "undefined") {
+        if (typeof chat !== 'undefined') {
           chat.messages.addMessage(message.message);
         }
       }

@@ -56,8 +56,6 @@ function createProduct(values) {
     const res = await Api.Products.createProduct(values);
 
     const result = flow.merge(res.data, Product);
-    console.log('ProductSchema', result);
-    console.log(result);
     store.ownProductsArray.add(result);
   };
 }

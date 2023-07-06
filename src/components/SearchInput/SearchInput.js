@@ -1,24 +1,27 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { useNavigation, useRoute } from "@react-navigation/native";
-import { TextInput, TouchableWithoutFeedback, View } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
-import Touchable from "../Touchable/Touchable";
-import s from "./styles";
+import React, { useCallback, useRef, useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import {
+  TextInput,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
+import Touchable from '../Touchable/Touchable';
+import s from './styles';
 
-const debounce = require("lodash.debounce");
+const debounce = require('lodash.debounce');
 
 const SearchInput = ({ sizes, style, ...props }) => {
-  const [text, setText] = useState("");
+  const [text, setText] = useState('');
   const [isFocused, setIsFocused] = useState(false);
   const navigation = useNavigation();
-  const { params } = useRoute();
   const inputRef = useRef();
 
   const changeTextDebouncer = useCallback(
     debounce((search) => {
       navigation.setParams({ search });
     }, 500),
-    []
+    [],
   );
 
   const onChangeHandler = (search) => {
@@ -27,16 +30,16 @@ const SearchInput = ({ sizes, style, ...props }) => {
   };
 
   function onPress() {
-    onChangeHandler("");
+    onChangeHandler('');
   }
 
-  // useEffect(() => {
-  //   setText(params.search);
-  // }, [params.search]);
-
   return (
-    <TouchableWithoutFeedback onPress={() => inputRef.current.focus()}>
-      <View style={[s.container, isFocused && s.containerOnFocus, style]}>
+    <TouchableWithoutFeedback
+      onPress={() => inputRef.current.focus()}
+    >
+      <View
+        style={[s.container, isFocused && s.containerOnFocus, style]}
+      >
         <AntDesign
           style={[s.searchIcon, isFocused && s.focusedIcon]}
           name="search1"

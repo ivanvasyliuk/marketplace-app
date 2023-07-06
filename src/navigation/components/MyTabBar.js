@@ -1,17 +1,17 @@
-import React from "react";
-import { View, Text, StyleSheet, Dimensions } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import Touchable from "../../components/Touchable/Touchable";
-import colors from "../../styles/colors";
-import TabBarButton from "./TabBarButton";
-import TabShape from "./TabShape";
-import { pushIcon } from "./utils";
-
-export const HEIGHT_SIZE = 80;
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import Touchable from '../../components/Touchable/Touchable';
+import colors from '../../styles/colors';
+import { TAB_BAR_HEIGHT_SIZE, width } from '../../styles/dimensions';
+import TabBarButton from './TabBarButton';
+import TabShape from './TabShape';
+import { pushIcon } from './utils';
 
 export default function TabBar(props) {
   const { state, descriptors, navigation } = props.props;
-  const focusedOptions = descriptors[state.routes[state.index].key].options;
+  const focusedOptions =
+    descriptors[state.routes[state.index].key].options;
 
   const { bottom } = useSafeAreaInsets();
 
@@ -37,7 +37,7 @@ export default function TabBar(props) {
 
             const onPress = () => {
               const event = navigation.emit({
-                type: "tabPress",
+                type: 'tabPress',
                 target: route.key,
                 canPreventDefault: true,
               });
@@ -49,7 +49,7 @@ export default function TabBar(props) {
 
             const onLongPress = () => {
               navigation.emit({
-                type: "tabLongPress",
+                type: 'tabLongPress',
                 target: route.key,
               });
             };
@@ -59,7 +59,9 @@ export default function TabBar(props) {
                 isOpacity
                 key={index}
                 accessibilityRole="button"
-                accessibilityState={isFocused ? { selected: true } : {}}
+                accessibilityState={
+                  isFocused ? { selected: true } : {}
+                }
                 accessibilityLabel={options.tabBarAccessibilityLabel}
                 testID={options.tabBarTestID}
                 onPress={onPress}
@@ -71,14 +73,18 @@ export default function TabBar(props) {
                 ) : (
                   <View
                     style={{
-                      justifyContent: "center",
-                      alignItems: "center",
+                      justifyContent: 'center',
+                      alignItems: 'center',
                       paddingBottom: bottom - 10,
                     }}
                   >
                     {pushIcon(label, 24, isFocused)}
                     <Text
-                      style={isFocused ? styles.label : styles.inactiveLabel}
+                      style={
+                        isFocused
+                          ? styles.label
+                          : styles.inactiveLabel
+                      }
                     >
                       {label}
                     </Text>
@@ -95,28 +101,28 @@ export default function TabBar(props) {
 
 const styles = StyleSheet.create({
   container: {
-    width: Dimensions.get("window").width,
-    position: "absolute",
-    shadowColor: "black",
+    width: width,
+    position: 'absolute',
+    shadowColor: 'black',
     shadowOffset: {
       width: 0,
       height: 0,
     },
     shadowOpacity: 0.2,
     elevation: 5,
-    height: HEIGHT_SIZE,
-    justifyContent: "center",
+    height: TAB_BAR_HEIGHT_SIZE,
+    justifyContent: 'center',
     bottom: 0,
   },
   content: {
     flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   button: {
     flex: 1,
-    alignItems: "center",
+    alignItems: 'center',
   },
   label: {
     fontSize: 12,

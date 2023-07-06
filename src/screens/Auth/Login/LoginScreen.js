@@ -1,26 +1,26 @@
-import React from "react";
+import React from 'react';
 import {
   CommonActions,
   useNavigation,
   useRoute,
-} from "@react-navigation/native";
-import { View, KeyboardAvoidingView } from "react-native";
-import { Formik } from "formik";
-import { observer } from "mobx-react";
-import * as yup from "yup";
-import Input from "../../../components/Form/Input/Input";
-import AuthFooter from "../../../components/Form/AuthFooter/AuthFooter";
-import { useStore } from "../../../stores/createStore";
-import screens from "../../../navigation/screens";
-import s from "./styles";
+} from '@react-navigation/native';
+import { View, KeyboardAvoidingView } from 'react-native';
+import { Formik } from 'formik';
+import { observer } from 'mobx-react';
+import * as yup from 'yup';
+import Input from '../../../components/Form/Input/Input';
+import AuthFooter from '../../../components/Form/AuthFooter/AuthFooter';
+import { useStore } from '../../../stores/createStore';
+import screens from '../../../navigation/screens';
+import s from './styles';
 
 const validationSchema = yup.object({
-  email: yup.string().required("Email is required").email(),
+  email: yup.string().required('Email is required').email(),
   password: yup
     .string()
-    .min(6, "Password must contain 6-20 characters.")
-    .max(20, "Password must contain 6-20 characters.")
-    .required("Password is required"),
+    .min(6, 'Password must contain 6-20 characters.')
+    .max(20, 'Password must contain 6-20 characters.')
+    .required('Password is required'),
 });
 
 const LoginScreen = () => {
@@ -36,7 +36,9 @@ const LoginScreen = () => {
       resetAction();
     }
     navigation.getParent().dispatch((state) => {
-      const routes = state.routes.filter((r) => r.name !== screens.Auth);
+      const routes = state.routes.filter(
+        (r) => r.name !== screens.Auth,
+      );
 
       return CommonActions.reset({
         ...state,
@@ -45,11 +47,16 @@ const LoginScreen = () => {
       });
     });
   }
+  function navigateToRegister() {
+    navigation.navigate(screens.Register, {
+      resetAction,
+    });
+  }
 
   return (
     <KeyboardAvoidingView style={s.container}>
       <Formik
-        initialValues={{ email: "", password: "" }}
+        initialValues={{ email: '', password: '' }}
         validationSchema={validationSchema}
         onSubmit={onSubmit}
       >
@@ -82,8 +89,8 @@ const LoginScreen = () => {
               />
             </View>
             <AuthFooter
+              onPress={navigateToRegister}
               onSubmit={handleSubmit}
-              navigation={navigation}
               buttonLabel="Login"
             />
           </>

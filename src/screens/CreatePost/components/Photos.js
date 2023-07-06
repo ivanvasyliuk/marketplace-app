@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { ActivityIndicator, Image, View } from "react-native";
-import { useFormikContext } from "formik";
-import ButtonAddPhoto from "./ButtonAddPhoto";
-import s from "./styles";
+import React, { useState } from 'react';
+import { ActivityIndicator, Image, View } from 'react-native';
+import { useFormikContext } from 'formik';
+import ButtonAddPhoto from './ButtonAddPhoto';
+import s from './styles';
 
 const Photos = () => {
   const [isLoadingPhoto, setIsLoadingPhoto] = useState(false);
@@ -20,12 +20,12 @@ const Photos = () => {
             </View>
           ))}
           {isLoadingPhoto && (
-            <ActivityIndicator style={s.loaderContainer} size="large" />
+            <ActivityIndicator
+              style={s.loaderContainer}
+              size="large"
+            />
           )}
-          <ButtonAddPhoto
-            isLoadingPhoto={isLoadingPhoto}
-            setIsLoadingPhoto={setIsLoadingPhoto}
-          />
+          <ButtonAddPhoto setIsLoadingPhoto={setIsLoadingPhoto} />
         </View>
       </View>
     </>

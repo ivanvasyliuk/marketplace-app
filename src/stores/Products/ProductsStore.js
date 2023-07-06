@@ -25,7 +25,7 @@ export const ProductsStore = types
   })
   .views((store) => ({
     get fuse() {
-      const fuse = new Fuse(store.savedProductsList.items, {
+      const fuse = new Fuse(store.savedProducts.items, {
         keys: ['title', 'description'],
         shouldSort: true,
         includeMatches: true,

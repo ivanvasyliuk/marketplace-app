@@ -27,11 +27,6 @@ export const ProductModel = types
   }))
 
   .actions((store) => ({
-    fetchOwner() {
-      getRoot(store).entities.users.getById.run(store.ownerId);
-
-      store.owner = store.ownerId;
-    },
     update(product) {
       Object.assign(store, product);
       if (store.saved) {

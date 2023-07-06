@@ -1,10 +1,9 @@
-import React from "react";
-import Svg, { ClipPath, Defs, G, Path, Rect } from "react-native-svg";
+import React from 'react';
+import Svg, { ClipPath, Defs, G, Path, Rect } from 'react-native-svg';
 
-const BigLogo = ({ styles }) => {
+const BigLogo = () => {
   return (
     <Svg
-      styles={styles}
       width="119"
       height="51"
       viewBox="0 0 119 51"

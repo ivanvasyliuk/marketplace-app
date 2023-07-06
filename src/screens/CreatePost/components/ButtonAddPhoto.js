@@ -1,15 +1,14 @@
-import React, { useRef, useState } from "react";
-import { Text, View } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import * as ImagePicker from "expo-image-picker";
-import ActionSheet from "react-native-actionsheet";
-import { useFormikContext } from "formik";
-import Touchable from "../../../components/Touchable/Touchable";
-import s from "./styles";
+import React, { useRef, useState } from 'react';
+import { Text, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import * as ImagePicker from 'expo-image-picker';
+import ActionSheet from 'react-native-actionsheet';
+import { useFormikContext } from 'formik';
+import Touchable from '../../../components/Touchable/Touchable';
+import s from './styles';
 
-const ButtonAddPhoto = ({ isLoadingPhoto, setIsLoadingPhoto }) => {
+const ButtonAddPhoto = ({ setIsLoadingPhoto }) => {
   const actionRef = useRef();
-  const [startCamera, setStartCamera] = useState(false);
   const {
     values: { images },
     setFieldValue,
@@ -25,11 +24,11 @@ const ButtonAddPhoto = ({ isLoadingPhoto, setIsLoadingPhoto }) => {
         aspect: [4, 3],
         quality: 1,
       });
-      setFieldValue("images", [...images, result.assets[0].uri]);
+      setFieldValue('images', [...images, result.assets[0].uri]);
       setIsLoadingPhoto(false);
     } catch (error) {
       setIsLoadingPhoto(false);
-      console.log("error", error);
+      console.log('error', error);
     }
   }
 
@@ -38,12 +37,12 @@ const ButtonAddPhoto = ({ isLoadingPhoto, setIsLoadingPhoto }) => {
       setIsLoadingPhoto(true);
       const result = await ImagePicker.launchCameraAsync();
 
-      setFieldValue("images", [...images, result.assets[0].uri]);
+      setFieldValue('images', [...images, result.assets[0].uri]);
 
       setIsLoadingPhoto(false);
     } catch (error) {
       setIsLoadingPhoto(false);
-      console.log("error", error);
+      console.log('error', error);
     }
   }
 
@@ -70,7 +69,7 @@ const ButtonAddPhoto = ({ isLoadingPhoto, setIsLoadingPhoto }) => {
       <ActionSheet
         ref={actionRef}
         title="Which one do you like ?"
-        options={["Camera", "Gallery", "Cancel"]}
+        options={['Camera', 'Gallery', 'Cancel']}
         cancelButtonIndex={2}
         onPress={onChoose}
       />

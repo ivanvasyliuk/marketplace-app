@@ -1,8 +1,12 @@
-import React, { useRef, useState } from "react";
-import { TextInput, TouchableWithoutFeedback, View } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
-import Touchable from "../Touchable/Touchable";
-import s from "./styles";
+import React, { useRef, useState } from 'react';
+import {
+  TextInput,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
+import Touchable from '../Touchable/Touchable';
+import s from './styles';
 
 const SearchInputField = ({
   sizes,
@@ -20,8 +24,12 @@ const SearchInputField = ({
   }
 
   return (
-    <TouchableWithoutFeedback onPress={() => inputRef.current.focus()}>
-      <View style={[s.container, isFocused && s.containerOnFocus, style]}>
+    <TouchableWithoutFeedback
+      onPress={() => inputRef.current.focus()}
+    >
+      <View
+        style={[s.container, isFocused && s.containerOnFocus, style]}
+      >
         <AntDesign
           style={[s.searchIcon, isFocused && s.focusedIcon]}
           name="search1"
@@ -31,7 +39,6 @@ const SearchInputField = ({
           ref={inputRef}
           style={[s.input, style]}
           onChangeText={onChange}
-          d
           onBlur={() => setIsFocused(false)}
           onFocus={() => setIsFocused(true)}
           value={value}
@@ -40,7 +47,9 @@ const SearchInputField = ({
         {filtersValues.search && (
           <Touchable
             isOpacity
-            onPress={() => setFiltersValues({ ...filtersValues, search: "" })}
+            onPress={() =>
+              setFiltersValues({ ...filtersValues, search: '' })
+            }
           >
             <View style={s.cleanTextButtonContainer}>
               <AntDesign

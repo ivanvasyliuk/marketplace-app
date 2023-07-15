@@ -1,12 +1,12 @@
-import { StyleSheet } from "react-native";
-import colors from "../../styles/colors";
+import { StyleSheet } from 'react-native';
+import colors from '../../styles/colors';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
   footer: {
-    flexDirection: "row",
+    flexDirection: 'row',
     padding: 8,
     backgroundColor: colors.white,
     borderTopColor: colors.border,
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   icon: {
-    alignSelf: "flex-end",
+    alignSelf: 'flex-end',
     marginLeft: 10,
     color: colors.primary,
   },
@@ -42,33 +42,38 @@ const styles = StyleSheet.create({
     color: colors.primary,
   },
   ownerBarItem: {
-    flexDirection: "row",
+    flexDirection: 'row',
     paddingHorizontal: 8,
-    position: "relative",
+    position: 'relative',
     top: 0,
     left: 0,
     right: 0,
     height: 58,
-    backgroundColor: "white",
+    backgroundColor: 'white',
     borderBottomWidth: 1,
     borderTopWidth: 1,
     borderColor: colors.border,
-    alignItems: "center",
+    alignItems: 'center',
   },
   titlesContainer: { flex: 1, marginLeft: 8 },
   productTitle: {
-    fontStyle: "normal",
-    fontWeight: "400",
+    fontStyle: 'normal',
+    fontWeight: '400',
     fontSize: 14,
     lineHeight: 21,
   },
 
   lastMessageLabel: {
-    fontStyle: "normal",
-    fontWeight: "400",
+    marginRight: 40,
+    fontStyle: 'normal',
+    fontWeight: '400',
     fontSize: 14,
     lineHeight: 21,
     color: colors.gray,
+  },
+  iconRight: {
+    position: 'absolute',
+    right: 20,
   },
 });
 export default styles;

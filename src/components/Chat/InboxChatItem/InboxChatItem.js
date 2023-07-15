@@ -3,9 +3,9 @@ import { Text, View } from 'react-native';
 import { observer } from 'mobx-react';
 import { useNavigation } from '@react-navigation/native';
 import { format, isToday, isYesterday } from 'date-fns';
-import screens from '../../../navigation/screens';
 import Touchable from '../../Touchable/Touchable';
-import UserImage from '../../User/UserImage/UserImage';
+import UserImage from '../../UserImage/UserImage';
+import screens from '../../../navigation/screens';
 import s from './styles';
 
 const InboxChatItem = ({ chat }) => {

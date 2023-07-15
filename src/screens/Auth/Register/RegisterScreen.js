@@ -1,34 +1,38 @@
-import React from "react";
-import { Field, Formik } from "formik";
-import { observer } from "mobx-react";
-import { View } from "react-native";
-import * as yup from "yup";
-import AuthFooter from "../../../components/Form/AuthFooter/AuthFooter";
-import Input from "../../../components/Form/Input/Input";
-import s from "./styles";
+import React from 'react';
+import { Formik } from 'formik';
+import { observer } from 'mobx-react';
+import { View } from 'react-native';
+import * as yup from 'yup';
+import AuthFooter from '../../../components/Form/AuthFooter/AuthFooter';
+import Input from '../../../components/Form/Input/Input';
+import s from './styles';
 
 const validationSchema = yup.object({
-  email: yup.string().email().required("Email is required"),
+  email: yup.string().email().required('Email is required'),
   password: yup
     .string()
-    .min(6, "Password must contain 6-20 characters.")
-    .max(20, "Password must contain 6-20 characters.")
-    .required("Password is required"),
+    .min(6, 'Password must contain 6-20 characters.')
+    .max(20, 'Password must contain 6-20 characters.')
+    .required('Password is required'),
   repeatPassword: yup
     .string()
-    .required("Passwords don’t match.")
-    .oneOf([yup.ref("password"), null], "Passwords don’t match."),
+    .required('Passwords don’t match.')
+    .oneOf([yup.ref('password'), null], 'Passwords don’t match.'),
 });
 
 const RegisterScreen = ({ navigation }) => {
   function onSubmit(values) {
-    console.log("register submit", values);
+    console.log('register submit', values);
   }
 
   return (
     <View style={s.container}>
       <Formik
-        initialValues={{ email: "", password: "", repeatPassword: "" }}
+        initialValues={{
+          email: '',
+          password: '',
+          repeatPassword: '',
+        }}
         validationSchema={validationSchema}
         onSubmit={onSubmit}
       >

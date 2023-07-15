@@ -1,8 +1,8 @@
-import { getRoot, types } from "mobx-state-tree";
-import Api from "../../api";
-import { asyncModel } from "../utils";
+import { types } from 'mobx-state-tree';
+import Api from '../../api';
+import { asyncModel } from '../utils';
 
-export const AuthStore = types.model("AuthStore", {
+export const AuthStore = types.model('AuthStore', {
   login: asyncModel(loginFlow),
   logout: asyncModel(logout),
 });
@@ -17,7 +17,7 @@ function loginFlow({ password, email }) {
 }
 function logout() {
   return async function logoutFlow(flow, store, rootStore) {
-    Api.Auth.setToken("");
+    Api.Auth.setToken('');
     rootStore.viewer.setViewer(undefined);
   };
 }

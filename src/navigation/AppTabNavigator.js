@@ -1,21 +1,18 @@
-import React from "react";
-import { Text } from "react-native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { observer } from "mobx-react";
-import { AntDesign } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
-import ProfileNavigator from "./ProfileNavigator";
-import BrowseNavigator from "./BrowseNavigator";
-import SavedNavigator from "./SavedNavigator";
-import InboxNavigator from "./InboxNavigator";
-import CreatePostNavigator from "./CreatePostNavigator";
-import TabBar from "./components/MyTabBar";
-import screens from "./screens";
-import colors from "../styles/colors";
+import React from 'react';
+import { Text } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { observer } from 'mobx-react';
+import ProfileNavigator from './ProfileNavigator';
+import BrowseNavigator from './BrowseNavigator';
+import SavedNavigator from './SavedNavigator';
+import InboxNavigator from './InboxNavigator';
+import CreatePostNavigator from './CreatePostNavigator';
+import TabBar from './components/MyTabBar';
+import screens from './screens';
 
 const Tab = createBottomTabNavigator();
 
-function AppTabNavigator({ barColor = "#FFFFFF" }) {
+function AppTabNavigator({ barColor = '#FFFFFF' }) {
   return (
     <>
       <Tab.Navigator
@@ -30,14 +27,14 @@ function AppTabNavigator({ barColor = "#FFFFFF" }) {
           name={screens.BrowseTab}
           component={BrowseNavigator}
           options={{
-            tabBarLabel: "Browse",
+            tabBarLabel: 'Browse',
           }}
         />
         <Tab.Screen
           name={screens.SavedTab}
           component={SavedNavigator}
           options={{
-            tabBarLabel: "Saved",
+            tabBarLabel: 'Saved',
           }}
         />
         <Tab.Screen
@@ -54,14 +51,14 @@ function AppTabNavigator({ barColor = "#FFFFFF" }) {
           name={screens.InboxTab}
           component={InboxNavigator}
           options={{
-            tabBarLabel: "Inbox",
+            tabBarLabel: 'Inbox',
           }}
         />
         <Tab.Screen
           name={screens.ProfileTab}
           component={ProfileNavigator}
           options={{
-            tabBarLabel: "Profile",
+            tabBarLabel: 'Profile',
           }}
         />
       </Tab.Navigator>

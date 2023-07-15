@@ -1,6 +1,6 @@
-import React from "react";
-import { Image, View } from "react-native";
-import s from "./styles";
+import React from 'react';
+import { Image, View } from 'react-native';
+import s from './styles';
 
 const UserImage = ({ image, size }) => {
   return (
@@ -11,7 +11,7 @@ const UserImage = ({ image, size }) => {
       ]}
     >
       <Image
-        style={[s.image, { width: size, height: size }]}
+        style={{ width: size, height: size }}
         source={{ uri: image }}
       />
     </View>

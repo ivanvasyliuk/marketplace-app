@@ -1,22 +1,23 @@
-import React, { useState } from "react";
-import { observer } from "mobx-react";
-import { View, Share, Text, ScrollView, Linking } from "react-native";
-import { useRoute } from "@react-navigation/native";
-import Toast from "react-native-toast-message";
-import { LinearGradient } from "expo-linear-gradient";
-import { MaterialIcons } from "@expo/vector-icons";
-import Touchable from "../../components/Touchable/Touchable";
-import { useStore } from "../../stores/createStore";
-import SellerInfo from "../../components/SellerInfo/SellerInfo";
-import HeaderPost from "../../components/HeaderPost/HeaderPost";
-import DotsCarousel from "../../components/DotsCarousel/DotsCarousel";
-import ImagesCarousel from "../../components/ImagesCarousel/ImagesCarousel";
-import CallAndMessageButtons from "../../components/CallAndMessageButtons/CallAndMessageButtons";
-import s from "./styles";
-import { TAB_BAR_HEIGHT_SIZE } from "../../styles/dimensions";
+import React, { useState } from 'react';
+import { observer } from 'mobx-react';
+import { View, Share, Text, ScrollView, Linking } from 'react-native';
+import { useRoute } from '@react-navigation/native';
+import Toast from 'react-native-toast-message';
+import { LinearGradient } from 'expo-linear-gradient';
+import { MaterialIcons } from '@expo/vector-icons';
+import Touchable from '../../components/Touchable/Touchable';
+import { useStore } from '../../stores/createStore';
+import SellerInfo from '../../components/SellerInfo/SellerInfo';
+import HeaderPost from '../../components/HeaderPost/HeaderPost';
+import DotsCarousel from '../../components/DotsCarousel/DotsCarousel';
+import ImagesCarousel from '../../components/ImagesCarousel/ImagesCarousel';
+import CallAndMessageButtons from '../../components/CallAndMessageButtons/CallAndMessageButtons';
+import s from './styles';
+import { TAB_BAR_HEIGHT_SIZE } from '../../styles/dimensions';
 
 const PostScreen = () => {
-  const [allDescriptionVisible, setAllDescriptionVisible] = useState(false);
+  const [allDescriptionVisible, setAllDescriptionVisible] =
+    useState(false);
   const [index, setIndex] = useState(0);
   const route = useRoute();
   const store = useStore();
@@ -25,15 +26,15 @@ const PostScreen = () => {
 
   const isOwnerPost = store.viewer.userId === product.ownerId;
 
-  const timeCreatedAt = `${new Date(+product.createdAt).getHours()}:${new Date(
-    +product.createdAt
-  ).getMinutes()}`;
+  const timeCreatedAt = `${new Date(
+    +product.createdAt,
+  ).getHours()}:${new Date(+product.createdAt).getMinutes()}`;
 
   async function onShare() {
     try {
       const result = await Share.share({
         message:
-          "React Native | A framework for building native apps using React",
+          'React Native | A framework for building native apps using React',
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
@@ -54,7 +55,7 @@ const PostScreen = () => {
       Linking.openURL(`tel:${phoneNumber}`);
     } else {
       Toast.show({
-        type: "success",
+        type: 'success',
         text1: "User don't have phone number ",
       });
     }
@@ -67,12 +68,16 @@ const PostScreen = () => {
         isOwnerPost={isOwnerPost}
         onShare={onShare}
       />
-      <ScrollView style={[s.contentContainer]}>
+      <ScrollView contentContainerStyle={s.contentContainer}>
         <View>
           <ImagesCarousel list={product.photos} setIndex={setIndex} />
           <DotsCarousel list={product.photos} index={index} />
           <LinearGradient
-            colors={["transparent", "rgba(0, 0, 0, 0.2)", "rgba(0,0,0,0.6)"]}
+            colors={[
+              'transparent',
+              'rgba(0, 0, 0, 0.2)',
+              'rgba(0,0,0,0.6)',
+            ]}
             style={s.titleAndPriceContainer}
           >
             <View>
@@ -80,7 +85,11 @@ const PostScreen = () => {
               <Text style={s.timeAndLocation}>
                 {timeCreatedAt}
                 {`   `}
-                <MaterialIcons name="location-on" size={18} color="gray" />
+                <MaterialIcons
+                  name="location-on"
+                  size={18}
+                  color="gray"
+                />
                 {product.location}
               </Text>
             </View>
@@ -96,11 +105,15 @@ const PostScreen = () => {
             </Text>
             <Touchable
               isOpacity
-              onPress={() => setAllDescriptionVisible(!allDescriptionVisible)}
+              onPress={() =>
+                setAllDescriptionVisible(!allDescriptionVisible)
+              }
             >
               {product.description.length > 145 && (
                 <Text style={s.readMore}>
-                  {allDescriptionVisible ? "Hide more..." : "Read more..."}
+                  {allDescriptionVisible
+                    ? 'Hide more...'
+                    : 'Read more...'}
                 </Text>
               )}
             </Touchable>
@@ -109,9 +122,15 @@ const PostScreen = () => {
           <SellerInfo product={product} />
         </View>
       </ScrollView>
-      <Toast position="bottom" bottomOffset={TAB_BAR_HEIGHT_SIZE * 2} />
+      <Toast
+        position="bottom"
+        bottomOffset={TAB_BAR_HEIGHT_SIZE * 2}
+      />
       {!isOwnerPost && (
-        <CallAndMessageButtons product={product} openCall={openCall} />
+        <CallAndMessageButtons
+          product={product}
+          openCall={openCall}
+        />
       )}
     </View>
   );

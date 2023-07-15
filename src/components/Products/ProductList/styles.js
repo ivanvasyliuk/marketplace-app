@@ -1,13 +1,12 @@
-import { StyleSheet } from "react-native";
-import colors from "../../../styles/colors";
-import { TAB_BAR_HEIGHT_SIZE } from "../../../styles/dimensions";
+import { StyleSheet } from 'react-native';
+import colors from '../../../styles/colors';
+import { TAB_BAR_HEIGHT_SIZE } from '../../../styles/dimensions';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
   listContainer: {
-    // flex: 1,
     paddingBottom: TAB_BAR_HEIGHT_SIZE,
   },
 });
